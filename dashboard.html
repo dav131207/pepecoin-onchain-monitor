@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pepecoin On-Chain Monitor</title>
+    <style>
+        :root {
+            --bg-color: #0f1115;
+            --card-bg: #1a1d24;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #22c55e;
+            --border: #334155;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-weight: 600;
+            font-size: 2.5rem;
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.02em;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .card h2 {
+            font-size: 1.1rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.75rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .metric-value {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1.05rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 0.85rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        tr:hover td {
+            background-color: rgba(255,255,255,0.03);
+        }
+        .address-cell {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            color: #cbd5e1;
+        }
+        .status-badge {
+            background-color: rgba(34, 197, 94, 0.2);
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pepecoin On-Chain Monitor</h1>
+        <div class="subtitle" id="last-updated">Lade Dashboard...</div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Adressen nach Guthaben</h2>
+                <div id="address-metrics">
+                    <div class="metric-row"><span class="metric-label">Lade Daten...</span></div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Netzwerk Übersicht</h2>
+                <div class="metric-row">
+                    <span class="metric-label">Datenstatus</span>
+                    <span class="metric-value"><span id="status-val" class="status-badge">...</span></span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Erfasste Wale (>= 10M PEP)</span>
+                    <span class="metric-value" id="whales-val">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Historische Wale (bekannt)</span>
+                    <span class="metric-value" id="historical-whales-val">Lade...</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Aktuelle Wale (Top Adressen)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rang</th>
+                        <th>Pepecoin Adresse</th>
+                        <th>Guthaben (PEP)</th>
+                    </tr>
+                </thead>
+                <tbody id="whales-table">
+                    <tr><td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">Lade On-Chain Daten...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card" style="margin-top: 2rem;">
+            <h2>Zuletzt erfasste Groß-Transaktionen (> 500k PEP)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Datum / Zeit</th>
+                        <th>Transaktions-ID (TXID)</th>
+                        <th>Volumen (PEP)</th>
+                    </tr>
+                </thead>
+                <tbody id="tx-table">
+                    <tr><td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">Lade Transaktionsdaten...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        async function loadData() {
+            try {
+                // Wir holen das Datum von heute
+                const today = new Date().toISOString().split('T')[0];
+                
+                // Fetch JSON Datei
+                const response = await fetch(`snapshots/${today}.json`);
+                if (!response.ok) throw new Error("Snapshot von heute nicht gefunden!");
+                const data = await response.json();
+                
+                // Known Whales laden für die Übersicht
+                let knownWhalesCount = 0;
+                try {
+                    const kwResp = await fetch('known_whales.json');
+                    if (kwResp.ok) {
+                        const kwData = await kwResp.json();
+                        knownWhalesCount = Object.keys(kwData).length;
+                    }
+                } catch(e) {}
+
+                renderData(data, knownWhalesCount);
+            } catch (error) {
+                document.getElementById('last-updated').innerText = `Fehler: Bitte öffne das Dashboard über einen lokalen Webserver (siehe Anweisungen).`;
+                console.error(error);
+            }
+        }
+
+        function formatNumber(num) {
+            return new Intl.NumberFormat('de-DE').format(num);
+        }
+
+        function renderData(data, knownWhalesCount) {
+            const date = new Date(data.timestamp);
+            document.getElementById('last-updated').innerText = `Datenstand: ${date.toLocaleString('de-DE')}`;
+            document.getElementById('status-val').innerText = data.status;
+            document.getElementById('historical-whales-val').innerText = formatNumber(knownWhalesCount);
+            
+            // Adress Metriken
+            const metricsDiv = document.getElementById('address-metrics');
+            metricsDiv.innerHTML = '';
+            const counts = data.metrics.address_counts;
+            // Reihenfolge umdrehen (größte zuerst)
+            const orderedBuckets = ["3B", "2B", "1B", "500M", "100M", "50M", "20M", "10M", "5M", "2M", "1M", "500k", "100k"];
+            orderedBuckets.forEach(bucket => {
+                const count = counts[bucket] || 0;
+                metricsDiv.innerHTML += `
+                    <div class="metric-row">
+                        <span class="metric-label">≥ ${bucket} PEP</span>
+                        <span class="metric-value">${formatNumber(count)}</span>
+                    </div>
+                `;
+            });
+
+            // Wal Tabelle
+            const whales = data.whales.sort((a, b) => b.balance - a.balance);
+            document.getElementById('whales-val').innerText = formatNumber(whales.length);
+            
+            const tbody = document.getElementById('whales-table');
+            tbody.innerHTML = '';
+            whales.forEach((whale, index) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="metric-label" style="width: 50px;">#${index + 1}</td>
+                        <td class="address-cell"><a href="https://pepeblocks.com/address/${whale.address}" target="_blank" style="color: inherit; text-decoration: none;">${whale.address}</a></td>
+                        <td class="metric-value">${formatNumber(Math.floor(whale.balance))}</td>
+                    </tr>
+                `;
+            });
+
+            // Transaktions Tabelle
+            const txBody = document.getElementById('tx-table');
+            txBody.innerHTML = '';
+            const largeTxs = data.large_transfers || [];
+            
+            if (largeTxs.length === 0) {
+                txBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">Keine großen Transaktionen im gescannten Zeitraum gefunden.</td></tr>`;
+            } else {
+                // Nach Zeit sortieren (neueste zuerst)
+                largeTxs.sort((a, b) => b.time - a.time).forEach(tx => {
+                    const txDate = new Date(tx.time * 1000).toLocaleString('de-DE');
+                    txBody.innerHTML += `
+                        <tr>
+                            <td class="metric-label" style="white-space: nowrap;">${txDate}</td>
+                            <td class="address-cell" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">
+                                <a href="https://pepeblocks.com/tx/${tx.txid}" target="_blank" style="color: inherit; text-decoration: none;" title="${tx.txid}">${tx.txid}</a>
+                            </td>
+                            <td class="metric-value">${formatNumber(Math.floor(tx.amount))}</td>
+                        </tr>
+                    `;
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+*.pyc
+richlist_dump.html
+scan_blocks_patch.py
+last_scanned_block.txt
