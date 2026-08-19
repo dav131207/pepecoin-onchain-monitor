@@ -1,0 +1,115 @@
+{
+  "note": "Verhaltensbasiert (wiederholte Coinbase-Auszahlung) \u2014 keine best\u00e4tigten Pool-Namen. 'share_pct_of_seen_blocks' bezieht sich nur auf die bislang gescannten/gesampleten Bl\u00f6cke, nicht auf die gesamte Chain-Historie.",
+  "total_blocks_seen": 2524,
+  "min_blocks_for_tag": 3,
+  "miners": [
+    {
+      "address": "PsHArZKD6oodN47QW5oqaTXTw27jEdDyiW",
+      "blocks_mined": 877,
+      "total_reward_pep": 8770033.96,
+      "share_pct_of_seen_blocks": 34.75,
+      "first_block": 1047398,
+      "last_block": 1113896,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "Pd4Ee73nvvymgiGKMouC1GYZpQCrgMmCjd",
+      "blocks_mined": 683,
+      "total_reward_pep": 6830022.39,
+      "share_pct_of_seen_blocks": 27.06,
+      "first_block": 1047408,
+      "last_block": 1113897,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "PjdviQbYuVu4RgX5N3SVebpcTHyuaZq8uj",
+      "blocks_mined": 498,
+      "total_reward_pep": 4980017.1,
+      "share_pct_of_seen_blocks": 19.73,
+      "first_block": 1047438,
+      "last_block": 1113895,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "Pfz1FHLRYAW8NNc6N6n63t2DJYJrCNsLo9",
+      "blocks_mined": 141,
+      "total_reward_pep": 1410002.27,
+      "share_pct_of_seen_blocks": 5.59,
+      "first_block": 1047618,
+      "last_block": 1113847,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "PYHaj2jrTVVy15ygiAJyPjnvjCkVUYisGc",
+      "blocks_mined": 102,
+      "total_reward_pep": 1020013.27,
+      "share_pct_of_seen_blocks": 4.04,
+      "first_block": 1047568,
+      "last_block": 1113891,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "PnBFXec7tVQvndqktsVnkfJGwy63GFnwoo",
+      "blocks_mined": 73,
+      "total_reward_pep": 730001.87,
+      "share_pct_of_seen_blocks": 2.89,
+      "first_block": 1047518,
+      "last_block": 1113808,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "PimfuHFEZf4GRuSpjAoiVNS65EnL4dsAej",
+      "blocks_mined": 47,
+      "total_reward_pep": 470000.58,
+      "share_pct_of_seen_blocks": 1.86,
+      "first_block": 1047488,
+      "last_block": 1113890,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "PvSYktoNfDa2BRU5q39Ldafpx6Ei2goJLr",
+      "blocks_mined": 44,
+      "total_reward_pep": 440000.88,
+      "share_pct_of_seen_blocks": 1.74,
+      "first_block": 1047908,
+      "last_block": 1113730,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "PgRLcaCTEkXSguu6ZgzkuncHdCxADmPBXP",
+      "blocks_mined": 15,
+      "total_reward_pep": 150000.06,
+      "share_pct_of_seen_blocks": 0.59,
+      "first_block": 1048538,
+      "last_block": 1113806,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "Pic4QD7VXdEaw8ykn1puANDEQDPkNRhaBC",
+      "blocks_mined": 14,
+      "total_reward_pep": 140000.07,
+      "share_pct_of_seen_blocks": 0.55,
+      "first_block": 1048308,
+      "last_block": 1113874,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "PbiJbcGgJDyHWLMJnq6eNHkcCgZJWA66DN",
+      "blocks_mined": 14,
+      "total_reward_pep": 140000.27,
+      "share_pct_of_seen_blocks": 0.55,
+      "first_block": 1053108,
+      "last_block": 1113630,
+      "includes_sampled_blocks": true
+    },
+    {
+      "address": "PmAKzVn2hqR6a2whuzkD7jLV4Q5ALSctSK",
+      "blocks_mined": 10,
+      "total_reward_pep": 100000.09,
+      "share_pct_of_seen_blocks": 0.4,
+      "first_block": 1051508,
+      "last_block": 1113190,
+      "includes_sampled_blocks": true
+    }
+  ]
+}

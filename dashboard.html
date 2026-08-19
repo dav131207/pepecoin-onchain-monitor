@@ -1,274 +1,1540 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pepecoin On-Chain Monitor</title>
-    <style>
-        :root {
-            --bg-color: #0f1115;
-            --card-bg: #1a1d24;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #22c55e;
-            --border: #334155;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 2rem;
-            line-height: 1.5;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 {
-            font-weight: 600;
-            font-size: 2.5rem;
-            margin-bottom: 0.2rem;
-            letter-spacing: -0.02em;
-        }
-        .subtitle {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        .card h2 {
-            font-size: 1.1rem;
-            margin-top: 0;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.75rem;
-            color: #cbd5e1;
-            font-weight: 500;
-        }
-        .metric-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-        .metric-row:last-child {
-            border-bottom: none;
-        }
-        .metric-label {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-        .metric-value {
-            font-weight: 600;
-            color: var(--accent);
-            font-size: 1.05rem;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-        th, td {
-            padding: 0.85rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-        th {
-            color: var(--text-muted);
-            font-weight: 500;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        tr:hover td {
-            background-color: rgba(255,255,255,0.03);
-        }
-        .address-cell {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            color: #cbd5e1;
-        }
-        .status-badge {
-            background-color: rgba(34, 197, 94, 0.2);
-            color: var(--accent);
-            padding: 0.2rem 0.6rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pepecoin On-Chain Monitor</title>
+<style>
+    :root {
+        --page: #0d0d0d;
+        --surface: #1a1a19;
+        --surface-2: #232322;
+        --text-primary: #ffffff;
+        --text-secondary: #c3c2b7;
+        --text-muted: #898781;
+        --grid: #2c2c2a;
+        --axis: #383835;
+        --border: rgba(255,255,255,0.10);
+        --good: #0ca30c;
+        --warning: #fab219;
+        --serious: #ec835a;
+        --critical: #d03b3b;
+        --blue: #3987e5;
+        --orange: #d95926;
+        --aqua: #199e70;
+        --yellow: #c98500;
+        --magenta: #d55181;
+        --green: #008300;
+        --violet: #9085e9;
+        --red: #e66767;
+        color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    body {
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        background-color: var(--page);
+        color: var(--text-primary);
+        margin: 0;
+        padding: 2rem;
+        line-height: 1.5;
+    }
+    .container { max-width: 1320px; margin: 0 auto; }
+
+    header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+    h1 { font-weight: 600; font-size: 1.9rem; margin: 0 0 0.25rem 0; letter-spacing: -0.01em; }
+    .subtitle { color: var(--text-muted); font-size: 0.85rem; }
+    .status-badge {
+        padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.72rem;
+        text-transform: uppercase; font-weight: 700; letter-spacing: 0.03em;
+        background: rgba(12,163,12,0.15); color: var(--good);
+    }
+    .status-badge.bad { background: rgba(208,59,59,0.15); color: var(--critical); }
+    .status-badge.warn { background: rgba(250,178,25,0.15); color: var(--warning); }
+    .coverage-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem; }
+
+    /* filter row */
+    .filter-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .filter-row .filter-label { color: var(--text-muted); font-size: 0.8rem; margin-right: 0.4rem; }
+    .segmented { display: inline-flex; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 3px; }
+    .segmented button {
+        appearance: none; border: none; background: transparent; color: var(--text-secondary);
+        padding: 0.4rem 0.85rem; font-size: 0.82rem; border-radius: 6px; cursor: pointer; font-family: inherit;
+    }
+    .segmented button.active { background: var(--surface-2); color: var(--text-primary); font-weight: 600; }
+    .segmented button:hover:not(.active) { color: var(--text-primary); }
+
+    /* KPI tiles */
+    .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .kpi-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.2rem; }
+    .kpi-label { color: var(--text-muted); font-size: 0.78rem; margin-bottom: 0.5rem; }
+    .kpi-value { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+    .kpi-delta { font-size: 0.78rem; margin-top: 0.35rem; color: var(--text-muted); }
+    .kpi-delta.up { color: var(--good); }
+    .kpi-delta.down { color: var(--critical); }
+    .kpi-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.35rem; }
+
+    /* cards */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; margin-bottom: 1.5rem; }
+    .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+    .card-head h2 { font-size: 1.02rem; margin: 0; font-weight: 600; color: var(--text-primary); }
+    .card-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; max-width: 60ch; }
+    .table-toggle {
+        appearance: none; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-secondary);
+        font-size: 0.75rem; padding: 0.3rem 0.6rem; border-radius: 6px; cursor: pointer; font-family: inherit; white-space: nowrap;
+    }
+    .table-toggle:hover { color: var(--text-primary); }
+
+    /* legend */
+    .legend { display: flex; gap: 1.2rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-secondary); }
+    .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    .legend-line { width: 14px; height: 2px; border-radius: 1px; flex-shrink: 0; }
+
+    /* chart svg */
+    .chart-wrap { position: relative; }
+    svg.chart { width: 100%; height: auto; display: block; overflow: visible; }
+    .bar-mark { transition: opacity 0.1s; cursor: pointer; }
+    .bar-mark:hover, .bar-mark.hovered { opacity: 0.82; }
+    .axis-label { fill: var(--text-muted); font-size: 11px; }
+    .axis-line { stroke: var(--axis); stroke-width: 1; }
+    .grid-line { stroke: var(--grid); stroke-width: 1; }
+    .value-label { fill: var(--text-secondary); font-size: 11px; font-weight: 600; }
+    .cat-label { fill: var(--text-secondary); font-size: 11.5px; }
+
+    /* tooltip */
+    .viz-tooltip {
+        position: absolute; pointer-events: none; background: #050505; border: 1px solid var(--border);
+        border-radius: 8px; padding: 0.55rem 0.75rem; font-size: 0.78rem; color: var(--text-primary);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.08s; z-index: 20; white-space: nowrap;
+    }
+    .viz-tooltip.visible { opacity: 1; }
+    .viz-tooltip .tt-title { color: var(--text-muted); font-size: 0.72rem; margin-bottom: 0.3rem; }
+    .viz-tooltip .tt-row { display: flex; align-items: center; gap: 0.4rem; }
+    .viz-tooltip .tt-key { width: 12px; height: 2px; border-radius: 1px; }
+    .viz-tooltip .tt-val { font-weight: 700; margin-left: auto; padding-left: 0.6rem; font-variant-numeric: tabular-nums; }
+    .crosshair { stroke: var(--axis); stroke-width: 1; pointer-events: none; }
+
+    /* table-view */
+    .chart-table-wrap { display: none; }
+    .chart-table-wrap.visible { display: block; }
+    .chart-svg-wrap.hidden { display: none; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { padding: 0.7rem 0.6rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--text-muted); font-weight: 500; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    .address-cell { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; color: var(--text-secondary); font-size: 0.83rem; }
+    .address-cell a { color: inherit; text-decoration: none; }
+    .address-cell a:hover { color: var(--text-primary); text-decoration: underline; }
+    .addr-list { display: flex; flex-direction: column; gap: 0.2rem; }
+    .empty-note { text-align: center; color: var(--text-muted); padding: 2.5rem 1rem; font-size: 0.85rem; }
+
+    .hub-badge {
+        background: rgba(217,89,38,0.18); color: var(--orange); padding: 0.12rem 0.45rem; border-radius: 999px;
+        font-size: 0.65rem; font-weight: 700; margin-left: 0.4rem; white-space: nowrap; letter-spacing: 0.02em;
+    }
+    .miner-badge {
+        background: rgba(144,133,233,0.18); color: var(--violet); padding: 0.12rem 0.45rem; border-radius: 999px;
+        font-size: 0.65rem; font-weight: 700; margin-left: 0.4rem; white-space: nowrap; letter-spacing: 0.02em;
+    }
+    .class-badge {
+        display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.7rem; font-weight: 600;
+    }
+    .class-badge.tier-1 { background: rgba(217,89,38,0.18); color: var(--orange); }
+    .class-badge.tier-2 { background: rgba(201,133,0,0.18); color: var(--yellow); }
+    .class-badge.tier-3 { background: rgba(144,133,233,0.18); color: var(--violet); }
+    .class-badge.tier-4 { background: rgba(137,135,129,0.18); color: var(--text-muted); }
+
+    .mini-bar-track { background: var(--grid); border-radius: 3px; height: 6px; width: 100px; overflow: hidden; }
+    .mini-bar-fill { background: var(--blue); height: 100%; border-radius: 3px; }
+
+    /* heatmap / matrix */
+    .heat-cell { stroke: var(--surface); stroke-width: 2px; cursor: pointer; }
+    .heat-cell.gated { fill: var(--surface-2); }
+    .heat-label { fill: var(--text-primary); font-size: 12px; font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
+    .heat-label.muted { fill: var(--text-muted); font-weight: 500; font-size: 10.5px; }
+    .heat-n { fill: var(--text-muted); font-size: 8.5px; text-anchor: middle; }
+    .heat-axis-label { fill: var(--text-secondary); font-size: 11px; }
+    .scale-legend { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.9rem; }
+    .scale-gradient { height: 8px; width: 160px; border-radius: 4px; }
+    .price-line { fill: none; stroke: var(--blue); stroke-width: 2px; stroke-linejoin: round; stroke-linecap: round; }
+    .price-area { fill: var(--blue); opacity: 0.10; }
+    .hover-dot { fill: var(--blue); stroke: var(--surface); stroke-width: 2px; }
+    .gate-note { font-size: 0.78rem; color: var(--text-muted); background: var(--surface-2); border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; }
+
+    footer { text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 2rem; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Pepecoin On-Chain Monitor</h1>
-        <div class="subtitle" id="last-updated">Lade Dashboard...</div>
-
-        <div class="grid">
-            <div class="card">
-                <h2>Adressen nach Guthaben</h2>
-                <div id="address-metrics">
-                    <div class="metric-row"><span class="metric-label">Lade Daten...</span></div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <h2>Netzwerk Übersicht</h2>
-                <div class="metric-row">
-                    <span class="metric-label">Datenstatus</span>
-                    <span class="metric-value"><span id="status-val" class="status-badge">...</span></span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Erfasste Wale (>= 10M PEP)</span>
-                    <span class="metric-value" id="whales-val">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Historische Wale (bekannt)</span>
-                    <span class="metric-value" id="historical-whales-val">Lade...</span>
-                </div>
-            </div>
+<div class="container">
+    <header>
+        <div>
+            <h1>Pepecoin On-Chain Monitor</h1>
+            <div class="subtitle" id="last-updated">Lade Dashboard...</div>
+            <div class="coverage-note" id="coverage-note"></div>
         </div>
+        <span id="status-val" class="status-badge">...</span>
+    </header>
 
-        <div class="card">
-            <h2>Aktuelle Wale (Top Adressen)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rang</th>
-                        <th>Pepecoin Adresse</th>
-                        <th>Guthaben (PEP)</th>
-                    </tr>
-                </thead>
-                <tbody id="whales-table">
-                    <tr><td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">Lade On-Chain Daten...</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="card" style="margin-top: 2rem;">
-            <h2>Zuletzt erfasste Groß-Transaktionen (> 500k PEP)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Datum / Zeit</th>
-                        <th>Transaktions-ID (TXID)</th>
-                        <th>Volumen (PEP)</th>
-                    </tr>
-                </thead>
-                <tbody id="tx-table">
-                    <tr><td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">Lade Transaktionsdaten...</td></tr>
-                </tbody>
-            </table>
+    <div class="filter-row">
+        <span class="filter-label">Zeitraum (Transfers &amp; Netflow)</span>
+        <div class="segmented" id="range-filter">
+            <button data-range="7">7 Tage</button>
+            <button data-range="30">30 Tage</button>
+            <button data-range="90">90 Tage</button>
+            <button data-range="all" class="active">Alle</button>
         </div>
     </div>
 
-    <script>
-        async function loadData() {
-            try {
-                // Wir holen das Datum von heute
-                const today = new Date().toISOString().split('T')[0];
-                
-                // Fetch JSON Datei
-                const response = await fetch(`snapshots/${today}.json`);
-                if (!response.ok) throw new Error("Snapshot von heute nicht gefunden!");
-                const data = await response.json();
-                
-                // Known Whales laden für die Übersicht
-                let knownWhalesCount = 0;
-                try {
-                    const kwResp = await fetch('known_whales.json');
-                    if (kwResp.ok) {
-                        const kwData = await kwResp.json();
-                        knownWhalesCount = Object.keys(kwData).length;
-                    }
-                } catch(e) {}
+    <div class="kpi-row" id="kpi-row"></div>
 
-                renderData(data, knownWhalesCount);
-            } catch (error) {
-                document.getElementById('last-updated').innerText = `Fehler: Bitte öffne das Dashboard über einen lokalen Webserver (siehe Anweisungen).`;
-                console.error(error);
-            }
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Pepecoin Preis (USD)</h2>
+                <div class="card-desc">Quelle: CoinGecko (Coin-ID "pepecoin-network"), UTC-Tage. Im gewählten Zeitraum.</div>
+            </div>
+            <button class="table-toggle" data-target="price">Als Tabelle</button>
+        </div>
+        <div class="chart-svg-wrap" id="price-chart-wrap"><div class="chart-wrap" id="price-chart"></div></div>
+        <div class="chart-table-wrap" id="price-table-wrap"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Handelsvolumen (USD)</h2>
+                <div class="card-desc">24h-Handelsvolumen laut CoinGecko, je UTC-Tag. Separates Diagramm statt zweiter Y-Achse im Preis-Chart.</div>
+            </div>
+            <button class="table-toggle" data-target="volusd">Als Tabelle</button>
+        </div>
+        <div class="chart-svg-wrap" id="volusd-chart-wrap"><div class="chart-wrap" id="volusd-chart"></div></div>
+        <div class="chart-table-wrap" id="volusd-table-wrap"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Adressen nach Guthaben-Schwelle</h2>
+                <div class="card-desc">Kumulative Anzahl Adressen je Mindest-Guthaben (aktueller Rich-List-Snapshot).</div>
+            </div>
+            <button class="table-toggle" data-target="dist">Als Tabelle</button>
+        </div>
+        <div class="chart-svg-wrap" id="dist-chart-wrap"><div class="chart-wrap" id="dist-chart"></div></div>
+        <div class="chart-table-wrap" id="dist-table-wrap"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Groß-Transfers — Volumen pro Tag</h2>
+                <div class="card-desc">Summe aller Netto-Transfers ≥ 1M PEP je Tag (Wechselgeld herausgerechnet), im gewählten Zeitraum.</div>
+            </div>
+            <button class="table-toggle" data-target="volume">Als Tabelle</button>
+        </div>
+        <div class="chart-svg-wrap" id="volume-chart-wrap"><div class="chart-wrap" id="volume-chart"></div></div>
+        <div class="chart-table-wrap" id="volume-table-wrap"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Netto-Fluss zu vermuteten Exchange-/Hub-Wallets</h2>
+                <div class="card-desc">Zufluss minus Abfluss bei Adressen mit auffällig hoher Tx-Aktivität (≥200 Tx, siehe Tabelle unten) — positiv = Netto-Zufluss in Hub-Wallets, negativ = Netto-Abfluss.</div>
+            </div>
+            <button class="table-toggle" data-target="netflow">Als Tabelle</button>
+        </div>
+        <div class="legend" id="netflow-legend"></div>
+        <div class="chart-svg-wrap" id="netflow-chart-wrap"><div class="chart-wrap" id="netflow-chart"></div></div>
+        <div class="chart-table-wrap" id="netflow-table-wrap"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Korrelationsmatrix — Preis &amp; On-Chain-Aktivität</h2>
+                <div class="card-desc">
+                    Pearson-Korrelation zwischen Tageswerten im gewählten Zeitraum. Preis- und Handelsvolumen-Reihen gehen als
+                    Tag-über-Tag-Änderung ein (nicht als Niveau), damit ein gemeinsamer Trend keine Scheinkorrelation erzeugt.
+                    On-Chain-Metriken zählen nur innerhalb des bereits vom Backfill abgedeckten Zeitfensters — dort ist ein Tag
+                    ohne Groß-Transfer ein echtes 0, außerhalb gilt er als fehlend (nicht künstlich auf 0 gesetzt). UTC-Tage.
+                </div>
+            </div>
+        </div>
+        <div id="corr-gate-note"></div>
+        <div class="scale-legend" id="corr-legend"></div>
+        <div class="chart-wrap" id="corr-matrix"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Netto-Fluss zu Hub-Wallets vs. Preisänderung — zeitversetzt</h2>
+                <div class="card-desc">
+                    Korrelation von täglichem Hub-Netto-Fluss mit der Preisänderung ±3 Tage versetzt. Rechts von 0 = Hub-Fluss
+                    geht der Preisbewegung voraus (potenziell prädiktiv); links von 0 = Hub-Fluss folgt auf die Preisbewegung.
+                    Kein Beleg für Kausalität, nur zeitliche Reihenfolge.
+                </div>
+            </div>
+        </div>
+        <div id="lag-gate-note"></div>
+        <div class="chart-wrap" id="lag-chart"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Aktivität nach Wochentag &amp; Stunde (UTC)</h2>
+                <div class="card-desc">Anzahl Groß-Transfers ≥1M PEP je Wochentag/Stunde im gewählten Zeitraum — zeigt, wann Wal-Bewegungen gehäuft auftreten.</div>
+            </div>
+        </div>
+        <div id="activity-gate-note"></div>
+        <div class="scale-legend" id="activity-legend"></div>
+        <div class="chart-wrap" id="activity-heatmap"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Mining-Difficulty (Verlauf)</h2>
+                <div class="card-desc">
+                    Aus den Coinbase-Feldern bereits gescannter Blöcke (kostenlos, keine zusätzlichen API-Calls) — Pepecoin ist Proof-of-Work.
+                    Deckt aktuell nur die tatsächlich gescannten/gesampleten Blöcke ab (siehe Hinweis oben), nicht lückenlos jeden Tag.
+                </div>
+            </div>
+            <button class="table-toggle" data-target="difficulty">Als Tabelle</button>
+        </div>
+        <div class="chart-svg-wrap" id="difficulty-chart-wrap"><div class="chart-wrap" id="difficulty-chart"></div></div>
+        <div class="chart-table-wrap" id="difficulty-table-wrap"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Vermutliche Exchange-/Hub-Wallets</h2>
+                <div class="card-desc">Verhaltensbasiertes Ranking nach Tx-Aktivität — keine bestätigten Börsen-Zuordnungen, es gibt keine öffentliche Adressliste für Pepecoin. Erkannte Miner-Wallets (siehe Tabelle unten) sind hier ausgeschlossen.</div>
+            </div>
+        </div>
+        <table>
+            <thead><tr><th>Rang</th><th>Adresse</th><th class="num">Tx-Anzahl</th><th class="num">Gegenparteien ≥1M PEP</th><th class="num">Guthaben (PEP)</th><th>Einordnung</th></tr></thead>
+            <tbody id="exchange-table"><tr><td colspan="6" class="empty-note">Lade Kandidaten...</td></tr></tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Vermutliche Mining-Wallets</h2>
+                <div class="card-desc">Adressen mit wiederholten Coinbase-Auszahlungen (Block-Belohnung) — verhaltensbasiert, keine bestätigten Pool-Namen. "Anteil" bezieht sich nur auf die bislang gescannten/gesampleten Blöcke, nicht die gesamte Chain-Historie.</div>
+            </div>
+        </div>
+        <table>
+            <thead><tr><th>Rang</th><th>Adresse</th><th class="num">Blöcke gesehen</th><th class="num">Anteil (Sample)</th><th class="num">Belohnung gesamt (PEP)</th></tr></thead>
+            <tbody id="miner-table"><tr><td colspan="5" class="empty-note">Lade Miner-Daten...</td></tr></tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <div class="card-head"><h2>Aktuelle Wale (Top Adressen)</h2></div>
+        <table>
+            <thead><tr><th>Rang</th><th>Adresse</th><th class="num">Guthaben (PEP)</th></tr></thead>
+            <tbody id="whales-table"><tr><td colspan="3" class="empty-note">Lade On-Chain Daten...</td></tr></tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div>
+                <h2>Groß-Transfers (Netto ≥ 1M PEP)</h2>
+                <div class="card-desc">Im gewählten Zeitraum, neueste zuerst.</div>
+            </div>
+        </div>
+        <table>
+            <thead><tr><th>Datum / Zeit</th><th>Von</th><th>Nach</th><th class="num">Netto-Volumen (PEP)</th><th>TXID</th></tr></thead>
+            <tbody id="tx-table"><tr><td colspan="5" class="empty-note">Lade Transaktionsdaten...</td></tr></tbody>
+        </table>
+    </div>
+
+    <footer>Datenquelle: avivppblocks.realmasterkush.com — Best-Effort, keine Garantie auf Vollständigkeit.</footer>
+</div>
+
+<div class="viz-tooltip" id="tooltip"></div>
+
+<script>
+const EXPLORER_BASE = 'https://avivppblocks.realmasterkush.com';
+const COLORS = {
+    blue: '#3987e5', orange: '#d95926', aqua: '#199e70', yellow: '#c98500',
+    magenta: '#d55181', green: '#008300', violet: '#9085e9', red: '#e66767',
+    good: '#0ca30c', critical: '#d03b3b', axis: '#383835', grid: '#2c2c2a', muted: '#898781'
+};
+
+const MIN_N_CORRELATION = 30; // Mindestanzahl gemeinsamer Tage, bevor ein Korrelationswert angezeigt wird
+
+let STATE = {
+    snapshot: null,
+    knownWhalesCount: 0,
+    exchangeCandidates: [],
+    hubAddresses: new Set(),
+    transfers: [],       // merged, deduped by txid
+    prevSnapshot: null,
+    priceHistory: {},    // dayKey -> {price_usd, volume_usd, market_cap_usd}
+    backfillState: null,
+    minerWallets: [],
+    minerAddresses: new Set(),
+    minerRewards: [],    // {block, time, difficulty, payouts, sampled?}
+    networkStats: {},    // dayKey -> {hashrate, difficulty}
+    range: 'all',
+};
+
+function formatNumber(num) {
+    return new Intl.NumberFormat('de-DE').format(Math.round(num));
+}
+function formatCompact(n) {
+    const sign = n < 0 ? '-' : '';
+    const abs = Math.abs(n);
+    if (abs >= 1e9) return sign + (abs / 1e9).toFixed(abs >= 1e10 ? 0 : 1) + 'B';
+    if (abs >= 1e6) return sign + (abs / 1e6).toFixed(abs >= 1e7 ? 0 : 1) + 'M';
+    if (abs >= 1e3) return sign + (abs / 1e3).toFixed(abs >= 1e4 ? 0 : 1) + 'K';
+    return sign + Math.round(abs).toString();
+}
+// UTC-Tage durchgängig (Preisdaten von CoinGecko sind UTC-basiert; damit alle
+// Zeitreihen auf denselben Tagesgrenzen liegen, bucketen wir On-Chain-Zeitstempel ebenfalls in UTC).
+function dayKey(ts) {
+    const d = new Date(ts * 1000);
+    return d.getUTCFullYear() + '-' + String(d.getUTCMonth() + 1).padStart(2, '0') + '-' + String(d.getUTCDate()).padStart(2, '0');
+}
+// Positioniert Datenpunkte nach ECHTER verstrichener Zeit, nicht nach Array-Index.
+// Sonst würde z.B. eine 44-Tage-Datenlücke genauso schmal dargestellt wie ein
+// 1-Tage-Abstand — das täuscht eine durchgängigere Abdeckung vor, als sie ist.
+function buildTimeScale(dayKeys, padLeft, plotW) {
+    if (dayKeys.length <= 1) return () => padLeft;
+    const toTs = k => Date.parse(k + 'T00:00:00Z');
+    const start = toTs(dayKeys[0]);
+    const end = toTs(dayKeys[dayKeys.length - 1]);
+    const span = end - start || 1;
+    return (i) => padLeft + (toTs(dayKeys[i]) - start) / span * plotW;
+}
+function nearestIndexByX(localX, n, xAt) {
+    let best = 0, bestDist = Infinity;
+    for (let i = 0; i < n; i++) {
+        const dist = Math.abs(xAt(i) - localX);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+    }
+    return best;
+}
+function formatHashrate(hps) {
+    const units = ['H/s', 'KH/s', 'MH/s', 'GH/s', 'TH/s', 'PH/s', 'EH/s'];
+    let v = hps, i = 0;
+    while (v >= 1000 && i < units.length - 1) { v /= 1000; i++; }
+    return v.toFixed(v >= 100 ? 0 : v >= 10 ? 1 : 2) + ' ' + units[i];
+}
+function dayLabel(key) {
+    const [y, m, d] = key.split('-');
+    return `${d}.${m}.`;
+}
+
+async function loadJSON(url) {
+    try {
+        const r = await fetch(url);
+        if (!r.ok) return null;
+        return await r.json();
+    } catch (e) { return null; }
+}
+
+async function loadJSONL(url) {
+    try {
+        const r = await fetch(url);
+        if (!r.ok) return [];
+        const text = await r.text();
+        return text.split('\n').filter(l => l.trim()).map(l => {
+            try { return JSON.parse(l); } catch (e) { return null; }
+        }).filter(Boolean);
+    } catch (e) { return []; }
+}
+
+async function loadData() {
+    const today = new Date().toISOString().split('T')[0];
+    const snapshot = await loadJSON(`snapshots/${today}.json`);
+    if (!snapshot) {
+        document.getElementById('last-updated').innerText = 'Fehler: Kein heutiger Snapshot gefunden. Bitte monitor.py ausführen, und das Dashboard über einen lokalen Webserver öffnen.';
+        return;
+    }
+    STATE.snapshot = snapshot;
+
+    const [knownWhales, exchangeData, backfillTransfers, backfillState, priceHistoryData, minerData, minerRewards, networkStatsData] = await Promise.all([
+        loadJSON('known_whales.json'),
+        loadJSON('exchange_candidates.json'),
+        loadJSONL('large_transfers_3m.jsonl'),
+        loadJSON('backfill_state.json'),
+        loadJSON('price_history.json'),
+        loadJSON('miner_wallets.json'),
+        loadJSONL('miner_rewards.jsonl'),
+        loadJSON('network_stats.json'),
+    ]);
+
+    STATE.priceHistory = (priceHistoryData && priceHistoryData.daily) || {};
+    STATE.backfillState = backfillState;
+    STATE.knownWhalesCount = knownWhales ? Object.keys(knownWhales).length : 0;
+    STATE.exchangeCandidates = (exchangeData && exchangeData.candidates) || [];
+    STATE.minerWallets = (minerData && minerData.miners) || [];
+    STATE.minerAddresses = new Set(STATE.minerWallets.map(m => m.address));
+    STATE.minerRewards = minerRewards || [];
+    STATE.networkStats = networkStatsData || {};
+    // Miner ausschließen: wiederholte Coinbase-Auszahlung ist keine Exchange-Bewegung,
+    // auch wenn die Adresse (viele Auszahlungen an Miner) hohe Tx-Aktivität zeigt.
+    STATE.hubAddresses = new Set(
+        STATE.exchangeCandidates
+            .filter(c => c.tx_count >= 200 && !c.is_miner && !STATE.minerAddresses.has(c.address))
+            .map(c => c.address)
+    );
+
+    // Vortages-/Vorwochen-Snapshot fürs Delta, best effort
+    for (const daysBack of [1, 7]) {
+        const d = new Date();
+        d.setDate(d.getDate() - daysBack);
+        const key = d.toISOString().split('T')[0];
+        const prev = await loadJSON(`snapshots/${key}.json`);
+        if (prev) { STATE.prevSnapshot = prev; break; }
+    }
+
+    // Transfers zusammenführen (Backfill + heutiger Snapshot), Duplikate per txid entfernen
+    const byTxid = new Map();
+    for (const t of backfillTransfers) byTxid.set(t.txid, t);
+    for (const t of (snapshot.large_transfers || [])) byTxid.set(t.txid, t);
+    STATE.transfers = Array.from(byTxid.values()).sort((a, b) => b.time - a.time);
+
+    if (backfillState) {
+        const total = Math.floor((backfillState.target_end_height - backfillState.target_start_height) / 500) + 1;
+        const done = (backfillState.completed_chunks || []).length;
+        const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+        if (STATE.transfers.length > 0) {
+            const oldest = new Date(Math.min(...STATE.transfers.map(t => t.time)) * 1000);
+            const newest = new Date(Math.max(...STATE.transfers.map(t => t.time)) * 1000);
+            document.getElementById('coverage-note').innerText =
+                `Verlaufsdaten: ${oldest.toLocaleDateString('de-DE')} – ${newest.toLocaleDateString('de-DE')} · 90-Tage-Backfill ${pct}% abgeschlossen (läuft im Hintergrund weiter)`;
         }
+    }
 
-        function formatNumber(num) {
-            return new Intl.NumberFormat('de-DE').format(num);
+    render();
+}
+
+function filteredTransfers() {
+    if (STATE.range === 'all') return STATE.transfers;
+    const cutoff = Date.now() / 1000 - parseInt(STATE.range, 10) * 86400;
+    return STATE.transfers.filter(t => t.time >= cutoff);
+}
+
+function render() {
+    const snapshot = STATE.snapshot;
+    const date = new Date(snapshot.timestamp);
+    document.getElementById('last-updated').innerText = `Datenstand: ${date.toLocaleString('de-DE')}`;
+    const statusEl = document.getElementById('status-val');
+    statusEl.innerText = snapshot.status;
+    statusEl.className = 'status-badge' + (snapshot.status === 'ok' ? '' : snapshot.status === 'teilweise' ? ' warn' : ' bad');
+
+    renderKPIs();
+    renderPriceChart();
+    renderVolumeUsdChart();
+    renderDistributionChart();
+    renderVolumeChart();
+    renderNetflowChart();
+    renderCorrelationMatrix();
+    renderLagChart();
+    renderActivityHeatmap();
+    renderDifficultyChart();
+    renderExchangeTable();
+    renderMinerTable();
+    renderWhalesTable();
+    renderTransfersTable();
+}
+
+// ---------- KPIs ----------
+function renderKPIs() {
+    const snapshot = STATE.snapshot;
+    const transfers = filteredTransfers();
+    const counts = snapshot.metrics.address_counts;
+    const whaleCount = snapshot.whales.length;
+    const addr100k = counts['100k'] || 0;
+
+    let whaleDelta = null, addrDelta = null;
+    if (STATE.prevSnapshot) {
+        whaleDelta = whaleCount - STATE.prevSnapshot.whales.length;
+        addrDelta = addr100k - (STATE.prevSnapshot.metrics.address_counts['100k'] || 0);
+    }
+
+    const totalVolume = transfers.reduce((s, t) => s + t.net_amount, 0);
+    const largest = transfers.reduce((max, t) => t.net_amount > (max ? max.net_amount : -1) ? t : max, null);
+    const hubCount = STATE.hubAddresses.size;
+
+    const priceDays = Object.keys(STATE.priceHistory).sort();
+    let priceHtml = '', priceDeltaHtml = '';
+    if (priceDays.length > 0) {
+        const lastKey = priceDays[priceDays.length - 1];
+        const prevKey = priceDays.length > 1 ? priceDays[priceDays.length - 2] : null;
+        const last = STATE.priceHistory[lastKey];
+        priceHtml = '$' + last.price_usd.toFixed(8).replace(/0+$/, '').replace(/\.$/, '');
+        if (prevKey && STATE.priceHistory[prevKey].price_usd) {
+            const pct = (last.price_usd - STATE.priceHistory[prevKey].price_usd) / STATE.priceHistory[prevKey].price_usd * 100;
+            const cls = pct > 0 ? 'up' : pct < 0 ? 'down' : '';
+            const arrow = pct > 0 ? '▲' : pct < 0 ? '▼' : '–';
+            priceDeltaHtml = `<div class="kpi-delta ${cls}">${arrow} ${Math.abs(pct).toFixed(1)}% vs. Vortag (UTC)</div>`;
         }
+    }
 
-        function renderData(data, knownWhalesCount) {
-            const date = new Date(data.timestamp);
-            document.getElementById('last-updated').innerText = `Datenstand: ${date.toLocaleString('de-DE')}`;
-            document.getElementById('status-val').innerText = data.status;
-            document.getElementById('historical-whales-val').innerText = formatNumber(knownWhalesCount);
-            
-            // Adress Metriken
-            const metricsDiv = document.getElementById('address-metrics');
-            metricsDiv.innerHTML = '';
-            const counts = data.metrics.address_counts;
-            // Reihenfolge umdrehen (größte zuerst)
-            const orderedBuckets = ["3B", "2B", "1B", "500M", "100M", "50M", "20M", "10M", "5M", "2M", "1M", "500k", "100k"];
-            orderedBuckets.forEach(bucket => {
-                const count = counts[bucket] || 0;
-                metricsDiv.innerHTML += `
-                    <div class="metric-row">
-                        <span class="metric-label">≥ ${bucket} PEP</span>
-                        <span class="metric-value">${formatNumber(count)}</span>
-                    </div>
-                `;
-            });
+    function deltaHtml(delta) {
+        if (delta === null) return '';
+        const cls = delta > 0 ? 'up' : delta < 0 ? 'down' : '';
+        const arrow = delta > 0 ? '▲' : delta < 0 ? '▼' : '–';
+        return `<div class="kpi-delta ${cls}">${arrow} ${formatNumber(Math.abs(delta))} vs. letzter Snapshot</div>`;
+    }
 
-            // Wal Tabelle
-            const whales = data.whales.sort((a, b) => b.balance - a.balance);
-            document.getElementById('whales-val').innerText = formatNumber(whales.length);
-            
-            const tbody = document.getElementById('whales-table');
-            tbody.innerHTML = '';
-            whales.forEach((whale, index) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td class="metric-label" style="width: 50px;">#${index + 1}</td>
-                        <td class="address-cell"><a href="https://pepeblocks.com/address/${whale.address}" target="_blank" style="color: inherit; text-decoration: none;">${whale.address}</a></td>
-                        <td class="metric-value">${formatNumber(Math.floor(whale.balance))}</td>
-                    </tr>
-                `;
-            });
+    const netDays = Object.keys(STATE.networkStats).sort();
+    let hashrateHtml = '–', hashrateSubHtml = '';
+    if (netDays.length > 0) {
+        const latest = STATE.networkStats[netDays[netDays.length - 1]];
+        hashrateHtml = formatHashrate(latest.hashrate);
+        hashrateSubHtml = `<div class="kpi-sub">Difficulty: ${formatNumber(latest.difficulty)}</div>`;
+    }
 
-            // Transaktions Tabelle
-            const txBody = document.getElementById('tx-table');
-            txBody.innerHTML = '';
-            const largeTxs = data.large_transfers || [];
-            
-            if (largeTxs.length === 0) {
-                txBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">Keine großen Transaktionen im gescannten Zeitraum gefunden.</td></tr>`;
+    const tiles = [
+        { label: 'Preis (USD, CoinGecko)', value: priceHtml || '–', delta: priceDeltaHtml },
+        { label: 'Aktive Wale (≥10M PEP)', value: formatNumber(whaleCount), delta: deltaHtml(whaleDelta) },
+        { label: 'Adressen ≥100K PEP', value: formatNumber(addr100k), delta: deltaHtml(addrDelta) },
+        { label: 'Transfer-Volumen (Zeitraum)', value: formatCompact(totalVolume) + ' PEP', delta: `<div class="kpi-sub">${transfers.length} Transfers ≥1M PEP</div>` },
+        { label: 'Größter Einzeltransfer', value: largest ? formatCompact(largest.net_amount) + ' PEP' : '–', delta: largest ? `<div class="kpi-sub">${new Date(largest.time * 1000).toLocaleDateString('de-DE')}</div>` : '' },
+        { label: 'Vermutliche Exchange-Hubs', value: formatNumber(hubCount), delta: `<div class="kpi-sub">von ${STATE.knownWhalesCount} bekannten Walen</div>` },
+        { label: 'Netzwerk-Hashrate (aktuell)', value: hashrateHtml, delta: hashrateSubHtml },
+    ];
+
+    document.getElementById('kpi-row').innerHTML = tiles.map(t => `
+        <div class="kpi-tile">
+            <div class="kpi-label">${t.label}</div>
+            <div class="kpi-value">${t.value}</div>
+            ${t.delta}
+        </div>
+    `).join('');
+}
+
+// ---------- Tooltip helper ----------
+const tooltipEl = document.getElementById('tooltip');
+function showTooltip(x, y, html) {
+    tooltipEl.innerHTML = html;
+    tooltipEl.style.left = x + 12 + 'px';
+    tooltipEl.style.top = y + 12 + 'px';
+    tooltipEl.classList.add('visible');
+}
+function hideTooltip() { tooltipEl.classList.remove('visible'); }
+
+function svgEl(tag, attrs) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (const k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+}
+
+// 4px rounded corner only at the data-end, square at the baseline (mark spec)
+function roundedBarPath(x, y, w, h, r, tl, tr, br, bl) {
+    if (h <= 0 || w <= 0) return '';
+    r = Math.min(r, w / 2, h);
+    const rtl = tl ? r : 0, rtr = tr ? r : 0, rbr = br ? r : 0, rbl = bl ? r : 0;
+    return [
+        `M${x + rtl},${y}`,
+        `H${x + w - rtr}`,
+        rtr ? `Q${x + w},${y} ${x + w},${y + rtr}` : '',
+        `V${y + h - rbr}`,
+        rbr ? `Q${x + w},${y + h} ${x + w - rbr},${y + h}` : '',
+        `H${x + rbl}`,
+        rbl ? `Q${x},${y + h} ${x},${y + h - rbl}` : '',
+        `V${y + rtl}`,
+        rtl ? `Q${x},${y} ${x + rtl},${y}` : '',
+        'Z',
+    ].join(' ');
+}
+
+// ---------- Chart 1: horizontal bar (address distribution) ----------
+function renderDistributionChart() {
+    const counts = STATE.snapshot.metrics.address_counts;
+    const buckets = [
+        ['100k', '≥ 100K'], ['500k', '≥ 500K'], ['1M', '≥ 1M'], ['2M', '≥ 2M'], ['5M', '≥ 5M'],
+        ['10M', '≥ 10M'], ['20M', '≥ 20M'], ['50M', '≥ 50M'], ['100M', '≥ 100M'],
+        ['500M', '≥ 500M'], ['1B', '≥ 1B'], ['2B', '≥ 2B'], ['3B', '≥ 3B'],
+    ];
+    const data = buckets.map(([key, label]) => ({ label, value: counts[key] || 0 }));
+    const maxVal = Math.max(1, ...data.map(d => d.value));
+
+    const W = 900, rowH = 26, padTop = 10, padBottom = 30, padLeft = 70, padRight = 70;
+    const H = data.length * rowH + padTop + padBottom;
+    const plotW = W - padLeft - padRight;
+
+    const ticks = niceTicks(0, maxVal, 5);
+    let gridHtml = '';
+    let axisLabelsHtml = '';
+    ticks.forEach(t => {
+        const x = padLeft + (t / maxVal) * plotW;
+        gridHtml += `<line class="grid-line" x1="${x}" y1="${padTop}" x2="${x}" y2="${padTop + data.length * rowH}"></line>`;
+        axisLabelsHtml += `<text class="axis-label" x="${x}" y="${padTop + data.length * rowH + 18}" text-anchor="middle">${formatCompact(t)}</text>`;
+    });
+
+    let barsHtml = '';
+    data.forEach((d, i) => {
+        const y = padTop + i * rowH;
+        const barW = Math.max(1, (d.value / maxVal) * plotW);
+        const cy = y + rowH / 2;
+        const bh = rowH - 8;
+        barsHtml += `<text class="cat-label" x="${padLeft - 10}" y="${cy + 4}" text-anchor="end">${d.label}</text>`;
+        barsHtml += `<path class="bar-mark" data-idx="${i}" d="${roundedBarPath(padLeft, y + 4, barW, bh, 4, false, true, true, false)}" fill="${COLORS.blue}"></path>`;
+        const labelX = padLeft + barW + 8;
+        barsHtml += `<text class="value-label" x="${labelX}" y="${cy + 4}">${formatNumber(d.value)}</text>`;
+    });
+
+    const svg = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Adressverteilung nach Guthaben-Schwelle">
+        <line class="axis-line" x1="${padLeft}" y1="${padTop}" x2="${padLeft}" y2="${padTop + data.length * rowH}"></line>
+        ${gridHtml}
+        ${barsHtml}
+        ${axisLabelsHtml}
+    </svg>`;
+    const container = document.getElementById('dist-chart');
+    container.innerHTML = svg;
+    attachBarTooltips(container, data, d => `<div class="tt-title">${d.label} PEP</div><div class="tt-row"><span class="tt-key" style="background:${COLORS.blue}"></span><span>Adressen</span><span class="tt-val">${formatNumber(d.value)}</span></div>`);
+
+    document.getElementById('dist-table-wrap').innerHTML = simpleTable(['Schwelle', 'Adressen'], data.map(d => [d.label, formatNumber(d.value)]));
+}
+
+// ---------- Chart 2: daily volume ----------
+function renderVolumeChart() {
+    const transfers = filteredTransfers();
+    const byDay = new Map();
+    transfers.forEach(t => {
+        const k = dayKey(t.time);
+        byDay.set(k, (byDay.get(k) || 0) + t.net_amount);
+    });
+    const days = Array.from(byDay.keys()).sort();
+    const data = days.map(k => ({ key: k, label: dayLabel(k), value: byDay.get(k) }));
+
+    const wrap = document.getElementById('volume-chart');
+    if (data.length === 0) {
+        wrap.innerHTML = '<div class="empty-note">Noch keine Transfers im gewählten Zeitraum erfasst.</div>';
+        document.getElementById('volume-table-wrap').innerHTML = '<div class="empty-note">Keine Daten.</div>';
+        return;
+    }
+
+    const W = 900, H = 320, padTop = 15, padBottom = 40, padLeft = 60, padRight = 15;
+    const plotW = W - padLeft - padRight, plotH = H - padTop - padBottom;
+    const maxVal = Math.max(1, ...data.map(d => d.value));
+    const ticks = niceTicks(0, maxVal, 5);
+    const dayKeys = data.map(d => d.key);
+    const xAt = buildTimeScale(dayKeys, padLeft, plotW);
+    let minGap = plotW;
+    for (let i = 1; i < data.length; i++) minGap = Math.min(minGap, xAt(i) - xAt(i - 1));
+    const barW = Math.min(24, Math.max(2, minGap * 0.7));
+
+    let gridHtml = '', axisLabelsHtml = '';
+    ticks.forEach(t => {
+        const y = padTop + plotH - (t / maxVal) * plotH;
+        gridHtml += `<line class="grid-line" x1="${padLeft}" y1="${y}" x2="${W - padRight}" y2="${y}"></line>`;
+        axisLabelsHtml += `<text class="axis-label" x="${padLeft - 8}" y="${y + 4}" text-anchor="end">${formatCompact(t)}</text>`;
+    });
+
+    const labelIdxSet = new Set(pickLabelIndices(data.length, 9));
+    let barsHtml = '', xLabelsHtml = '';
+    data.forEach((d, i) => {
+        const cx = xAt(i);
+        const barH = Math.max(1, (d.value / maxVal) * plotH);
+        const y = padTop + plotH - barH;
+        barsHtml += `<path class="bar-mark" data-idx="${i}" d="${roundedBarPath(cx - barW / 2, y, barW, barH, 4, true, true, false, false)}" fill="${COLORS.blue}"></path>`;
+        if (labelIdxSet.has(i)) {
+            xLabelsHtml += `<text class="axis-label" x="${cx}" y="${padTop + plotH + 18}" text-anchor="middle">${d.label}</text>`;
+        }
+    });
+
+    const svg = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Groß-Transfer-Volumen pro Tag">
+        <line class="axis-line" x1="${padLeft}" y1="${padTop + plotH}" x2="${W - padRight}" y2="${padTop + plotH}"></line>
+        ${gridHtml}
+        ${barsHtml}
+        ${xLabelsHtml}
+    </svg>`;
+    wrap.innerHTML = svg;
+    attachBarTooltips(wrap, data, d => `<div class="tt-title">${d.key}</div><div class="tt-row"><span class="tt-key" style="background:${COLORS.blue}"></span><span>Volumen</span><span class="tt-val">${formatNumber(d.value)} PEP</span></div>`);
+
+    document.getElementById('volume-table-wrap').innerHTML = simpleTable(['Tag', 'Volumen (PEP)'], data.map(d => [d.key, formatNumber(d.value)]));
+}
+
+// ---------- Chart 3: netflow (diverging) ----------
+function renderNetflowChart() {
+    const transfers = filteredTransfers();
+    const hubs = STATE.hubAddresses;
+    const byDay = new Map();
+    transfers.forEach(t => {
+        const k = dayKey(t.time);
+        const toHubs = (t.to || []).filter(o => o.address && hubs.has(o.address)).reduce((s, o) => s + o.amount, 0);
+        const fromHubs = (t.from || []).filter(f => hubs.has(f.address)).reduce((s, f) => s + f.amount, 0);
+        byDay.set(k, (byDay.get(k) || 0) + (toHubs - fromHubs));
+    });
+    const days = Array.from(byDay.keys()).sort();
+    const data = days.map(k => ({ key: k, label: dayLabel(k), value: byDay.get(k) }));
+
+    document.getElementById('netflow-legend').innerHTML = `
+        <div class="legend-item"><span class="legend-swatch" style="background:${COLORS.blue}"></span>Netto-Zufluss</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:${COLORS.red}"></span>Netto-Abfluss</div>
+    `;
+
+    const wrap = document.getElementById('netflow-chart');
+    if (hubs.size === 0 || data.every(d => d.value === 0)) {
+        wrap.innerHTML = '<div class="empty-note">Keine Hub-Bewegungen im gewählten Zeitraum erfasst.</div>';
+        document.getElementById('netflow-table-wrap').innerHTML = '<div class="empty-note">Keine Daten.</div>';
+        return;
+    }
+
+    const W = 900, H = 320, padTop = 15, padBottom = 40, padLeft = 60, padRight = 15;
+    const plotW = W - padLeft - padRight, plotH = H - padTop - padBottom;
+    const maxAbs = Math.max(1, ...data.map(d => Math.abs(d.value)));
+    const zeroY = padTop + plotH / 2;
+    const ticks = niceTicks(0, maxAbs, 3);
+    const dayKeys = data.map(d => d.key);
+    const xAt = buildTimeScale(dayKeys, padLeft, plotW);
+    let minGap = plotW;
+    for (let i = 1; i < data.length; i++) minGap = Math.min(minGap, xAt(i) - xAt(i - 1));
+    const barW = Math.min(24, Math.max(2, minGap * 0.7));
+
+    let gridHtml = '', axisLabelsHtml = '';
+    [...ticks.map(t => t), ...ticks.filter(t => t !== 0).map(t => -t)].forEach(t => {
+        const y = zeroY - (t / maxAbs) * (plotH / 2);
+        gridHtml += `<line class="grid-line" x1="${padLeft}" y1="${y}" x2="${W - padRight}" y2="${y}"></line>`;
+        axisLabelsHtml += `<text class="axis-label" x="${padLeft - 8}" y="${y + 4}" text-anchor="end">${formatCompact(t)}</text>`;
+    });
+
+    const labelIdxSet = new Set(pickLabelIndices(data.length, 9));
+    let barsHtml = '', xLabelsHtml = '';
+    data.forEach((d, i) => {
+        const cx = xAt(i);
+        const barH = Math.max(1, Math.abs(d.value) / maxAbs * (plotH / 2));
+        const y = d.value >= 0 ? zeroY - barH : zeroY;
+        const color = d.value >= 0 ? COLORS.blue : COLORS.red;
+        const corners = d.value >= 0 ? [true, true, false, false] : [false, false, true, true];
+        barsHtml += `<path class="bar-mark" data-idx="${i}" d="${roundedBarPath(cx - barW / 2, y, barW, barH, 4, ...corners)}" fill="${color}"></path>`;
+        if (labelIdxSet.has(i)) {
+            xLabelsHtml += `<text class="axis-label" x="${cx}" y="${padTop + plotH + 18}" text-anchor="middle">${d.label}</text>`;
+        }
+    });
+
+    const svg = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Netto-Fluss zu Exchange-Hub-Wallets pro Tag">
+        <line class="axis-line" x1="${padLeft}" y1="${zeroY}" x2="${W - padRight}" y2="${zeroY}"></line>
+        ${gridHtml}
+        ${barsHtml}
+        ${xLabelsHtml}
+    </svg>`;
+    wrap.innerHTML = svg;
+    attachBarTooltips(wrap, data, d => {
+        const dir = d.value >= 0 ? 'Zufluss' : 'Abfluss';
+        const color = d.value >= 0 ? COLORS.blue : COLORS.red;
+        return `<div class="tt-title">${d.key}</div><div class="tt-row"><span class="tt-key" style="background:${color}"></span><span>Netto-${dir}</span><span class="tt-val">${formatNumber(Math.abs(d.value))} PEP</span></div>`;
+    });
+
+    document.getElementById('netflow-table-wrap').innerHTML = simpleTable(['Tag', 'Netto-Fluss (PEP, + = Zufluss)'], data.map(d => [d.key, (d.value >= 0 ? '+' : '') + formatNumber(d.value)]));
+}
+
+// ---------- Preis-Zeitreihe (gefiltert nach Zeitraum) ----------
+function filteredPriceDays() {
+    let days = Object.keys(STATE.priceHistory).sort();
+    if (STATE.range !== 'all') {
+        const cutoffKey = new Date(Date.now() - parseInt(STATE.range, 10) * 86400000).toISOString().split('T')[0];
+        days = days.filter(k => k >= cutoffKey);
+    }
+    return days;
+}
+
+// ---------- Chart: Preis-Linie ----------
+function renderPriceChart() {
+    const days = filteredPriceDays();
+    const data = days.map(k => ({ key: k, label: dayLabel(k), value: STATE.priceHistory[k].price_usd })).filter(d => d.value != null);
+    const wrap = document.getElementById('price-chart');
+
+    if (data.length < 2) {
+        wrap.innerHTML = '<div class="empty-note">Noch keine Preisdaten im gewählten Zeitraum.</div>';
+        document.getElementById('price-table-wrap').innerHTML = '<div class="empty-note">Keine Daten.</div>';
+        return;
+    }
+
+    const W = 900, H = 280, padTop = 15, padBottom = 30, padLeft = 70, padRight = 15;
+    const plotW = W - padLeft - padRight, plotH = H - padTop - padBottom;
+    const minVal = Math.min(...data.map(d => d.value));
+    const maxVal = Math.max(...data.map(d => d.value));
+    const range = maxVal - minVal || maxVal || 1;
+    const yMin = Math.max(0, minVal - range * 0.1);
+    const yMax = maxVal + range * 0.1;
+    const dayKeys = data.map(d => d.key);
+    const xAt = buildTimeScale(dayKeys, padLeft, plotW);
+    function yAt(v) { return padTop + plotH - ((v - yMin) / (yMax - yMin || 1)) * plotH; }
+
+    const ticks = niceTicks(yMin, yMax, 4);
+    let gridHtml = '', axisLabelsHtml = '';
+    ticks.forEach(t => {
+        const y = yAt(t);
+        gridHtml += `<line class="grid-line" x1="${padLeft}" y1="${y}" x2="${W - padRight}" y2="${y}"></line>`;
+        axisLabelsHtml += `<text class="axis-label" x="${padLeft - 8}" y="${y + 4}" text-anchor="end">$${t.toFixed(t < 0.001 ? 8 : 4)}</text>`;
+    });
+
+    const linePoints = data.map((d, i) => `${xAt(i)},${yAt(d.value)}`).join(' ');
+    const areaPoints = `${xAt(0)},${yAt(yMin)} ${linePoints} ${xAt(data.length - 1)},${yAt(yMin)}`;
+
+    const labelIdxSet = new Set(pickLabelIndices(data.length, 9));
+    let xLabelsHtml = '';
+    data.forEach((d, i) => {
+        if (labelIdxSet.has(i)) {
+            xLabelsHtml += `<text class="axis-label" x="${xAt(i)}" y="${padTop + plotH + 18}" text-anchor="middle">${d.label}</text>`;
+        }
+    });
+
+    const svg = `<svg class="chart" id="price-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Pepecoin Preis in USD über Zeit">
+        <line class="axis-line" x1="${padLeft}" y1="${padTop + plotH}" x2="${W - padRight}" y2="${padTop + plotH}"></line>
+        ${gridHtml}
+        <polygon class="price-area" points="${areaPoints}"></polygon>
+        <polyline class="price-line" points="${linePoints}"></polyline>
+        ${xLabelsHtml}
+        ${axisLabelsHtml}
+        <line class="crosshair" id="price-crosshair" x1="0" y1="${padTop}" x2="0" y2="${padTop + plotH}" style="opacity:0"></line>
+        <circle class="hover-dot" id="price-hoverdot" r="4" style="opacity:0"></circle>
+        <rect id="price-hitrect" x="${padLeft}" y="${padTop}" width="${plotW}" height="${plotH}" fill="transparent"></rect>
+    </svg>`;
+    wrap.innerHTML = svg;
+
+    const hitRect = document.getElementById('price-hitrect');
+    const crosshair = document.getElementById('price-crosshair');
+    const dot = document.getElementById('price-hoverdot');
+    hitRect.addEventListener('pointermove', (e) => {
+        const svgEl = document.getElementById('price-svg');
+        const pt = svgEl.createSVGPoint();
+        pt.x = e.clientX; pt.y = e.clientY;
+        const local = pt.matrixTransform(svgEl.getScreenCTM().inverse());
+        const idx = nearestIndexByX(local.x, data.length, xAt);
+        const d = data[idx];
+        const x = xAt(idx), y = yAt(d.value);
+        crosshair.setAttribute('x1', x); crosshair.setAttribute('x2', x); crosshair.style.opacity = 1;
+        dot.setAttribute('cx', x); dot.setAttribute('cy', y); dot.style.opacity = 1;
+        showTooltip(e.clientX + window.scrollX, e.clientY + window.scrollY,
+            `<div class="tt-title">${d.key}</div><div class="tt-row"><span class="tt-key" style="background:${COLORS.blue}"></span><span>Preis</span><span class="tt-val">$${d.value.toFixed(8)}</span></div>`);
+    });
+    hitRect.addEventListener('pointerleave', () => { crosshair.style.opacity = 0; dot.style.opacity = 0; hideTooltip(); });
+
+    document.getElementById('price-table-wrap').innerHTML = simpleTable(['Tag', 'Preis (USD)'], data.map(d => [d.key, '$' + d.value.toFixed(8)]));
+}
+
+// ---------- Chart: Handelsvolumen (USD) ----------
+function renderVolumeUsdChart() {
+    const days = filteredPriceDays();
+    const data = days.map(k => ({ key: k, label: dayLabel(k), value: STATE.priceHistory[k].volume_usd })).filter(d => d.value != null);
+    const wrap = document.getElementById('volusd-chart');
+
+    if (data.length === 0) {
+        wrap.innerHTML = '<div class="empty-note">Noch keine Volumendaten im gewählten Zeitraum.</div>';
+        document.getElementById('volusd-table-wrap').innerHTML = '<div class="empty-note">Keine Daten.</div>';
+        return;
+    }
+
+    const W = 900, H = 260, padTop = 15, padBottom = 30, padLeft = 70, padRight = 15;
+    const plotW = W - padLeft - padRight, plotH = H - padTop - padBottom;
+    const maxVal = Math.max(1, ...data.map(d => d.value));
+    const ticks = niceTicks(0, maxVal, 4);
+    const dayKeys = data.map(d => d.key);
+    const xAt = buildTimeScale(dayKeys, padLeft, plotW);
+    let minGap = plotW;
+    for (let i = 1; i < data.length; i++) minGap = Math.min(minGap, xAt(i) - xAt(i - 1));
+    const barW = Math.min(24, Math.max(2, minGap * 0.7));
+
+    let gridHtml = '', axisLabelsHtml = '';
+    ticks.forEach(t => {
+        const y = padTop + plotH - (t / maxVal) * plotH;
+        gridHtml += `<line class="grid-line" x1="${padLeft}" y1="${y}" x2="${W - padRight}" y2="${y}"></line>`;
+        axisLabelsHtml += `<text class="axis-label" x="${padLeft - 8}" y="${y + 4}" text-anchor="end">$${formatCompact(t)}</text>`;
+    });
+
+    const labelIdxSet = new Set(pickLabelIndices(data.length, 9));
+    let barsHtml = '', xLabelsHtml = '';
+    data.forEach((d, i) => {
+        const cx = xAt(i);
+        const barH = Math.max(1, (d.value / maxVal) * plotH);
+        const y = padTop + plotH - barH;
+        barsHtml += `<path class="bar-mark" data-idx="${i}" d="${roundedBarPath(cx - barW / 2, y, barW, barH, 4, true, true, false, false)}" fill="${COLORS.blue}"></path>`;
+        if (labelIdxSet.has(i)) {
+            xLabelsHtml += `<text class="axis-label" x="${cx}" y="${padTop + plotH + 18}" text-anchor="middle">${d.label}</text>`;
+        }
+    });
+
+    wrap.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Handelsvolumen in USD pro Tag">
+        <line class="axis-line" x1="${padLeft}" y1="${padTop + plotH}" x2="${W - padRight}" y2="${padTop + plotH}"></line>
+        ${gridHtml}${barsHtml}${xLabelsHtml}
+    </svg>`;
+    attachBarTooltips(wrap, data, d => `<div class="tt-title">${d.key}</div><div class="tt-row"><span class="tt-key" style="background:${COLORS.blue}"></span><span>Volumen</span><span class="tt-val">$${formatNumber(d.value)}</span></div>`);
+
+    document.getElementById('volusd-table-wrap').innerHTML = simpleTable(['Tag', 'Volumen (USD)'], data.map(d => [d.key, '$' + formatNumber(d.value)]));
+}
+
+// ---------- Tagesmetriken für Korrelation/Lag (Preisänderung%, nicht Niveau) ----------
+// Wichtig: Tage außerhalb des tatsächlich vom Backfill abgedeckten Fensters bekommen
+// NULL für die On-Chain-Metriken (nicht 0) — sonst würden "noch nicht gescannt" und
+// "an dem Tag wirklich keine Groß-Transfers" ununterscheidbar, was die Korrelation
+// mit vielen künstlichen Nullen verwässert/verzerrt (n sähe hoch aus, wäre es aber nicht).
+function buildDailyMetrics() {
+    const dayset = new Set(Object.keys(STATE.priceHistory));
+    STATE.transfers.forEach(t => dayset.add(dayKey(t.time)));
+    let sortedDays = Array.from(dayset).sort();
+    if (STATE.range !== 'all') {
+        const cutoffKey = new Date(Date.now() - parseInt(STATE.range, 10) * 86400000).toISOString().split('T')[0];
+        sortedDays = sortedDays.filter(k => k >= cutoffKey);
+    }
+
+    const onchainByDay = new Map();
+    STATE.transfers.forEach(t => {
+        const k = dayKey(t.time);
+        if (!onchainByDay.has(k)) onchainByDay.set(k, { volume: 0, netflow: 0, count: 0 });
+        const rec = onchainByDay.get(k);
+        rec.volume += t.net_amount;
+        rec.count += 1;
+        const toHubs = (t.to || []).filter(o => o.address && STATE.hubAddresses.has(o.address)).reduce((s, o) => s + o.amount, 0);
+        const fromHubs = (t.from || []).filter(f => STATE.hubAddresses.has(f.address)).reduce((s, f) => s + f.amount, 0);
+        rec.netflow += (toHubs - fromHubs);
+    });
+    // Nur das vom Backfill-Skript selbst bestätigte LÜCKENLOSE Fenster gilt als abgedeckt
+    // (siehe backfill_history.py: contiguous_covered_*_day). Der min/max der tatsächlichen
+    // Transfer-Tage wäre hier falsch, weil der heutige Live-Rand (aus monitor.py) sonst
+    // fälschlich die riesige noch-nicht-gescannte Lücke dazwischen als "abgedeckt" erscheinen ließe.
+    const coverageMin = STATE.backfillState && STATE.backfillState.contiguous_covered_start_day || null;
+    const coverageMax = STATE.backfillState && STATE.backfillState.contiguous_covered_end_day || null;
+
+    const result = [];
+    for (let i = 0; i < sortedDays.length; i++) {
+        const k = sortedDays[i];
+        const prevK = i > 0 ? sortedDays[i - 1] : null;
+        const price = STATE.priceHistory[k];
+        const prevPrice = prevK ? STATE.priceHistory[prevK] : null;
+        let priceChangePct = null, volChangePct = null;
+        if (price && prevPrice && prevPrice.price_usd) {
+            priceChangePct = (price.price_usd - prevPrice.price_usd) / prevPrice.price_usd * 100;
+        }
+        if (price && prevPrice && prevPrice.volume_usd) {
+            volChangePct = (price.volume_usd - prevPrice.volume_usd) / prevPrice.volume_usd * 100;
+        }
+        const withinCoverage = coverageMin && k >= coverageMin && k <= coverageMax;
+        const oc = withinCoverage ? (onchainByDay.get(k) || { volume: 0, netflow: 0, count: 0 }) : null;
+        result.push({
+            key: k, priceChangePct, volChangePct,
+            onchainVolume: oc ? oc.volume : null,
+            netflow: oc ? oc.netflow : null,
+            txCount: oc ? oc.count : null,
+        });
+    }
+    return result;
+}
+
+function pearson(xs, ys) {
+    const n = xs.length;
+    if (n < 2) return null;
+    const mx = xs.reduce((a, b) => a + b, 0) / n, my = ys.reduce((a, b) => a + b, 0) / n;
+    let num = 0, dx2 = 0, dy2 = 0;
+    for (let i = 0; i < n; i++) {
+        const dx = xs[i] - mx, dy = ys[i] - my;
+        num += dx * dy; dx2 += dx * dx; dy2 += dy * dy;
+    }
+    if (dx2 === 0 || dy2 === 0) return null;
+    return num / Math.sqrt(dx2 * dy2);
+}
+
+function pairedSeries(rows, keyA, keyB) {
+    const xs = [], ys = [];
+    rows.forEach(r => {
+        if (r[keyA] != null && r[keyB] != null && !Number.isNaN(r[keyA]) && !Number.isNaN(r[keyB])) {
+            xs.push(r[keyA]); ys.push(r[keyB]);
+        }
+    });
+    return { xs, ys, n: xs.length };
+}
+
+function divergingColor(r) {
+    const blue = [0x39, 0x87, 0xe5], red = [0xe6, 0x67, 0x67], mid = [0x38, 0x38, 0x35];
+    const lerp = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+    const rgb = r >= 0 ? lerp(mid, blue, Math.min(1, r)) : lerp(mid, red, Math.min(1, -r));
+    return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+}
+
+// Eigene sequentielle Rampe fürs dunkle Chart-Surface: niedrig = nah am Surface (rezessiv),
+// hoch = kräftiges Blau (pop) — invertiert gegenüber der hellen Referenzrampe, gleiche Logik.
+function sequentialColorDark(t) {
+    const near = [0x20, 0x24, 0x30], bright = [0x39, 0x87, 0xe5];
+    const rgb = near.map((v, i) => Math.round(v + (bright[i] - v) * Math.min(1, t)));
+    return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+}
+
+// ---------- Korrelationsmatrix (Heatmap, diverging) ----------
+const CORR_METRICS = [
+    ['priceChangePct', 'Preisänderung %'],
+    ['volChangePct', 'Handelsvol. Δ%'],
+    ['onchainVolume', 'On-Chain Vol.'],
+    ['netflow', 'Hub-Netto-Fluss'],
+    ['txCount', 'Anz. Transfers'],
+];
+
+function renderCorrelationMatrix() {
+    const rows = buildDailyMetrics();
+    const n = CORR_METRICS.length;
+    const cellSize = 110, padLeft = 130, padTop = 30, legendH = 0;
+    const W = padLeft + n * cellSize + 20, H = padTop + n * cellSize + 20;
+
+    let maxN = 0;
+    const matrix = [];
+    for (let i = 0; i < n; i++) {
+        matrix.push([]);
+        for (let j = 0; j < n; j++) {
+            if (i === j) { matrix[i].push({ r: 1, n: rows.length, diag: true }); continue; }
+            const { xs, ys, n: cn } = pairedSeries(rows, CORR_METRICS[i][0], CORR_METRICS[j][0]);
+            maxN = Math.max(maxN, cn);
+            matrix[i].push({ r: pearson(xs, ys), n: cn });
+        }
+    }
+
+    const gateNoteEl = document.getElementById('corr-gate-note');
+    if (maxN < MIN_N_CORRELATION) {
+        gateNoteEl.innerHTML = `<div class="gate-note">Noch nicht genug gemeinsame Tage für eine aussagekräftige Korrelation (mindestens ${MIN_N_CORRELATION} nötig, aktuell max. ${maxN}). Die Matrix zeigt vorerst nur die Stichprobengröße "n" statt Werten — sie füllt sich automatisch, sobald der 90-Tage-Backfill weiter fortschreitet.</div>`;
+    } else {
+        gateNoteEl.innerHTML = '';
+    }
+
+    document.getElementById('corr-legend').innerHTML = `
+        <span>−1</span><div class="scale-gradient" style="background:linear-gradient(90deg, ${divergingColor(-1)}, ${divergingColor(0)}, ${divergingColor(1)})"></div><span>+1</span>
+        <span style="margin-left:0.6rem;">Zellen unter n=${MIN_N_CORRELATION} bleiben neutral</span>
+    `;
+
+    let cellsHtml = '', rowLabelsHtml = '', colLabelsHtml = '';
+    for (let i = 0; i < n; i++) {
+        const y = padTop + i * cellSize;
+        rowLabelsHtml += `<text class="heat-axis-label" x="${padLeft - 10}" y="${y + cellSize / 2 + 4}" text-anchor="end">${CORR_METRICS[i][1]}</text>`;
+        for (let j = 0; j < n; j++) {
+            const x = padLeft + j * cellSize;
+            const cell = matrix[i][j];
+            const gated = !cell.diag && cell.n < MIN_N_CORRELATION;
+            const fill = gated ? 'var(--surface-2)' : divergingColor(cell.r == null ? 0 : cell.r);
+            cellsHtml += `<rect class="heat-cell${gated ? ' gated' : ''}" data-i="${i}" data-j="${j}" x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${fill}" rx="4"></rect>`;
+            if (gated) {
+                cellsHtml += `<text class="heat-label muted" x="${x + cellSize / 2}" y="${y + cellSize / 2}">n=${cell.n}</text>`;
             } else {
-                // Nach Zeit sortieren (neueste zuerst)
-                largeTxs.sort((a, b) => b.time - a.time).forEach(tx => {
-                    const txDate = new Date(tx.time * 1000).toLocaleString('de-DE');
-                    txBody.innerHTML += `
-                        <tr>
-                            <td class="metric-label" style="white-space: nowrap;">${txDate}</td>
-                            <td class="address-cell" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">
-                                <a href="https://pepeblocks.com/tx/${tx.txid}" target="_blank" style="color: inherit; text-decoration: none;" title="${tx.txid}">${tx.txid}</a>
-                            </td>
-                            <td class="metric-value">${formatNumber(Math.floor(tx.amount))}</td>
-                        </tr>
-                    `;
-                });
+                cellsHtml += `<text class="heat-label" x="${x + cellSize / 2}" y="${y + cellSize / 2 - 6}">${cell.r == null ? '–' : cell.r.toFixed(2)}</text>`;
+                cellsHtml += `<text class="heat-n" x="${x + cellSize / 2}" y="${y + cellSize / 2 + 12}">n=${cell.n}</text>`;
             }
         }
+        colLabelsHtml += `<text class="heat-axis-label" x="${padLeft + i * cellSize + cellSize / 2}" y="${padTop - 10}" text-anchor="middle">${CORR_METRICS[i][1]}</text>`;
+    }
 
-        document.addEventListener('DOMContentLoaded', loadData);
-    </script>
+    document.getElementById('corr-matrix').innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Korrelationsmatrix Preis und On-Chain-Aktivität">
+        ${rowLabelsHtml}${colLabelsHtml}${cellsHtml}
+    </svg>`;
+
+    const container = document.getElementById('corr-matrix');
+    container.querySelectorAll('.heat-cell').forEach(cell => {
+        const i = parseInt(cell.getAttribute('data-i'), 10), j = parseInt(cell.getAttribute('data-j'), 10);
+        const m = matrix[i][j];
+        cell.addEventListener('pointermove', (e) => {
+            const label = m.diag ? 'Diagonale (Metrik mit sich selbst)' : `${CORR_METRICS[i][1]} × ${CORR_METRICS[j][1]}`;
+            const valueHtml = (m.diag || m.n >= MIN_N_CORRELATION)
+                ? `<span class="tt-val">r = ${m.r == null ? 'n/a' : m.r.toFixed(3)}</span>`
+                : `<span class="tt-val">unter Mindest-n</span>`;
+            showTooltip(e.clientX + window.scrollX, e.clientY + window.scrollY,
+                `<div class="tt-title">${label}</div><div class="tt-row">${valueHtml}</div><div class="tt-row" style="color:var(--text-muted); font-size:0.7rem;">n=${m.n} gemeinsame Tage</div>`);
+        });
+        cell.addEventListener('pointerleave', hideTooltip);
+    });
+}
+
+// ---------- Lag-Analyse: Hub-Netto-Fluss vs. Preisänderung, verschoben ±3 Tage ----------
+function renderLagChart() {
+    const rows = buildDailyMetrics();
+    const byKey = new Map(rows.map(r => [r.key, r]));
+    const sortedKeys = rows.map(r => r.key);
+    const lags = [-3, -2, -1, 0, 1, 2, 3];
+
+    const results = lags.map(lag => {
+        const xs = [], ys = [];
+        sortedKeys.forEach((k, idx) => {
+            const targetIdx = idx + lag;
+            if (targetIdx < 0 || targetIdx >= sortedKeys.length) return;
+            const netflow = byKey.get(k).netflow;
+            const priceChange = byKey.get(sortedKeys[targetIdx]).priceChangePct;
+            if (netflow != null && priceChange != null) { xs.push(netflow); ys.push(priceChange); }
+        });
+        return { lag, r: pearson(xs, ys), n: xs.length };
+    });
+
+    const maxN = Math.max(0, ...results.map(r => r.n));
+    const gateEl = document.getElementById('lag-gate-note');
+    gateEl.innerHTML = maxN < MIN_N_CORRELATION
+        ? `<div class="gate-note">Noch nicht genug überlappende Tage (mindestens ${MIN_N_CORRELATION}, aktuell max. ${maxN}) — Balken zeigen vorerst nur "n" statt eines Korrelationswerts.</div>`
+        : '';
+
+    const W = 700, H = 220, padTop = 15, padBottom = 45, padLeft = 50, padRight = 15;
+    const plotW = W - padLeft - padRight, plotH = H - padTop - padBottom;
+    const zeroY = padTop + plotH / 2;
+    const barW = Math.min(24, plotW / lags.length * 0.5);
+    const step = plotW / lags.length;
+
+    let barsHtml = '', labelsHtml = '';
+    const gridMid = `<line class="axis-line" x1="${padLeft}" y1="${zeroY}" x2="${W - padRight}" y2="${zeroY}"></line>`;
+    results.forEach((res, i) => {
+        const cx = padLeft + i * step + step / 2;
+        const gated = res.n < MIN_N_CORRELATION;
+        const rVal = gated ? 0 : (res.r || 0);
+        const barH = Math.max(1, Math.abs(rVal) * (plotH / 2));
+        const y = rVal >= 0 ? zeroY - barH : zeroY;
+        const color = gated ? COLORS.muted : (rVal >= 0 ? COLORS.blue : COLORS.red);
+        const corners = rVal >= 0 ? [true, true, false, false] : [false, false, true, true];
+        if (!gated) {
+            barsHtml += `<path class="bar-mark" data-idx="${i}" d="${roundedBarPath(cx - barW / 2, y, barW, Math.max(barH,1), 4, ...corners)}" fill="${color}"></path>`;
+        }
+        const lagLabel = res.lag === 0 ? 'gleicher Tag' : (res.lag > 0 ? `+${res.lag}T` : `${res.lag}T`);
+        labelsHtml += `<text class="axis-label" x="${cx}" y="${padTop + plotH + 18}" text-anchor="middle">${lagLabel}</text>`;
+        labelsHtml += `<text class="heat-n" x="${cx}" y="${padTop + plotH + 32}" text-anchor="middle">n=${res.n}</text>`;
+        if (gated) {
+            barsHtml += `<text class="heat-label muted" x="${cx}" y="${zeroY}">–</text>`;
+        }
+    });
+
+    document.getElementById('lag-chart').innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Zeitversetzte Korrelation Hub-Netto-Fluss und Preisänderung">
+        ${gridMid}${barsHtml}${labelsHtml}
+    </svg>`;
+
+    const container = document.getElementById('lag-chart');
+    container.querySelectorAll('.bar-mark').forEach(bar => {
+        const idx = parseInt(bar.getAttribute('data-idx'), 10);
+        const res = results[idx];
+        bar.addEventListener('pointermove', (e) => {
+            showTooltip(e.clientX + window.scrollX, e.clientY + window.scrollY,
+                `<div class="tt-title">Lag ${res.lag > 0 ? '+' : ''}${res.lag} Tage</div><div class="tt-row"><span class="tt-val">r = ${res.r == null ? 'n/a' : res.r.toFixed(3)}</span></div><div class="tt-row" style="color:var(--text-muted); font-size:0.7rem;">n=${res.n}</div>`);
+        });
+        bar.addEventListener('pointerleave', hideTooltip);
+    });
+}
+
+// ---------- Aktivitäts-Heatmap: Wochentag × Stunde (UTC) ----------
+function renderActivityHeatmap() {
+    const transfers = filteredTransfers();
+    const WEEKDAYS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+    const grid = Array.from({ length: 7 }, () => Array(24).fill(0));
+    transfers.forEach(t => {
+        const d = new Date(t.time * 1000);
+        const jsDay = d.getUTCDay(); // 0=So
+        const day = (jsDay + 6) % 7; // 0=Mo
+        grid[day][d.getUTCHours()] += 1;
+    });
+
+    const gateEl = document.getElementById('activity-gate-note');
+    if (transfers.length < 50) {
+        gateEl.innerHTML = `<div class="gate-note">Noch zu wenige Transfers erfasst (${transfers.length}, empfohlen ≥50) für ein aussagekräftiges Aktivitätsmuster — Heatmap füllt sich automatisch mit fortschreitendem Backfill.</div>`;
+    } else {
+        gateEl.innerHTML = '';
+    }
+
+    const maxVal = Math.max(1, ...grid.flat());
+    document.getElementById('activity-legend').innerHTML = `
+        <span>0</span><div class="scale-gradient" style="background:linear-gradient(90deg, ${sequentialColorDark(0)}, ${sequentialColorDark(1)})"></div><span>${maxVal}</span>
+        <span style="margin-left:0.6rem;">Transfers je Zelle</span>
+    `;
+
+    const cellW = 30, cellH = 26, padLeft = 40, padTop = 15;
+    const W = padLeft + 24 * cellW + 10, H = padTop + 7 * cellH + 20;
+
+    let cellsHtml = '', rowLabelsHtml = '', colLabelsHtml = '';
+    for (let day = 0; day < 7; day++) {
+        const y = padTop + day * cellH;
+        rowLabelsHtml += `<text class="heat-axis-label" x="${padLeft - 8}" y="${y + cellH / 2 + 4}" text-anchor="end">${WEEKDAYS[day]}</text>`;
+        for (let hour = 0; hour < 24; hour++) {
+            const x = padLeft + hour * cellW;
+            const val = grid[day][hour];
+            const color = val === 0 ? 'var(--grid)' : sequentialColorDark(val / maxVal);
+            cellsHtml += `<rect class="heat-cell" data-day="${day}" data-hour="${hour}" x="${x}" y="${y}" width="${cellW}" height="${cellH}" fill="${color}" rx="3"></rect>`;
+        }
+    }
+    for (let hour = 0; hour < 24; hour += 3) {
+        colLabelsHtml += `<text class="heat-axis-label" x="${padLeft + hour * cellW + cellW / 2}" y="${padTop + 7 * cellH + 14}" text-anchor="middle">${hour}h</text>`;
+    }
+
+    document.getElementById('activity-heatmap').innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Groß-Transfer-Aktivität nach Wochentag und Stunde (UTC)">
+        ${rowLabelsHtml}${colLabelsHtml}${cellsHtml}
+    </svg>`;
+
+    const container = document.getElementById('activity-heatmap');
+    container.querySelectorAll('.heat-cell').forEach(cell => {
+        const day = parseInt(cell.getAttribute('data-day'), 10), hour = parseInt(cell.getAttribute('data-hour'), 10);
+        const val = grid[day][hour];
+        cell.addEventListener('pointermove', (e) => {
+            showTooltip(e.clientX + window.scrollX, e.clientY + window.scrollY,
+                `<div class="tt-title">${WEEKDAYS[day]}, ${hour}:00–${hour + 1}:00 UTC</div><div class="tt-row"><span class="tt-val">${val} Transfer${val === 1 ? '' : 's'}</span></div>`);
+        });
+        cell.addEventListener('pointerleave', hideTooltip);
+    });
+}
+
+// ---------- Chart: Mining-Difficulty (aus Coinbase-Daten bereits gescannter Blöcke) ----------
+function renderDifficultyChart() {
+    const byDay = new Map();
+    STATE.minerRewards.slice().sort((a, b) => a.block - b.block).forEach(r => {
+        if (r.difficulty == null) return;
+        byDay.set(dayKey(r.time), r.difficulty); // letzter Wert des Tages gewinnt (nach Block sortiert)
+    });
+    const days = Array.from(byDay.keys()).sort();
+    const data = days.map(k => ({ key: k, label: dayLabel(k), value: byDay.get(k) }));
+    const wrap = document.getElementById('difficulty-chart');
+
+    if (data.length < 2) {
+        wrap.innerHTML = '<div class="empty-note">Noch nicht genug Blöcke gescannt für eine Difficulty-Kurve.</div>';
+        document.getElementById('difficulty-table-wrap').innerHTML = '<div class="empty-note">Keine Daten.</div>';
+        return;
+    }
+
+    const W = 900, H = 260, padTop = 15, padBottom = 30, padLeft = 70, padRight = 15;
+    const plotW = W - padLeft - padRight, plotH = H - padTop - padBottom;
+    const minVal = Math.min(...data.map(d => d.value));
+    const maxVal = Math.max(...data.map(d => d.value));
+    const range = maxVal - minVal || maxVal || 1;
+    const yMin = Math.max(0, minVal - range * 0.1);
+    const yMax = maxVal + range * 0.1;
+    const dayKeys = data.map(d => d.key);
+    const xAt = buildTimeScale(dayKeys, padLeft, plotW);
+    function yAt(v) { return padTop + plotH - ((v - yMin) / (yMax - yMin || 1)) * plotH; }
+
+    const ticks = niceTicks(yMin, yMax, 4);
+    let gridHtml = '', axisLabelsHtml = '';
+    ticks.forEach(t => {
+        const y = yAt(t);
+        gridHtml += `<line class="grid-line" x1="${padLeft}" y1="${y}" x2="${W - padRight}" y2="${y}"></line>`;
+        axisLabelsHtml += `<text class="axis-label" x="${padLeft - 8}" y="${y + 4}" text-anchor="end">${formatCompact(t)}</text>`;
+    });
+
+    const linePoints = data.map((d, i) => `${xAt(i)},${yAt(d.value)}`).join(' ');
+    const areaPoints = `${xAt(0)},${yAt(yMin)} ${linePoints} ${xAt(data.length - 1)},${yAt(yMin)}`;
+
+    const labelIdxSet = new Set(pickLabelIndices(data.length, 9));
+    let xLabelsHtml = '';
+    data.forEach((d, i) => {
+        if (labelIdxSet.has(i)) {
+            xLabelsHtml += `<text class="axis-label" x="${xAt(i)}" y="${padTop + plotH + 18}" text-anchor="middle">${d.label}</text>`;
+        }
+    });
+
+    wrap.innerHTML = `<svg class="chart" id="difficulty-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Mining-Difficulty über Zeit">
+        <line class="axis-line" x1="${padLeft}" y1="${padTop + plotH}" x2="${W - padRight}" y2="${padTop + plotH}"></line>
+        ${gridHtml}
+        <polygon class="price-area" points="${areaPoints}"></polygon>
+        <polyline class="price-line" points="${linePoints}"></polyline>
+        ${xLabelsHtml}${axisLabelsHtml}
+        <line class="crosshair" id="difficulty-crosshair" x1="0" y1="${padTop}" x2="0" y2="${padTop + plotH}" style="opacity:0"></line>
+        <circle class="hover-dot" id="difficulty-hoverdot" r="4" style="opacity:0"></circle>
+        <rect id="difficulty-hitrect" x="${padLeft}" y="${padTop}" width="${plotW}" height="${plotH}" fill="transparent"></rect>
+    </svg>`;
+
+    const hitRect = document.getElementById('difficulty-hitrect');
+    const crosshair = document.getElementById('difficulty-crosshair');
+    const dot = document.getElementById('difficulty-hoverdot');
+    hitRect.addEventListener('pointermove', (e) => {
+        const svgEl = document.getElementById('difficulty-svg');
+        const pt = svgEl.createSVGPoint();
+        pt.x = e.clientX; pt.y = e.clientY;
+        const local = pt.matrixTransform(svgEl.getScreenCTM().inverse());
+        const idx = nearestIndexByX(local.x, data.length, xAt);
+        const d = data[idx];
+        const x = xAt(idx), y = yAt(d.value);
+        crosshair.setAttribute('x1', x); crosshair.setAttribute('x2', x); crosshair.style.opacity = 1;
+        dot.setAttribute('cx', x); dot.setAttribute('cy', y); dot.style.opacity = 1;
+        showTooltip(e.clientX + window.scrollX, e.clientY + window.scrollY,
+            `<div class="tt-title">${d.key}</div><div class="tt-row"><span class="tt-key" style="background:${COLORS.blue}"></span><span>Difficulty</span><span class="tt-val">${formatNumber(d.value)}</span></div>`);
+    });
+    hitRect.addEventListener('pointerleave', () => { crosshair.style.opacity = 0; dot.style.opacity = 0; hideTooltip(); });
+
+    document.getElementById('difficulty-table-wrap').innerHTML = simpleTable(['Tag', 'Difficulty'], data.map(d => [d.key, formatNumber(d.value)]));
+}
+
+// Erzeugt "runde" Tick-Werte im Bereich [min, max]. Startet bei einem Vielfachen
+// von niceStep >= min (nicht immer bei 0) — sonst landet bei einer Preis-Achse mit
+// min > 0 ein Tick unterhalb des Plot-Bereichs und rendert (wegen overflow:visible)
+// in die Karte darunter hinein.
+function niceTicks(min, max, count) {
+    if (max <= min) return [max];
+    const rawStep = (max - min) / count;
+    const mag = Math.pow(10, Math.floor(Math.log10(rawStep)));
+    const norm = rawStep / mag;
+    let niceStep;
+    if (norm < 1.5) niceStep = mag;
+    else if (norm < 3) niceStep = 2 * mag;
+    else if (norm < 7) niceStep = 5 * mag;
+    else niceStep = 10 * mag;
+    const start = Math.ceil(min / niceStep) * niceStep;
+    const ticks = [];
+    for (let t = start; t <= max + niceStep * 0.01; t += niceStep) ticks.push(Math.round(t * 1e8) / 1e8);
+    return ticks;
+}
+
+// Wählt bis zu ~targetCount Achsen-Label-Indizes gleichmäßig verteilt, inkl. des
+// letzten Punkts — verschiebt statt ein zweites, fast identisches Label direkt
+// daneben zu setzen (Label-Kollision am rechten Rand vermeiden).
+function pickLabelIndices(n, targetCount) {
+    if (n <= 1) return [0];
+    const stride = Math.max(1, Math.ceil(n / targetCount));
+    const idxs = [];
+    for (let i = 0; i < n; i += stride) idxs.push(i);
+    const last = n - 1;
+    if (idxs[idxs.length - 1] !== last) {
+        if (last - idxs[idxs.length - 1] < stride / 2) idxs[idxs.length - 1] = last;
+        else idxs.push(last);
+    }
+    return idxs;
+}
+
+function attachBarTooltips(container, data, htmlFn) {
+    const bars = container.querySelectorAll('.bar-mark');
+    bars.forEach(bar => {
+        const idx = parseInt(bar.getAttribute('data-idx'), 10);
+        const d = data[idx];
+        bar.addEventListener('pointermove', (e) => {
+            bar.classList.add('hovered');
+            showTooltip(e.clientX + window.scrollX, e.clientY + window.scrollY, htmlFn(d));
+        });
+        bar.addEventListener('pointerleave', () => { bar.classList.remove('hovered'); hideTooltip(); });
+        bar.tabIndex = 0;
+        bar.addEventListener('focus', (e) => {
+            const r = bar.getBoundingClientRect();
+            showTooltip(r.left + window.scrollX, r.top + window.scrollY, htmlFn(d));
+        });
+        bar.addEventListener('blur', hideTooltip);
+    });
+}
+
+function simpleTable(headers, rows) {
+    return `<table><thead><tr>${headers.map(h => `<th${h.match(/PEP|Anzahl/) ? ' class="num"' : ''}>${h}</th>`).join('')}</tr></thead>
+        <tbody>${rows.map(r => `<tr>${r.map((c, i) => `<td${i > 0 ? ' class="num"' : ''}>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+
+document.querySelectorAll('.table-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        const svgWrap = document.getElementById(target + '-chart-wrap');
+        const tableWrap = document.getElementById(target + '-table-wrap');
+        const showingTable = tableWrap.classList.contains('visible');
+        if (showingTable) {
+            tableWrap.classList.remove('visible');
+            svgWrap.classList.remove('hidden');
+            btn.innerText = 'Als Tabelle';
+        } else {
+            tableWrap.classList.add('visible');
+            svgWrap.classList.add('hidden');
+            btn.innerText = 'Als Chart';
+        }
+    });
+});
+
+document.querySelectorAll('#range-filter button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#range-filter button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        STATE.range = btn.getAttribute('data-range');
+        renderKPIs();
+        renderPriceChart();
+        renderVolumeUsdChart();
+        renderVolumeChart();
+        renderNetflowChart();
+        renderCorrelationMatrix();
+        renderLagChart();
+        renderActivityHeatmap();
+        renderTransfersTable();
+    });
+});
+
+// ---------- Tables ----------
+function renderExchangeTable() {
+    const tbody = document.getElementById('exchange-table');
+    const candidates = STATE.exchangeCandidates.filter(c => !c.is_miner);
+    if (candidates.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-note">Noch kein Ranking vorhanden (rank_exchange_candidates.py ausführen).</td></tr>';
+        return;
+    }
+    const maxTx = Math.max(...candidates.slice(0, 15).map(c => c.tx_count));
+    tbody.innerHTML = candidates.slice(0, 15).map((c, i) => {
+        const tierClass = c.tx_count >= 1000 ? 'tier-1' : c.tx_count >= 200 ? 'tier-2' : c.tx_count >= 50 ? 'tier-3' : 'tier-4';
+        const barPct = Math.max(2, (c.tx_count / maxTx) * 100);
+        const counterparties = (c.distinct_senders_ge1m || 0) + (c.distinct_receivers_ge1m || 0);
+        return `<tr>
+            <td>#${i + 1}</td>
+            <td class="address-cell"><a href="${EXPLORER_BASE}/address/${c.address}" target="_blank">${c.address}</a></td>
+            <td class="num">
+                <div style="display:flex; align-items:center; justify-content:flex-end; gap:0.5rem;">
+                    <span>${formatNumber(c.tx_count)}</span>
+                    <div class="mini-bar-track"><div class="mini-bar-fill" style="width:${barPct}%"></div></div>
+                </div>
+            </td>
+            <td class="num">${formatNumber(counterparties)}</td>
+            <td class="num">${formatNumber(Math.floor(c.balance))}</td>
+            <td><span class="class-badge ${tierClass}">${c.classification}</span></td>
+        </tr>`;
+    }).join('');
+}
+
+function renderMinerTable() {
+    const tbody = document.getElementById('miner-table');
+    const miners = STATE.minerWallets;
+    if (miners.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="empty-note">Noch keine Miner-Daten (rank_exchange_candidates.py nach genug miner_rewards.jsonl-Daten ausführen).</td></tr>';
+        return;
+    }
+    tbody.innerHTML = miners.slice(0, 15).map((m, i) => `
+        <tr>
+            <td>#${i + 1}</td>
+            <td class="address-cell"><a href="${EXPLORER_BASE}/address/${m.address}" target="_blank">${m.address}</a></td>
+            <td class="num">${formatNumber(m.blocks_mined)}</td>
+            <td class="num">${m.share_pct_of_seen_blocks != null ? m.share_pct_of_seen_blocks.toFixed(1) + '%' : '–'}</td>
+            <td class="num">${formatNumber(m.total_reward_pep)}</td>
+        </tr>
+    `).join('');
+}
+
+function renderWhalesTable() {
+    const whales = STATE.snapshot.whales.slice().sort((a, b) => b.balance - a.balance);
+    const tbody = document.getElementById('whales-table');
+    function badges(addr) {
+        if (STATE.minerAddresses.has(addr)) return '<span class="miner-badge">MINER</span>';
+        if (STATE.hubAddresses.has(addr)) return '<span class="hub-badge">HUB</span>';
+        return '';
+    }
+    tbody.innerHTML = whales.slice(0, 100).map((w, i) => `
+        <tr>
+            <td>#${i + 1}</td>
+            <td class="address-cell"><a href="${EXPLORER_BASE}/address/${w.address}" target="_blank">${w.address}</a>${badges(w.address)}</td>
+            <td class="num">${formatNumber(Math.floor(w.balance))}</td>
+        </tr>
+    `).join('');
+}
+
+function renderTransfersTable() {
+    const transfers = filteredTransfers();
+    const tbody = document.getElementById('tx-table');
+    if (transfers.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="empty-note">Keine großen Netto-Transfers im gewählten Zeitraum gefunden.</td></tr>';
+        return;
+    }
+    function addrLine(addr) {
+        if (!addr) return '<span class="metric-label">–</span>';
+        const badge = STATE.minerAddresses.has(addr) ? '<span class="miner-badge">MINER</span>' : (STATE.hubAddresses.has(addr) ? '<span class="hub-badge">HUB</span>' : '');
+        return `<a href="${EXPLORER_BASE}/address/${addr}" target="_blank" title="${addr}">${addr.slice(0, 10)}…</a>${badge}`;
+    }
+    tbody.innerHTML = transfers.slice(0, 300).map(t => {
+        const txDate = new Date(t.time * 1000).toLocaleString('de-DE');
+        const fromHtml = (t.from || []).length ? `<div class="addr-list">${t.from.map(f => addrLine(f.address)).join('')}</div>` : '<span>unbekannt</span>';
+        const toHtml = (t.to || []).filter(o => o.address).length ? `<div class="addr-list">${t.to.filter(o => o.address).map(o => addrLine(o.address)).join('')}</div>` : '<span>–</span>';
+        return `<tr>
+            <td style="white-space:nowrap;">${txDate}</td>
+            <td class="address-cell">${fromHtml}</td>
+            <td class="address-cell">${toHtml}</td>
+            <td class="num">${formatNumber(t.net_amount)}</td>
+            <td class="address-cell"><a href="${EXPLORER_BASE}/tx/${t.txid}" target="_blank" title="${t.txid}">${t.txid.slice(0, 10)}…</a></td>
+        </tr>`;
+    }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', loadData);
+</script>
 </body>
 </html>

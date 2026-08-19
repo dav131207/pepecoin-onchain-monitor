@@ -2,5 +2,13 @@
 __pycache__/
 *.pyc
 richlist_dump.html
-scan_blocks_patch.py
 last_scanned_block.txt
+backfill_run.log
+backfill_genesis.log
+sample_miner.log
+httpserver.log
+blocks_incomplete.txt
+blocks_incomplete_genesis.txt
+
+# backfill_state.json / backfill_genesis_state.json werden bewusst NICHT ignoriert:
+# der Cloud-Agent (siehe README) braucht sie im Repo, um exakt fortzusetzen.
