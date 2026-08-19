@@ -164,6 +164,79 @@
     .gate-note { font-size: 0.78rem; color: var(--text-muted); background: var(--surface-2); border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; }
 
     footer { text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 2rem; }
+
+    /* Fehlerhinweis pro Karte: ein kaputter Renderer darf nie die restliche Seite mitreißen */
+    .card-error {
+        font-size: 0.78rem; color: var(--serious); background: rgba(236,131,90,0.10);
+        border: 1px solid rgba(236,131,90,0.25); border-radius: 8px; padding: 0.6rem 0.9rem;
+        overflow-wrap: anywhere;
+    }
+
+    .metric-label { color: var(--text-muted); font-size: 0.78rem; }
+
+    /* horizontal scrollende Hülle für Tabellen — die Karte scrollt, nie die Seite */
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    /* ---------- Shill / Noise ---------- */
+    .hashtag-bar { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin-bottom: 1rem; }
+    .hashtag-chip {
+        background: rgba(57,135,229,0.14); color: var(--blue); border: 1px solid rgba(57,135,229,0.25);
+        padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; white-space: nowrap;
+    }
+    .shill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 0.9rem; }
+    .shill-post {
+        background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px;
+        padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .shill-kind {
+        font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--text-muted);
+    }
+    .shill-text { font-size: 0.86rem; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .shill-tags { font-size: 0.8rem; color: var(--blue); overflow-wrap: anywhere; }
+    .shill-actions { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-top: auto; }
+    .copy-btn {
+        appearance: none; border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary);
+        font-size: 0.75rem; font-family: inherit; padding: 0.35rem 0.7rem; border-radius: 6px; cursor: pointer;
+    }
+    .copy-btn:hover { color: var(--text-primary); }
+    .copy-btn.copied { color: var(--good); border-color: rgba(12,163,12,0.4); }
+    .char-count { font-size: 0.7rem; color: var(--text-muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+    .char-count.over { color: var(--critical); }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 900px) {
+        body { padding: 1.1rem; }
+        h1 { font-size: 1.5rem; }
+        .card { padding: 1.05rem; border-radius: 10px; margin-bottom: 1.1rem; }
+        .kpi-row { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.7rem; }
+        .kpi-value { font-size: 1.4rem; }
+        /* Charts behalten ihr Seitenverhältnis und scrollen in der Karte,
+           statt auf unlesbare Schriftgrößen zusammengestaucht zu werden. */
+        .chart-wrap, .chart-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        svg.chart { min-width: 620px; }
+        .table-scroll table, .chart-table-wrap table { min-width: 560px; }
+        .viz-tooltip { max-width: min(85vw, 320px); white-space: normal; }
+    }
+    @media (max-width: 560px) {
+        body { padding: 0.7rem; }
+        h1 { font-size: 1.2rem; }
+        header { align-items: flex-start; gap: 0.5rem; margin-bottom: 1.1rem; }
+        .subtitle, .coverage-note { font-size: 0.75rem; }
+        .filter-row { flex-direction: column; align-items: stretch; gap: 0.45rem; margin-bottom: 1.1rem; }
+        .filter-row .filter-label { margin-right: 0; }
+        .segmented { display: flex; }
+        .segmented button { flex: 1 1 0; padding: 0.45rem 0.25rem; font-size: 0.76rem; }
+        .card { padding: 0.85rem; }
+        .card-head { flex-direction: column; gap: 0.5rem; }
+        .card-head h2 { font-size: 0.95rem; }
+        .card-desc { max-width: none; font-size: 0.75rem; }
+        .kpi-row { grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); }
+        .kpi-value { font-size: 1.25rem; }
+        th, td { padding: 0.5rem 0.45rem; font-size: 0.8rem; }
+        .address-cell { font-size: 0.76rem; }
+        .shill-grid { grid-template-columns: 1fr; }
+        .legend { gap: 0.7rem; }
+    }
 </style>
 </head>
 <body>
@@ -309,6 +382,24 @@
         <div class="chart-table-wrap" id="difficulty-table-wrap"></div>
     </div>
 
+    <div class="card" id="shill-card">
+        <div class="card-head">
+            <div>
+                <h2>Shill / Noise</h2>
+                <div class="card-desc">
+                    Fertige Post-Entwürfe für X/Twitter — jede Zahl wird live aus den Daten dieses Dashboards erzeugt,
+                    nichts ist hart kodiert. Bewusst ohne Kursziele, Kaufaufrufe, Allzeithoch-Behauptungen und ohne Börsennamen:
+                    Die Zahlen tragen den Lärm, sonst ist der Ruf des Dashboards schneller weg als die Reichweite da.
+                    Texte auf Englisch (Reichweite auf Crypto-Twitter), Zeichenzähler gegen das 280er-Limit.
+                    Kopieren, prüfen, selbst posten — es wird nichts automatisch veröffentlicht.
+                </div>
+            </div>
+            <button class="copy-btn" id="copy-all-tags">Hashtags kopieren</button>
+        </div>
+        <div class="hashtag-bar" id="hashtag-bar"></div>
+        <div class="shill-grid" id="shill-grid"><div class="empty-note">Lade Post-Entwürfe...</div></div>
+    </div>
+
     <div class="card">
         <div class="card-head">
             <div>
@@ -316,10 +407,12 @@
                 <div class="card-desc">Verhaltensbasiertes Ranking nach Tx-Aktivität — keine bestätigten Börsen-Zuordnungen, es gibt keine öffentliche Adressliste für Pepecoin. Erkannte Miner-Wallets (siehe Tabelle unten) sind hier ausgeschlossen.</div>
             </div>
         </div>
-        <table>
-            <thead><tr><th>Rang</th><th>Adresse</th><th class="num">Tx-Anzahl</th><th class="num">Gegenparteien ≥1M PEP</th><th class="num">Guthaben (PEP)</th><th>Einordnung</th></tr></thead>
-            <tbody id="exchange-table"><tr><td colspan="6" class="empty-note">Lade Kandidaten...</td></tr></tbody>
-        </table>
+        <div class="table-scroll">
+            <table>
+                <thead><tr><th>Rang</th><th>Adresse</th><th class="num">Tx-Anzahl</th><th class="num">Gegenparteien ≥1M PEP</th><th class="num">Guthaben (PEP)</th><th>Einordnung</th></tr></thead>
+                <tbody id="exchange-table"><tr><td colspan="6" class="empty-note">Lade Kandidaten...</td></tr></tbody>
+            </table>
+        </div>
     </div>
 
     <div class="card">
@@ -329,18 +422,22 @@
                 <div class="card-desc">Adressen mit wiederholten Coinbase-Auszahlungen (Block-Belohnung) — verhaltensbasiert, keine bestätigten Pool-Namen. "Anteil" bezieht sich nur auf die bislang gescannten/gesampleten Blöcke, nicht die gesamte Chain-Historie.</div>
             </div>
         </div>
-        <table>
-            <thead><tr><th>Rang</th><th>Adresse</th><th class="num">Blöcke gesehen</th><th class="num">Anteil (Sample)</th><th class="num">Belohnung gesamt (PEP)</th></tr></thead>
-            <tbody id="miner-table"><tr><td colspan="5" class="empty-note">Lade Miner-Daten...</td></tr></tbody>
-        </table>
+        <div class="table-scroll">
+            <table>
+                <thead><tr><th>Rang</th><th>Adresse</th><th class="num">Blöcke gesehen</th><th class="num">Anteil (Sample)</th><th class="num">Belohnung gesamt (PEP)</th></tr></thead>
+                <tbody id="miner-table"><tr><td colspan="5" class="empty-note">Lade Miner-Daten...</td></tr></tbody>
+            </table>
+        </div>
     </div>
 
     <div class="card">
         <div class="card-head"><h2>Aktuelle Wale (Top Adressen)</h2></div>
-        <table>
-            <thead><tr><th>Rang</th><th>Adresse</th><th class="num">Guthaben (PEP)</th></tr></thead>
-            <tbody id="whales-table"><tr><td colspan="3" class="empty-note">Lade On-Chain Daten...</td></tr></tbody>
-        </table>
+        <div class="table-scroll">
+            <table>
+                <thead><tr><th>Rang</th><th>Adresse</th><th class="num">Guthaben (PEP)</th></tr></thead>
+                <tbody id="whales-table"><tr><td colspan="3" class="empty-note">Lade On-Chain Daten...</td></tr></tbody>
+            </table>
+        </div>
     </div>
 
     <div class="card">
@@ -350,10 +447,12 @@
                 <div class="card-desc">Im gewählten Zeitraum, neueste zuerst.</div>
             </div>
         </div>
-        <table>
-            <thead><tr><th>Datum / Zeit</th><th>Von</th><th>Nach</th><th class="num">Netto-Volumen (PEP)</th><th>TXID</th></tr></thead>
-            <tbody id="tx-table"><tr><td colspan="5" class="empty-note">Lade Transaktionsdaten...</td></tr></tbody>
-        </table>
+        <div class="table-scroll">
+            <table>
+                <thead><tr><th>Datum / Zeit</th><th>Von</th><th>Nach</th><th class="num">Netto-Volumen (PEP)</th><th>TXID</th></tr></thead>
+                <tbody id="tx-table"><tr><td colspan="5" class="empty-note">Lade Transaktionsdaten...</td></tr></tbody>
+            </table>
+        </div>
     </div>
 
     <footer>Datenquelle: avivppblocks.realmasterkush.com — Best-Effort, keine Garantie auf Vollständigkeit.</footer>
@@ -434,6 +533,19 @@ function dayLabel(key) {
     return `${d}.${m}.`;
 }
 
+// Min/Max ohne Spread: Math.min(...arr) wirft ab ca. 125k Elementen einen
+// RangeError (Stack) — die Transfer-Liste wächst mit jedem Backfill-Lauf darüber hinaus.
+function arrayMin(values) {
+    let m = Infinity;
+    for (let i = 0; i < values.length; i++) if (values[i] < m) m = values[i];
+    return m;
+}
+function arrayMax(values) {
+    let m = -Infinity;
+    for (let i = 0; i < values.length; i++) if (values[i] > m) m = values[i];
+    return m;
+}
+
 async function loadJSON(url) {
     try {
         const r = await fetch(url);
@@ -453,14 +565,32 @@ async function loadJSONL(url) {
     } catch (e) { return []; }
 }
 
-async function loadData() {
+const SNAPSHOT_LOOKBACK_DAYS = 14;
+
+function shiftDayKey(dayKeyStr, daysBack) {
+    const d = new Date(dayKeyStr + 'T00:00:00Z');
+    d.setUTCDate(d.getUTCDate() - daysBack);
+    return d.toISOString().split('T')[0];
+}
+
+// Nicht nur der heutige Snapshot: läuft monitor.py an einem Tag (noch) nicht durch,
+// darf das Dashboard nicht komplett leer bleiben — dann zählt der jüngste vorhandene.
+async function loadLatestSnapshot() {
     const today = new Date().toISOString().split('T')[0];
-    const snapshot = await loadJSON(`snapshots/${today}.json`);
-    if (!snapshot) {
-        document.getElementById('last-updated').innerText = 'Fehler: Kein heutiger Snapshot gefunden. Bitte monitor.py ausführen, und das Dashboard über einen lokalen Webserver öffnen.';
-        return;
+    for (let back = 0; back <= SNAPSHOT_LOOKBACK_DAYS; back++) {
+        const key = shiftDayKey(today, back);
+        const snap = await loadJSON(`snapshots/${key}.json`);
+        if (snap) return { snapshot: snap, dayKey: key, staleDays: back };
     }
+    return { snapshot: null, dayKey: null, staleDays: null };
+}
+
+async function loadData() {
+    const found = await loadLatestSnapshot();
+    const snapshot = found.snapshot;
     STATE.snapshot = snapshot;
+    STATE.snapshotDay = found.dayKey;
+    STATE.snapshotStaleDays = found.staleDays;
 
     const [knownWhales, exchangeData, backfillTransfers, backfillState, priceHistoryData, minerData, minerRewards, networkStatsData] = await Promise.all([
         loadJSON('known_whales.json'),
@@ -489,19 +619,18 @@ async function loadData() {
             .map(c => c.address)
     );
 
-    // Vortages-/Vorwochen-Snapshot fürs Delta, best effort
-    for (const daysBack of [1, 7]) {
-        const d = new Date();
-        d.setDate(d.getDate() - daysBack);
-        const key = d.toISOString().split('T')[0];
-        const prev = await loadJSON(`snapshots/${key}.json`);
-        if (prev) { STATE.prevSnapshot = prev; break; }
+    // Vortages-/Vorwochen-Snapshot fürs Delta, best effort (relativ zum geladenen Snapshot)
+    if (STATE.snapshotDay) {
+        for (const daysBack of [1, 7]) {
+            const prev = await loadJSON(`snapshots/${shiftDayKey(STATE.snapshotDay, daysBack)}.json`);
+            if (prev) { STATE.prevSnapshot = prev; break; }
+        }
     }
 
     // Transfers zusammenführen (Backfill + heutiger Snapshot), Duplikate per txid entfernen
     const byTxid = new Map();
     for (const t of backfillTransfers) byTxid.set(t.txid, t);
-    for (const t of (snapshot.large_transfers || [])) byTxid.set(t.txid, t);
+    for (const t of ((snapshot && snapshot.large_transfers) || [])) byTxid.set(t.txid, t);
     STATE.transfers = Array.from(byTxid.values()).sort((a, b) => b.time - a.time);
 
     if (backfillState) {
@@ -509,8 +638,8 @@ async function loadData() {
         const done = (backfillState.completed_chunks || []).length;
         const pct = total > 0 ? Math.round((done / total) * 100) : 0;
         if (STATE.transfers.length > 0) {
-            const oldest = new Date(Math.min(...STATE.transfers.map(t => t.time)) * 1000);
-            const newest = new Date(Math.max(...STATE.transfers.map(t => t.time)) * 1000);
+            const oldest = new Date(arrayMin(STATE.transfers.map(t => t.time)) * 1000);
+            const newest = new Date(arrayMax(STATE.transfers.map(t => t.time)) * 1000);
             document.getElementById('coverage-note').innerText =
                 `Verlaufsdaten: ${oldest.toLocaleDateString('de-DE')} – ${newest.toLocaleDateString('de-DE')} · 90-Tage-Backfill ${pct}% abgeschlossen (läuft im Hintergrund weiter)`;
         }
@@ -525,33 +654,76 @@ function filteredTransfers() {
     return STATE.transfers.filter(t => t.time >= cutoff);
 }
 
-function render() {
-    const snapshot = STATE.snapshot;
-    const date = new Date(snapshot.timestamp);
-    document.getElementById('last-updated').innerText = `Datenstand: ${date.toLocaleString('de-DE')}`;
-    const statusEl = document.getElementById('status-val');
-    statusEl.innerText = snapshot.status;
-    statusEl.className = 'status-badge' + (snapshot.status === 'ok' ? '' : snapshot.status === 'teilweise' ? ' warn' : ' bad');
+function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
 
-    renderKPIs();
-    renderPriceChart();
-    renderVolumeUsdChart();
-    renderDistributionChart();
-    renderVolumeChart();
-    renderNetflowChart();
-    renderCorrelationMatrix();
-    renderLagChart();
-    renderActivityHeatmap();
-    renderDifficultyChart();
-    renderExchangeTable();
-    renderMinerTable();
-    renderWhalesTable();
-    renderTransfersTable();
+// Jede Karte rendert isoliert: ein Fehler in einer Karte darf nicht dazu führen,
+// dass alle nachfolgenden Karten auf "Lade..." stehen bleiben.
+function safeRender(label, targetId, fn) {
+    try {
+        fn();
+    } catch (err) {
+        console.error(`[dashboard] Renderer "${label}" fehlgeschlagen:`, err);
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        const msg = escapeHtml((err && err.message) || String(err));
+        const note = `Diese Karte konnte nicht gerendert werden (${escapeHtml(label)}): ${msg}. Alle anderen Karten sind davon nicht betroffen.`;
+        if (el.tagName === 'TBODY') {
+            el.innerHTML = `<tr><td colspan="99"><div class="card-error">${note}</div></td></tr>`;
+        } else {
+            el.innerHTML = `<div class="card-error">${note}</div>`;
+        }
+    }
+}
+
+function renderHeader() {
+    const snapshot = STATE.snapshot;
+    const statusEl = document.getElementById('status-val');
+    const updatedEl = document.getElementById('last-updated');
+
+    if (!snapshot) {
+        updatedEl.innerText = 'Kein Snapshot gefunden (letzte 14 Tage) — bitte monitor.py ausführen. Preis-, Difficulty- und Transfer-Historie werden trotzdem angezeigt.';
+        statusEl.innerText = 'kein snapshot';
+        statusEl.className = 'status-badge bad';
+        return;
+    }
+
+    const date = new Date(snapshot.timestamp);
+    const stale = STATE.snapshotStaleDays || 0;
+    updatedEl.innerText = `Datenstand: ${date.toLocaleString('de-DE')}` +
+        (stale > 0 ? ` · jüngster verfügbarer Stand, ${stale} Tag${stale === 1 ? '' : 'e'} alt (monitor.py seitdem nicht gelaufen)` : '');
+    statusEl.innerText = stale > 0 ? `${snapshot.status} (veraltet)` : snapshot.status;
+    statusEl.className = 'status-badge' +
+        (stale > 0 ? ' warn' : snapshot.status === 'ok' ? '' : snapshot.status === 'teilweise' ? ' warn' : ' bad');
+}
+
+function render() {
+    safeRender('Kopfzeile', 'last-updated', renderHeader);
+    safeRender('KPI-Kacheln', 'kpi-row', renderKPIs);
+    safeRender('Preis-Chart', 'price-chart', renderPriceChart);
+    safeRender('Handelsvolumen', 'volusd-chart', renderVolumeUsdChart);
+    safeRender('Adressverteilung', 'dist-chart', renderDistributionChart);
+    safeRender('Transfer-Volumen', 'volume-chart', renderVolumeChart);
+    safeRender('Netto-Fluss', 'netflow-chart', renderNetflowChart);
+    safeRender('Korrelationsmatrix', 'corr-matrix', renderCorrelationMatrix);
+    safeRender('Lag-Analyse', 'lag-chart', renderLagChart);
+    safeRender('Aktivitäts-Heatmap', 'activity-heatmap', renderActivityHeatmap);
+    safeRender('Difficulty-Chart', 'difficulty-chart', renderDifficultyChart);
+    safeRender('Shill/Noise', 'shill-grid', renderShillNoise);
+    safeRender('Hub-Wallets', 'exchange-table', renderExchangeTable);
+    safeRender('Mining-Wallets', 'miner-table', renderMinerTable);
+    safeRender('Wale', 'whales-table', renderWhalesTable);
+    safeRender('Groß-Transfers', 'tx-table', renderTransfersTable);
 }
 
 // ---------- KPIs ----------
 function renderKPIs() {
     const snapshot = STATE.snapshot;
+    if (!snapshot) {
+        document.getElementById('kpi-row').innerHTML = '<div class="card-error">Keine Snapshot-Daten — KPI-Kacheln brauchen einen Lauf von monitor.py.</div>';
+        return;
+    }
     const transfers = filteredTransfers();
     const counts = snapshot.metrics.address_counts;
     const whaleCount = snapshot.whales.length;
@@ -620,9 +792,17 @@ function renderKPIs() {
 const tooltipEl = document.getElementById('tooltip');
 function showTooltip(x, y, html) {
     tooltipEl.innerHTML = html;
-    tooltipEl.style.left = x + 12 + 'px';
-    tooltipEl.style.top = y + 12 + 'px';
     tooltipEl.classList.add('visible');
+    // erst einblenden, dann messen: sonst ist die Breite 0 und das Clamping wirkungslos
+    const width = tooltipEl.offsetWidth || 200;
+    const height = tooltipEl.offsetHeight || 60;
+    const viewW = document.documentElement.clientWidth;
+    const viewH = document.documentElement.clientHeight;
+    const minX = window.scrollX + 8;
+    const maxX = window.scrollX + viewW - width - 8;
+    const maxY = window.scrollY + viewH - height - 8;
+    tooltipEl.style.left = Math.max(minX, Math.min(x + 12, Math.max(minX, maxX))) + 'px';
+    tooltipEl.style.top = Math.max(window.scrollY + 8, Math.min(y + 12, maxY)) + 'px';
 }
 function hideTooltip() { tooltipEl.classList.remove('visible'); }
 
@@ -653,6 +833,11 @@ function roundedBarPath(x, y, w, h, r, tl, tr, br, bl) {
 
 // ---------- Chart 1: horizontal bar (address distribution) ----------
 function renderDistributionChart() {
+    if (!STATE.snapshot) {
+        document.getElementById('dist-chart').innerHTML = '<div class="empty-note">Keine Snapshot-Daten — bitte monitor.py ausführen.</div>';
+        document.getElementById('dist-table-wrap').innerHTML = '<div class="empty-note">Keine Daten.</div>';
+        return;
+    }
     const counts = STATE.snapshot.metrics.address_counts;
     const buckets = [
         ['100k', '≥ 100K'], ['500k', '≥ 500K'], ['1M', '≥ 1M'], ['2M', '≥ 2M'], ['5M', '≥ 5M'],
@@ -857,8 +1042,8 @@ function renderPriceChart() {
 
     const W = 900, H = 280, padTop = 15, padBottom = 30, padLeft = 70, padRight = 15;
     const plotW = W - padLeft - padRight, plotH = H - padTop - padBottom;
-    const minVal = Math.min(...data.map(d => d.value));
-    const maxVal = Math.max(...data.map(d => d.value));
+    const minVal = arrayMin(data.map(d => d.value));
+    const maxVal = arrayMax(data.map(d => d.value));
     const range = maxVal - minVal || maxVal || 1;
     const yMin = Math.max(0, minVal - range * 0.1);
     const yMax = maxVal + range * 0.1;
@@ -1289,8 +1474,8 @@ function renderDifficultyChart() {
 
     const W = 900, H = 260, padTop = 15, padBottom = 30, padLeft = 70, padRight = 15;
     const plotW = W - padLeft - padRight, plotH = H - padTop - padBottom;
-    const minVal = Math.min(...data.map(d => d.value));
-    const maxVal = Math.max(...data.map(d => d.value));
+    const minVal = arrayMin(data.map(d => d.value));
+    const maxVal = arrayMax(data.map(d => d.value));
     const range = maxVal - minVal || maxVal || 1;
     const yMin = Math.max(0, minVal - range * 0.1);
     const yMax = maxVal + range * 0.1;
@@ -1432,19 +1617,217 @@ document.querySelectorAll('#range-filter button').forEach(btn => {
         document.querySelectorAll('#range-filter button').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         STATE.range = btn.getAttribute('data-range');
-        renderKPIs();
-        renderPriceChart();
-        renderVolumeUsdChart();
-        renderVolumeChart();
-        renderNetflowChart();
-        renderCorrelationMatrix();
-        renderLagChart();
-        renderActivityHeatmap();
-        renderTransfersTable();
+        // Auch beim Umschalten des Zeitraums isoliert rendern — sonst reicht ein
+        // Zeitraum ohne Daten, um alle folgenden Karten leer zurückzulassen.
+        safeRender('KPI-Kacheln', 'kpi-row', renderKPIs);
+        safeRender('Preis-Chart', 'price-chart', renderPriceChart);
+        safeRender('Handelsvolumen', 'volusd-chart', renderVolumeUsdChart);
+        safeRender('Transfer-Volumen', 'volume-chart', renderVolumeChart);
+        safeRender('Netto-Fluss', 'netflow-chart', renderNetflowChart);
+        safeRender('Korrelationsmatrix', 'corr-matrix', renderCorrelationMatrix);
+        safeRender('Lag-Analyse', 'lag-chart', renderLagChart);
+        safeRender('Aktivitäts-Heatmap', 'activity-heatmap', renderActivityHeatmap);
+        safeRender('Groß-Transfers', 'tx-table', renderTransfersTable);
     });
 });
 
+const copyAllTagsBtn = document.getElementById('copy-all-tags');
+if (copyAllTagsBtn) {
+    copyAllTagsBtn.addEventListener('click', () => {
+        copyToClipboard(allHashtags().join(' '), copyAllTagsBtn, 'Hashtags kopieren');
+    });
+}
+
 // ---------- Tables ----------
+// ---------- Shill / Noise ----------
+// Wenige, dafür tragfähige Hashtags: zwei feste (Coin-Identität) plus je nach Post
+// genau einer aus dem Kontext-Satz. Mehr Tags = weniger Reichweite pro Tag, nicht mehr.
+const HASHTAGS = {
+    core: ['#Pepecoin', '#PEP'],
+    context: { price: '#Memecoin', chain: '#OnChain', mining: '#PoW' },
+};
+const TWEET_LIMIT = 280;
+
+function allHashtags() {
+    return HASHTAGS.core.concat(Object.values(HASHTAGS.context));
+}
+
+function priceSeries() {
+    const days = Object.keys(STATE.priceHistory || {}).sort();
+    return days
+        .map(k => ({ key: k, price: STATE.priceHistory[k].price_usd, volume: STATE.priceHistory[k].volume_usd }))
+        .filter(d => typeof d.price === 'number' && isFinite(d.price));
+}
+
+function pctChangeOverDays(series, daysBack) {
+    if (series.length < daysBack + 1) return null;
+    const now = series[series.length - 1].price;
+    const then = series[series.length - 1 - daysBack].price;
+    if (!then || !now) return null;
+    return (now / then - 1) * 100;
+}
+
+// Post-Texte sind englisch (Reichweite auf Crypto-Twitter) — daher auch
+// englische Zahlformatierung, sonst liest "11.865" dort als 11,865.
+function formatNumberEn(num) {
+    return new Intl.NumberFormat('en-US').format(Math.round(num));
+}
+
+function formatHashrate(hps) {
+    const units = [[1e18, 'EH/s'], [1e15, 'PH/s'], [1e12, 'TH/s'], [1e9, 'GH/s'], [1e6, 'MH/s']];
+    for (const [factor, unit] of units) {
+        if (hps >= factor) return (hps / factor).toFixed(hps / factor >= 100 ? 0 : 2) + ' ' + unit;
+    }
+    return Math.round(hps) + ' H/s';
+}
+
+function formatPct(v) {
+    return (v >= 0 ? '+' : '') + v.toFixed(v >= 100 || v <= -100 ? 0 : 1) + '%';
+}
+
+function formatUsdPrice(p) {
+    return '$' + p.toFixed(p < 0.001 ? 8 : 4);
+}
+
+function transfersSince(daysBack) {
+    const cutoff = Date.now() / 1000 - daysBack * 86400;
+    return STATE.transfers.filter(t => t.time >= cutoff);
+}
+
+// Baut die Post-Entwürfe ausschließlich aus geladenen Daten. Jeder Block wird
+// übersprungen, wenn die Grundlage fehlt — lieber ein Post weniger als eine erfundene Zahl.
+function buildShillPosts() {
+    const posts = [];
+    const series = priceSeries();
+
+    if (series.length >= 8) {
+        const latest = series[series.length - 1];
+        const d7 = pctChangeOverDays(series, 7);
+        const d30 = pctChangeOverDays(series, 30);
+        const parts = [`PEP ${formatPct(d7)} over 7 days`];
+        if (d30 !== null) parts.push(`${formatPct(d30)} over 30 days`);
+        let text = `${parts.join(', ')}. Spot price ${formatUsdPrice(latest.price)}`;
+        if (latest.volume) text += `, $${formatCompact(latest.volume)} traded in the last daily bucket`;
+        text += '.\nNumbers pulled from the same feed our public on-chain dashboard runs on — check them yourself.';
+        posts.push({ kind: 'Preis-Momentum', text, tags: HASHTAGS.core.concat([HASHTAGS.context.price]) });
+    }
+
+    const snapshot = STATE.snapshot;
+    if (snapshot && snapshot.metrics && snapshot.metrics.address_counts) {
+        const c = snapshot.metrics.address_counts;
+        const lines = [];
+        if (c['100k']) lines.push(`${formatNumberEn(c['100k'])} addresses hold 100k+ PEP`);
+        if (c['1M']) lines.push(`${formatNumberEn(c['1M'])} hold 1M+`);
+        if (c['10M']) lines.push(`${formatNumberEn(c['10M'])} hold 10M+`);
+        if (lines.length) {
+            posts.push({
+                kind: 'Holder-Basis',
+                text: `Pepecoin holder base, counted from a full rich-list snapshot (not an estimate):\n${lines.join('\n')}\nRe-counted every run, history kept.`,
+                tags: HASHTAGS.core.concat([HASHTAGS.context.chain]),
+            });
+        }
+    }
+
+    const recent = transfersSince(7);
+    if (recent.length > 0) {
+        const vol = recent.reduce((s, t) => s + (t.net_amount || 0), 0);
+        posts.push({
+            kind: 'Groß-Transfers',
+            text: `${formatNumberEn(recent.length)} net transfers of 1M+ PEP in the last 7 days, ${formatCompact(vol)} PEP moved.\nEvery block parsed, change outputs netted out — this is counted, not sampled.`,
+            tags: HASHTAGS.core.concat([HASHTAGS.context.chain]),
+        });
+    }
+
+    const statDays = Object.keys(STATE.networkStats || {}).sort();
+    if (statDays.length) {
+        const st = STATE.networkStats[statDays[statDays.length - 1]];
+        if (st && st.difficulty) {
+            let text = `Pepecoin is proof-of-work and the hash is showing up.\nDifficulty ${formatCompact(st.difficulty)}`;
+            if (st.hashrate) text += `\nNetwork hashrate ${formatHashrate(st.hashrate)}`;
+            if (STATE.minerWallets.length) text += `\n${formatNumberEn(STATE.minerWallets.length)} distinct payout wallets across the blocks scanned so far`;
+            text += '.\nNo pre-mine narrative needed — just blocks.';
+            posts.push({ kind: 'Mining / PoW', text, tags: HASHTAGS.core.concat([HASHTAGS.context.mining]) });
+        }
+    }
+
+    if (recent.length > 0 && STATE.hubAddresses.size > 0) {
+        let net = 0;
+        recent.forEach(t => {
+            const toHubs = (t.to || []).filter(o => o.address && STATE.hubAddresses.has(o.address)).reduce((s, o) => s + o.amount, 0);
+            const fromHubs = (t.from || []).filter(f => STATE.hubAddresses.has(f.address)).reduce((s, f) => s + f.amount, 0);
+            net += toHubs - fromHubs;
+        });
+        if (Math.abs(net) > 0) {
+            const direction = net < 0 ? 'left' : 'moved into';
+            posts.push({
+                kind: 'Fluss-Verhalten',
+                text: `Last 7 days: ${formatCompact(Math.abs(net))} PEP net ${direction} high-throughput hub wallets.\n"Hub" here means behaviour — transaction throughput and counterparty count — not a named venue. We label what the chain shows and nothing beyond it.`,
+                tags: HASHTAGS.core.concat([HASHTAGS.context.chain]),
+            });
+        }
+    }
+
+    return posts;
+}
+
+function renderShillNoise() {
+    const bar = document.getElementById('hashtag-bar');
+    bar.innerHTML = allHashtags().map(t => `<span class="hashtag-chip">${escapeHtml(t)}</span>`).join('');
+
+    const grid = document.getElementById('shill-grid');
+    const posts = buildShillPosts();
+    if (posts.length === 0) {
+        grid.innerHTML = '<div class="empty-note">Noch keine belastbaren Zahlen geladen — ohne Datengrundlage werden keine Post-Entwürfe erzeugt.</div>';
+        return;
+    }
+
+    grid.innerHTML = posts.map((p, i) => {
+        const full = `${p.text}\n\n${p.tags.join(' ')}`;
+        const over = full.length > TWEET_LIMIT;
+        return `<div class="shill-post">
+            <div class="shill-kind">${escapeHtml(p.kind)}</div>
+            <div class="shill-text">${escapeHtml(p.text)}</div>
+            <div class="shill-tags">${escapeHtml(p.tags.join(' '))}</div>
+            <div class="shill-actions">
+                <button class="copy-btn" data-copy-idx="${i}">Kopieren</button>
+                <span class="char-count${over ? ' over' : ''}">${full.length}/${TWEET_LIMIT}</span>
+            </div>
+        </div>`;
+    }).join('');
+
+    const texts = posts.map(p => `${p.text}\n\n${p.tags.join(' ')}`);
+    grid.querySelectorAll('[data-copy-idx]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            copyToClipboard(texts[parseInt(btn.getAttribute('data-copy-idx'), 10)], btn, 'Kopieren');
+        });
+    });
+}
+
+function copyToClipboard(text, btn, resetLabel) {
+    const done = () => {
+        if (!btn) return;
+        btn.innerText = 'Kopiert ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.innerText = resetLabel; btn.classList.remove('copied'); }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+    } else {
+        fallbackCopy(text, done);
+    }
+}
+
+function fallbackCopy(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { /* Zwischenablage nicht verfügbar */ }
+    document.body.removeChild(ta);
+}
+
 function renderExchangeTable() {
     const tbody = document.getElementById('exchange-table');
     const candidates = STATE.exchangeCandidates.filter(c => !c.is_miner);
@@ -1452,7 +1835,7 @@ function renderExchangeTable() {
         tbody.innerHTML = '<tr><td colspan="6" class="empty-note">Noch kein Ranking vorhanden (rank_exchange_candidates.py ausführen).</td></tr>';
         return;
     }
-    const maxTx = Math.max(...candidates.slice(0, 15).map(c => c.tx_count));
+    const maxTx = arrayMax(candidates.slice(0, 15).map(c => c.tx_count));
     tbody.innerHTML = candidates.slice(0, 15).map((c, i) => {
         const tierClass = c.tx_count >= 1000 ? 'tier-1' : c.tx_count >= 200 ? 'tier-2' : c.tx_count >= 50 ? 'tier-3' : 'tier-4';
         const barPct = Math.max(2, (c.tx_count / maxTx) * 100);
@@ -1492,6 +1875,10 @@ function renderMinerTable() {
 }
 
 function renderWhalesTable() {
+    if (!STATE.snapshot) {
+        document.getElementById('whales-table').innerHTML = '<tr><td colspan="3" class="empty-note">Keine Snapshot-Daten — bitte monitor.py ausführen.</td></tr>';
+        return;
+    }
     const whales = STATE.snapshot.whales.slice().sort((a, b) => b.balance - a.balance);
     const tbody = document.getElementById('whales-table');
     function badges(addr) {
@@ -1520,10 +1907,21 @@ function renderTransfersTable() {
         const badge = STATE.minerAddresses.has(addr) ? '<span class="miner-badge">MINER</span>' : (STATE.hubAddresses.has(addr) ? '<span class="hub-badge">HUB</span>' : '');
         return `<a href="${EXPLORER_BASE}/address/${addr}" target="_blank" title="${addr}">${addr.slice(0, 10)}…</a>${badge}`;
     }
+    // Adressen pro Zelle deckeln: Transfers mit 20+ Eingängen haben die Zeilen
+    // auf dem Handy sonst über mehrere Bildschirmhöhen gestreckt.
+    const ADDR_CAP = 4;
+    function addrList(addresses) {
+        const shown = addresses.slice(0, ADDR_CAP).map(addrLine).join('');
+        const rest = addresses.length - ADDR_CAP;
+        const more = rest > 0 ? `<span class="metric-label">+${rest} weitere</span>` : '';
+        return `<div class="addr-list">${shown}${more}</div>`;
+    }
     tbody.innerHTML = transfers.slice(0, 300).map(t => {
         const txDate = new Date(t.time * 1000).toLocaleString('de-DE');
-        const fromHtml = (t.from || []).length ? `<div class="addr-list">${t.from.map(f => addrLine(f.address)).join('')}</div>` : '<span>unbekannt</span>';
-        const toHtml = (t.to || []).filter(o => o.address).length ? `<div class="addr-list">${t.to.filter(o => o.address).map(o => addrLine(o.address)).join('')}</div>` : '<span>–</span>';
+        const fromAddrs = (t.from || []).map(f => f.address).filter(Boolean);
+        const toAddrs = (t.to || []).map(o => o.address).filter(Boolean);
+        const fromHtml = fromAddrs.length ? addrList(fromAddrs) : '<span>unbekannt</span>';
+        const toHtml = toAddrs.length ? addrList(toAddrs) : '<span>–</span>';
         return `<tr>
             <td style="white-space:nowrap;">${txDate}</td>
             <td class="address-cell">${fromHtml}</td>
@@ -1534,7 +1932,17 @@ function renderTransfersTable() {
     }).join('');
 }
 
-document.addEventListener('DOMContentLoaded', loadData);
+document.addEventListener('DOMContentLoaded', () => {
+    loadData().catch(err => {
+        console.error('[dashboard] Laden fehlgeschlagen:', err);
+        document.getElementById('last-updated').innerText =
+            'Daten konnten nicht geladen werden: ' + ((err && err.message) || err) +
+            ' — Dashboard über einen lokalen Webserver öffnen (nicht per file://) und monitor.py ausführen.';
+        const statusEl = document.getElementById('status-val');
+        statusEl.innerText = 'fehler';
+        statusEl.className = 'status-badge bad';
+    });
+});
 </script>
 </body>
 </html>
