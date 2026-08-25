@@ -1,0 +1,46 @@
+name: Weekly Monitor
+
+on:
+  schedule:
+    - cron: "59 21 * * 0"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install -r requirements.txt
+
+      - name: Catch up recent 90-day window
+        run: timeout 30m python backfill_history.py || true
+
+      - name: Rank exchange candidates
+        run: python rank_exchange_candidates.py || true
+
+      - name: Weekly snapshot + price update
+        run: python monitor.py
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add snapshots known_whales.json exchange_candidates.json miner_wallets.json \
+            large_transfers_3m.jsonl miner_rewards.jsonl price_history.json network_stats.json \
+            backfill_state.json last_scanned_block.txt
+          git diff --cached --quiet || git commit -m "Weekly monitor run $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git pull --rebase origin main
+          git push origin main
