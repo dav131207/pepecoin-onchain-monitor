@@ -1,11 +1,11 @@
 import os
 import json
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import requests
 
 from pep_client import RateLimiter, fetch_block, extract_net_transfers, extract_coinbase_reward, API
-from price_client import update_price_history
+from price_client import update_price_history, update_ohlc
 
 DATA_DIR = "snapshots"
 KNOWN_WHALES_FILE = "known_whales.json"
@@ -85,6 +85,110 @@ def get_last_scanned_block(current_height):
 def set_last_scanned_block(height):
     with open(STATE_FILE, "w") as f:
         f.write(str(height))
+
+HEAD_BACKFILL_STATE_FILE = "backfill_state.json"
+GENESIS_BACKFILL_STATE_FILE = "backfill_genesis_state.json"
+MINER_REWARDS_FOR_TX_COUNTS = "miner_rewards.jsonl"
+
+
+def _covered_day_range(state_file):
+    if not os.path.exists(state_file):
+        return None, None
+    with open(state_file) as f:
+        try:
+            state = json.load(f)
+        except json.JSONDecodeError:
+            return None, None
+    start = state.get("contiguous_covered_start_day")
+    end = state.get("contiguous_covered_end_day")
+    if not start or not end:
+        return None, None
+    return (datetime.strptime(start, "%Y-%m-%d").date(),
+            datetime.strptime(end, "%Y-%m-%d").date())
+
+
+def _covered_days_set():
+    """
+    Vereinigt die lückenlos gescannten Tagesbereiche aus beiden Backfill-Läufen
+    (Genesis- und 90-Tage-Kopf-Fenster). Nur Tage in dieser Menge dürfen für
+    transaction_counts als vollständig gezählt gelten — alles andere (inkl. der
+    von sample_miner_history.py nur alle 10 Blöcke gesampelten Bereiche) fehlt
+    hier bewusst, damit keine Untererfassung als "0 Transaktionen" missverstanden
+    werden kann.
+    """
+    covered = set()
+    for state_file in (GENESIS_BACKFILL_STATE_FILE, HEAD_BACKFILL_STATE_FILE):
+        start, end = _covered_day_range(state_file)
+        if start is None:
+            continue
+        d = start
+        while d <= end:
+            covered.add(d.isoformat())
+            d += timedelta(days=1)
+    return covered
+
+
+def compute_transaction_counts():
+    """
+    Summiert tx_count je Block (aus miner_rewards.jsonl) für die letzten 7/30/365
+    Tage. Ein Tag zählt nur dann als "abgedeckt", wenn er (a) im lückenlos
+    gescannten Bereich beider Backfill-Läufe liegt UND (b) JEDER an diesem Tag
+    gesehene Block ein tx_count-Feld trägt.
+
+    (b) ist nötig, weil tx_count erst nachträglich ergänzt wurde: ältere, bereits
+    abgeschlossene Chunks haben Einträge ohne dieses Feld und werden nicht erneut
+    gescannt. Ohne diese Prüfung würde ein historischer, block-vollständig
+    gescannter aber tx_count-loser Tag fälschlich als "abgedeckt, 0 Tx" gezählt
+    statt als "noch keine Tx-Daten" — Untererfassung, die als Fakt aussieht, ist
+    schlimmer als ein ehrliches Coverage-Loch.
+    """
+    block_scanned_days = _covered_days_set()
+
+    by_day_count = {}
+    day_has_null = set()
+    seen_blocks = set()
+    if os.path.exists(MINER_REWARDS_FOR_TX_COUNTS):
+        with open(MINER_REWARDS_FOR_TX_COUNTS) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    entry = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                block = entry.get("block")
+                ts = entry.get("time")
+                if block is None or ts is None or block in seen_blocks:
+                    continue
+                seen_blocks.add(block)
+                day = datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
+                tx_count = entry.get("tx_count")
+                if tx_count is None:
+                    day_has_null.add(day)
+                    continue
+                by_day_count[day] = by_day_count.get(day, 0) + tx_count
+
+    tx_count_covered_days = {
+        d for d in block_scanned_days
+        if d in by_day_count and d not in day_has_null
+    }
+
+    today = datetime.now(timezone.utc).date()
+    windows = {"7_days": 7, "30_days": 30, "365_days": 365}
+    result = {}
+    for key, n_days in windows.items():
+        window_days = [(today - timedelta(days=i)).isoformat() for i in range(n_days)]
+        covered_in_window = [d for d in window_days if d in tx_count_covered_days]
+        count = sum(by_day_count.get(d, 0) for d in covered_in_window)
+        result[key] = {
+            "count": count,
+            "coverage_pct": round(100 * len(covered_in_window) / n_days, 1),
+            "days_covered": len(covered_in_window),
+            "days_total": n_days,
+        }
+    return result
+
 
 def scan_large_transactions(session, exchange_candidates):
     large_txs = []
@@ -168,6 +272,9 @@ def generate_snapshot():
     print("Aktualisiere Preis-/Volumenhistorie (CoinGecko)...")
     update_price_history()
 
+    print("Aktualisiere OHLC-Kerzen (CoinGecko)...")
+    update_ohlc()
+
     print("Aktualisiere Netzwerk-Stats (Hashrate/Difficulty)...")
     update_network_stats(session)
 
@@ -247,11 +354,7 @@ def generate_snapshot():
         },
         "whales": current_whales,
         "large_transfers": large_txs,
-        "transaction_counts": {
-            "7_days": 0,
-            "30_days": 0,
-            "365_days": 0
-        }
+        "transaction_counts": compute_transaction_counts()
     }
 
     date_str = datetime.now().strftime("%Y-%m-%d")

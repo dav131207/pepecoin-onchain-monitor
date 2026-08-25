@@ -166,6 +166,7 @@ def extract_coinbase_reward(block_meta, txs):
                 "block": block_meta["height"],
                 "time": block_meta["timestamp"],
                 "difficulty": block_meta.get("difficulty"),
+                "tx_count": block_meta.get("tx_count"),
                 "payouts": payouts,
             }
     return None

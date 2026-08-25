@@ -13,7 +13,10 @@ Datenspeicher für den wöchentlichen Pepecoin (PEP) On-Chain-Report-Agenten.
 - `exchange_candidates.json` — Ranking der bekannten Wal-Adressen nach Tx-Aktivität (`rank_exchange_candidates.py`), verhaltensbasierte Einordnung als vermutliche Exchange-/Hub-Wallets. Keine bestätigten Börsen-Namen — dafür gibt es keine öffentliche Adressliste für Pepecoin.
 - `large_transfers_3m.jsonl` — Ergebnis des einmaligen 90-Tage-Backfills (`backfill_history.py`), ein JSON-Objekt pro Zeile, gleiches Format wie `large_transfers` im Snapshot.
 - `price_history.json` — täglicher USD-Preis/Volumen/Marketcap von CoinGecko (Coin-ID `pepecoin-network`), gepflegt von `price_client.py`, bei jedem `monitor.py`-Lauf gemerged.
-- `backfill_state.json` (git-ignoriert) — Backfill-Fortschritt inkl. `contiguous_covered_start_day`/`contiguous_covered_end_day`: das vom Backfill bereits **lückenlos** gescannte Kalendertag-Fenster (Grundlage dafür, welche Tage im Dashboard als "echte 0" statt "fehlend" in Korrelationen eingehen dürfen).
+- `price_ohlc.json` — OHLC-Kerzen von CoinGecko (`price_client.py`, `update_ohlc()`), bei jedem Lauf komplett neu geschrieben (kein Merge nötig, CoinGecko liefert das volle Fenster). Bei einem Anforderungsfenster >30 Tage liefert CoinGeckos kostenloser Tarif serverseitig **4-Tage-Kerzen**, kein echtes Tages-OHLC — steht explizit als `candle_days` in der Datei, um Verwechslung zu vermeiden.
+- `holder_distribution.json` — Konzentrationskennzahlen (Gini-Koeffizient, Top-1%/Top-10%-Anteil) aus der kompletten Rich List, ein Eintrag pro Kalendertag (`holder_distribution.py`). Die ~294k einzelnen Adress-/Balance-Paare selbst werden nicht gespeichert, nur die abgeleiteten Kennzahlen.
+- `whale_dormancy.json` — pro bekannter Wal-Adresse: Zeitpunkt der letzten Auszahlung >= 1M PEP (aus `large_transfers_3m.jsonl`) und Tage seit dieser Auszahlung (`whale_dormancy.py`, rein lokal, keine API-Calls). "Keine Auszahlung gefunden" heißt nur "nicht im bislang gescannten Zeitraum", nicht zwingend "seit Genesis inaktiv" — der abgedeckte Zeitraum steht mit in der Datei.
+- `backfill_state.json` / `backfill_genesis_state.json` / `last_scanned_block.txt` — bewusst **nicht** git-ignoriert: GitHub Actions checkt bei jedem Lauf frisch aus, diese Fortschrittsdateien müssen im Repo liegen, damit die Skripte exakt fortsetzen statt bei jedem Lauf neu zu starten. Enthalten u.a. `contiguous_covered_start_day`/`contiguous_covered_end_day`: das vom jeweiligen Backfill bereits **lückenlos** gescannte Kalendertag-Fenster (Grundlage dafür, welche Tage als "echte 0" statt "fehlend" in Korrelationen/Transaktionszählungen eingehen dürfen).
 - `dashboard.html` — Analyse-Dashboard (Coinglass-artig: KPI-Kacheln, Preis-/Volumen-Charts, Adressverteilung, Groß-Transfer-Volumen, Exchange-Netflow, Korrelationsmatrix, Lag-Analyse, Aktivitäts-Heatmap, Shill/Noise-Postentwürfe). Liest alle obigen Dateien per `fetch()` (muss über einen lokalen Webserver geöffnet werden, nicht per `file://`). Siehe Abschnitte "Darstellung & Robustheit" und "Shill/Noise" unten.
 
 ## Datenquelle
@@ -27,11 +30,13 @@ Zugriff ist dennoch Best-Effort und kann fehlschlagen — in diesem Fall im Snap
 
 ## Skripte
 
-- `monitor.py` — der wöchentliche Hauptlauf: Rich-List-Snapshot + inkrementeller Scan neuer Blöcke seit `last_scanned_block.txt` auf Netto-Transfers >= 1M PEP. Deckelt ein einzelnes Fenster auf max. 20.000 Blöcke (Sicherheitsventil, kein Datenverlust — der Rest folgt beim nächsten Lauf).
-- `pep_client.py` — gemeinsamer Client (Devalue-Parser für die SvelteKit-Routen, Rate-Limiter, Block-/Adress-Fetcher, Netto-Transfer-Filter). Wird von `monitor.py`, `backfill_history.py` und `rank_exchange_candidates.py` genutzt.
-- `backfill_history.py` — einmaliger, fortsetzbarer Backfill der letzten ~90 Tage. Fortschritt in 500-Block-Chunks (`backfill_state.json`, git-ignoriert), Ergebnisse werden laufend an `large_transfers_3m.jsonl` angehängt. Bei Abbruch: einfach erneut starten, es wird nur der fehlende Rest geholt.
+- `monitor.py` — der wöchentliche Hauptlauf: Rich-List-Snapshot + inkrementeller Scan neuer Blöcke seit `last_scanned_block.txt` auf Netto-Transfers >= 1M PEP, plus Preis-/OHLC-Update und `transaction_counts` (7/30/365 Tage, siehe unten). Deckelt ein einzelnes Fenster auf max. 20.000 Blöcke (Sicherheitsventil, kein Datenverlust — der Rest folgt beim nächsten Lauf).
+- `pep_client.py` — gemeinsamer Client (Devalue-Parser für die SvelteKit-Routen, Rate-Limiter, Block-/Adress-Fetcher, Netto-Transfer-Filter, Coinbase-Reward-Extraktion inkl. `tx_count` je Block). Wird von `monitor.py`, `backfill_history.py`, `backfill_genesis.py`, `sample_miner_history.py` und `rank_exchange_candidates.py` genutzt.
+- `backfill_history.py` / `backfill_genesis.py` — fortsetzbarer Backfill (90-Tage-Kopf-Fenster bzw. komplette Historie seit Genesis-Block). Fortschritt in 500-Block-Chunks (`backfill_state.json` / `backfill_genesis_state.json`), Ergebnisse werden laufend an `large_transfers_3m.jsonl` und `miner_rewards.jsonl` angehängt. Bei Abbruch: einfach erneut starten, es wird nur der fehlende Rest geholt.
 - `rank_exchange_candidates.py` — prüft alle Adressen aus `known_whales.json` auf Tx-Aktivität und schreibt ein Ranking nach `exchange_candidates.json`.
-- `price_client.py` — holt USD-Preis-/Volumenhistorie von CoinGecko (öffentliche API, kein Key), gebucketed auf UTC-Kalendertage, merged in `price_history.json`. Wird von `monitor.py` bei jedem Lauf aufgerufen (best-effort, blockiert den Snapshot nicht bei Fehlschlag).
+- `price_client.py` — holt USD-Preis-/Volumenhistorie und OHLC-Kerzen von CoinGecko (öffentliche API, kein Key). Preis-Historie wird auf UTC-Kalendertage gebucketed und in `price_history.json` gemerged; OHLC wird komplett neu geschrieben in `price_ohlc.json`. Wird von `monitor.py` bei jedem Lauf aufgerufen (best-effort, blockiert den Snapshot nicht bei Fehlschlag).
+- `holder_distribution.py` — holt die komplette Rich List und berechnet Gini-Koeffizient sowie Top-1%/Top-10%-Anteil, schreibt nach `holder_distribution.json`.
+- `whale_dormancy.py` — rein lokale Auswertung von `known_whales.json` + `large_transfers_3m.jsonl`: Tage seit der letzten Auszahlung >= 1M PEP je Wal-Adresse, schreibt nach `whale_dormancy.json`.
 
 ## Korrelationen & Heatmaps (Dashboard)
 
@@ -58,4 +63,11 @@ Die Karte "Shill/Noise" erzeugt fertige, kopierbare Post-Entwürfe für X/Twitte
 
 ## Automatisierung
 
-Aktuell **manuell**: `monitor.py` wird bei Bedarf von Hand gestartet (z.B. wöchentlich). Eine automatische Zeitsteuerung (lokaler cron-Job oder Cloud-Schedule) wurde bewusst noch nicht eingerichtet — das kann später nachgezogen werden, sobald klar ist, auf welchem Weg (lokal vs. Cloud) automatisiert werden soll.
+**GitHub Actions** (`.github/workflows/`), nicht die Claude-Cloud-Routine — der Sandbox der Claude-Cloud-Routine blockiert per Netzwerk-Policy ausgehende Requests an die Datenquellen (bestätigt am 23.08.2026: alle vier versuchten Quellen inkl. CoinGecko wurden dort geblockt, während pip/GitHub normal funktionierten). GitHub-Actions-Runner haben uneingeschränkten Netzwerkzugriff und committen die Ergebnisse direkt zurück ins Repo:
+
+- **`genesis-backfill.yml`** — alle 6h, 5h Zeitbudget pro Lauf, treibt `backfill_genesis.py` voran. Schaltet sich nach Fertigstellung automatisch ab (Skript erkennt "bereits vollständig" und beendet sich sofort).
+- **`weekly-monitor.yml`** — sonntags 21:59 UTC, fährt `backfill_history.py` (90-Tage-Fenster nachziehen), `rank_exchange_candidates.py`, `monitor.py`, `holder_distribution.py` und `whale_dormancy.py` hintereinander, committet alle Ergebnisdateien.
+
+Beide Workflows lassen sich manuell per `workflow_dispatch` anstoßen (GitHub-UI oder `gh workflow run <name>.yml`). Das Repo ist bewusst **öffentlich** gestellt, damit GitHub-Actions-Minuten unbegrenzt und kostenlos sind (enthält nur öffentliche Blockchain-Daten und Skripte, keine Secrets).
+
+Die Claude-Cloud-Routine (falls wieder aktiviert) eignet sich stattdessen für das, was tatsächlich funktioniert hat: aus den bereits im Repo liegenden Daten das Artifact-Dashboard bauen und veröffentlichen (siehe Git-Historie, Lauf vom 23.08.2026 — Datenabruf schlug fehl, das Dashboard aus vorhandenen Daten wurde aber erfolgreich gebaut und published).

@@ -31,16 +31,23 @@ jobs:
       - name: Rank exchange candidates
         run: python rank_exchange_candidates.py || true
 
-      - name: Weekly snapshot + price update
+      - name: Weekly snapshot + price/OHLC update
         run: python monitor.py
+
+      - name: Holder distribution (Gini, top-percentile shares)
+        run: timeout 20m python holder_distribution.py || true
+
+      - name: Whale dormancy
+        run: python whale_dormancy.py || true
 
       - name: Commit and push results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add snapshots known_whales.json exchange_candidates.json miner_wallets.json \
-            large_transfers_3m.jsonl miner_rewards.jsonl price_history.json network_stats.json \
-            backfill_state.json last_scanned_block.txt
+            large_transfers_3m.jsonl miner_rewards.jsonl price_history.json price_ohlc.json \
+            network_stats.json backfill_state.json last_scanned_block.txt \
+            holder_distribution.json whale_dormancy.json
           git diff --cached --quiet || git commit -m "Weekly monitor run $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git pull --rebase origin main
           git push origin main
