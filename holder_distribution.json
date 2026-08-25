@@ -1,0 +1,11 @@
+{
+  "2026-08-25": {
+    "timestamp": "2026-08-25T21:19:26.550910+00:00",
+    "addresses_counted": 293990,
+    "addresses_total_reported": 293989,
+    "complete": true,
+    "gini": 0.99357,
+    "top_1pct_share_pct": 89.9995,
+    "top_10pct_share_pct": 99.9995
+  }
+}
