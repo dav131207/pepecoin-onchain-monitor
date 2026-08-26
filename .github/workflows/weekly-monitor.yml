@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: weekly-monitor
+  group: pep-data-pipeline
   cancel-in-progress: false
 
 jobs:
@@ -49,5 +49,14 @@ jobs:
             network_stats.json backfill_state.json last_scanned_block.txt \
             holder_distribution.json whale_dormancy.json
           git diff --cached --quiet || git commit -m "Weekly monitor run $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          git pull --rebase origin main
-          git push origin main
+          # Concurrency group already serializes this against genesis-backfill.yml,
+          # but a manual/stray overlap could still race — retry a few times before
+          # giving up, rather than silently losing this run's results.
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin main && exit 0
+            echo "Push attempt $attempt failed, retrying in 30s..."
+            git rebase --abort 2>/dev/null || true
+            sleep 30
+          done
+          echo "::error::Could not push after 5 attempts — local commit is lost when this runner is torn down."
+          exit 1
