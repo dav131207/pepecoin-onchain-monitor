@@ -4,14 +4,14 @@ import time
 from datetime import datetime, timezone, timedelta
 import requests
 
-from pep_client import RateLimiter, fetch_block, extract_net_transfers, extract_coinbase_reward, API
+from pep_client import (RateLimiter, fetch_block, extract_net_transfers, extract_coinbase_reward, API,
+                         MINER_REWARDS_DIR, append_jsonl_by_month, read_jsonl_dir)
 from price_client import update_price_history, update_ohlc
 
 DATA_DIR = "snapshots"
 KNOWN_WHALES_FILE = "known_whales.json"
 STATE_FILE = "last_scanned_block.txt"
 EXCHANGE_CANDIDATES_FILE = "exchange_candidates.json"
-MINER_REWARDS_FILE = "miner_rewards.jsonl"
 NETWORK_STATS_FILE = "network_stats.json"
 BASE_URL = API
 
@@ -88,7 +88,6 @@ def set_last_scanned_block(height):
 
 HEAD_BACKFILL_STATE_FILE = "backfill_state.json"
 GENESIS_BACKFILL_STATE_FILE = "backfill_genesis_state.json"
-MINER_REWARDS_FOR_TX_COUNTS = "miner_rewards.jsonl"
 
 
 def _covered_day_range(state_file):
@@ -130,7 +129,7 @@ def _covered_days_set():
 
 def compute_transaction_counts():
     """
-    Summiert tx_count je Block (aus miner_rewards.jsonl) für die letzten 7/30/365
+    Summiert tx_count je Block (aus miner_rewards/*.jsonl) für die letzten 7/30/365
     Tage. Ein Tag zählt nur dann als "abgedeckt", wenn er (a) im lückenlos
     gescannten Bereich beider Backfill-Läufe liegt UND (b) JEDER an diesem Tag
     gesehene Block ein tx_count-Feld trägt.
@@ -147,27 +146,18 @@ def compute_transaction_counts():
     by_day_count = {}
     day_has_null = set()
     seen_blocks = set()
-    if os.path.exists(MINER_REWARDS_FOR_TX_COUNTS):
-        with open(MINER_REWARDS_FOR_TX_COUNTS) as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    entry = json.loads(line)
-                except json.JSONDecodeError:
-                    continue
-                block = entry.get("block")
-                ts = entry.get("time")
-                if block is None or ts is None or block in seen_blocks:
-                    continue
-                seen_blocks.add(block)
-                day = datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
-                tx_count = entry.get("tx_count")
-                if tx_count is None:
-                    day_has_null.add(day)
-                    continue
-                by_day_count[day] = by_day_count.get(day, 0) + tx_count
+    for entry in read_jsonl_dir(MINER_REWARDS_DIR):
+        block = entry.get("block")
+        ts = entry.get("time")
+        if block is None or ts is None or block in seen_blocks:
+            continue
+        seen_blocks.add(block)
+        day = datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
+        tx_count = entry.get("tx_count")
+        if tx_count is None:
+            day_has_null.add(day)
+            continue
+        by_day_count[day] = by_day_count.get(day, 0) + tx_count
 
     tx_count_covered_days = {
         d for d in block_scanned_days
@@ -218,8 +208,6 @@ def scan_large_transactions(session, exchange_candidates):
 
         print(f"Scanne Blöcke von {start_height} bis {end_height}...")
 
-        miner_f = open(MINER_REWARDS_FILE, "a")
-
         for height in range(start_height, end_height + 1):
             if height % 200 == 0:
                 print(f"Scanne Block {height}/{end_height}...")
@@ -241,12 +229,10 @@ def scan_large_transactions(session, exchange_candidates):
 
             reward = extract_coinbase_reward(block_meta, txs)
             if reward:
-                miner_f.write(json.dumps(reward) + "\n")
+                append_jsonl_by_month([reward], MINER_REWARDS_DIR)
 
             # Zustand speichern
             set_last_scanned_block(height)
-
-        miner_f.close()
 
     except Exception as e:
         print(f"Fehler beim Block-Scan: {e}")

@@ -11,9 +11,13 @@ auf 20 Stichproben-Blöcken (u.a. ein 449-Tx-Block) — 0 Abweichungen.
 Werte auf dieser Route sind 1e8-skaliert (wie Satoshi) und werden von diesem Modul
 bereits in PEP umgerechnet zurückgegeben.
 """
+import glob
+import json
+import os
 import random
 import threading
 import time
+from datetime import datetime, timezone
 
 import requests
 
@@ -21,6 +25,46 @@ HOST = "https://avivppblocks.realmasterkush.com"
 API = f"{HOST}/api"
 
 SAT = 100_000_000
+
+LARGE_TRANSFERS_DIR = "large_transfers"
+MINER_REWARDS_DIR = "miner_rewards"
+
+
+def month_key(ts):
+    return datetime.fromtimestamp(ts, tz=timezone.utc).strftime("%Y-%m")
+
+
+def append_jsonl_by_month(records, dir_path):
+    """
+    Verteilt Records auf monatliche Dateien (dir_path/YYYY-MM.jsonl), damit keine
+    einzelne Datei je in Richtung GitHubs 100-MB-Hard-Limit wächst (miner_rewards.jsonl
+    riss das am 26.8. bei ~119 MB — jeder Push seitdem wurde hart abgelehnt, siehe
+    README). Jeder Record braucht ein "time"-Feld (Unix-Sekunden).
+    """
+    if not records:
+        return
+    os.makedirs(dir_path, exist_ok=True)
+    by_month = {}
+    for r in records:
+        by_month.setdefault(month_key(r["time"]), []).append(r)
+    for month, items in by_month.items():
+        with open(os.path.join(dir_path, f"{month}.jsonl"), "a") as f:
+            for r in items:
+                f.write(json.dumps(r) + "\n")
+
+
+def read_jsonl_dir(dir_path):
+    """Generator über alle Records in allen dir_path/*.jsonl-Dateien, Monatsdateien aufsteigend sortiert."""
+    for path in sorted(glob.glob(os.path.join(dir_path, "*.jsonl"))):
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    yield json.loads(line)
+                except json.JSONDecodeError:
+                    continue
 
 
 class RateLimiter:

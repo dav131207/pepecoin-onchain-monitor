@@ -4,9 +4,9 @@ Zweiter, unabhängiger Backfill-Lauf: füllt die Historie vom Launch-Block (Bloc
 
 Eigene Zustandsdatei (GENESIS_STATE_FILE), eigenes fixes Zielende (nicht der
 aktuelle Blockstand) — läuft komplett unabhängig neben backfill_history.py,
-ohne dessen Fortschritt zu berühren. Beide schreiben an dieselben Ausgabedateien
-(large_transfers_3m.jsonl, miner_rewards.jsonl) an, das Dashboard dedupliziert
-Transfers ohnehin per txid.
+ohne dessen Fortschritt zu berühren. Beide schreiben in dieselben monatlich
+aufgeteilten Verzeichnisse (large_transfers/, miner_rewards/ — siehe pep_client.py,
+append_jsonl_by_month), das Dashboard dedupliziert Transfers ohnehin per txid.
 
 Umfang: ~1,17 Mio. Blöcke (fast die gesamte Chain) — bei aktuellem Tempo
 mehrere Tage durchgehender Scan. Läuft im Hintergrund weiter, auch über
@@ -16,10 +16,11 @@ import json
 import os
 
 from backfill_history import run_backfill, STATE_FILE as HEAD_STATE_FILE
+from pep_client import LARGE_TRANSFERS_DIR, MINER_REWARDS_DIR
 
 GENESIS_STATE_FILE = "backfill_genesis_state.json"
-OUTPUT_FILE = "large_transfers_3m.jsonl"
-MINER_OUTPUT_FILE = "miner_rewards.jsonl"
+OUTPUT_DIR = LARGE_TRANSFERS_DIR
+MINER_OUTPUT_DIR = MINER_REWARDS_DIR
 INCOMPLETE_LOG = "blocks_incomplete_genesis.txt"
 
 GENESIS_HEIGHT = 1  # Block 1 = 30.1.2024, siehe README
@@ -47,8 +48,8 @@ def determine_initial_range_genesis(session, current_height):
 def main():
     run_backfill(
         state_file=GENESIS_STATE_FILE,
-        output_file=OUTPUT_FILE,
-        miner_file_path=MINER_OUTPUT_FILE,
+        output_dir=OUTPUT_DIR,
+        miner_dir=MINER_OUTPUT_DIR,
         incomplete_log=INCOMPLETE_LOG,
         determine_initial_range=determine_initial_range_genesis,
         auto_extend_end=False,

@@ -25,7 +25,8 @@ from datetime import datetime, timezone
 
 import requests
 
-from pep_client import RateLimiter, fetch_block, extract_net_transfers, extract_coinbase_reward, API
+from pep_client import (RateLimiter, fetch_block, extract_net_transfers, extract_coinbase_reward, API,
+                         LARGE_TRANSFERS_DIR, MINER_REWARDS_DIR, append_jsonl_by_month)
 
 THRESHOLD_PEP = 1_000_000
 BACKFILL_DAYS = 90
@@ -38,8 +39,11 @@ WORKERS = 6
 MIN_REQUEST_INTERVAL = 0.03
 
 STATE_FILE = "backfill_state.json"
-OUTPUT_FILE = "large_transfers_3m.jsonl"
-MINER_OUTPUT_FILE = "miner_rewards.jsonl"
+# Monatlich aufgeteilt (large_transfers/YYYY-MM.jsonl, miner_rewards/YYYY-MM.jsonl)
+# statt einer einzigen wachsenden Datei — miner_rewards.jsonl riss am 26.8.2026
+# GitHubs 100-MB-Hard-Limit bei ~119 MB, seither wurde jeder Push hart abgelehnt.
+OUTPUT_DIR = LARGE_TRANSFERS_DIR
+MINER_OUTPUT_DIR = MINER_REWARDS_DIR
 INCOMPLETE_LOG = "blocks_incomplete.txt"
 
 
@@ -147,7 +151,7 @@ def update_contiguous_coverage(state):
     state["contiguous_covered_end_day"] = utc_day(covered_end_ts) if covered_end_ts else None
 
 
-def run_backfill(state_file, output_file, miner_file_path, incomplete_log,
+def run_backfill(state_file, output_dir, miner_dir, incomplete_log,
                   determine_initial_range, auto_extend_end=False, label="Backfill",
                   min_request_interval=None, workers=None):
     """
@@ -204,8 +208,6 @@ def run_backfill(state_file, output_file, miner_file_path, incomplete_log,
         return
 
     limiter = RateLimiter(effective_interval)
-    out_f = open(output_file, "a")
-    miner_f = open(miner_file_path, "a")
     incomplete_f = open(incomplete_log, "a")
 
     done_count = 0
@@ -230,14 +232,10 @@ def run_backfill(state_file, output_file, miner_file_path, incomplete_log,
                     print(f"{label}: Chunk {chunk_start}: FEHLER {e} — wird beim nächsten Lauf erneut versucht.")
                     continue
 
-                for r in miner_rewards:
-                    miner_f.write(json.dumps(r) + "\n")
-                miner_f.flush()
+                append_jsonl_by_month(miner_rewards, miner_dir)
                 state["miner_data_chunks"].append(chunk_start)
 
-                for t in transfers:
-                    out_f.write(json.dumps(t) + "\n")
-                out_f.flush()
+                append_jsonl_by_month(transfers, output_dir)
 
                 for height, err in incomplete:
                     incomplete_f.write(f"{height}\t{err}\n")
@@ -258,11 +256,9 @@ def run_backfill(state_file, output_file, miner_file_path, incomplete_log,
                           f"({elapsed/60:.1f} min, ETA ~{eta_min:.0f} min)"
                           + (f" — {len(incomplete)} unvollständige Blöcke in diesem Chunk" if incomplete else ""))
     finally:
-        out_f.close()
-        miner_f.close()
         incomplete_f.close()
 
-    print(f"\n{label}: abgeschlossen. Transfers in {output_file}, Miner-Rewards in {miner_file_path}, "
+    print(f"\n{label}: abgeschlossen. Transfers in {output_dir}/, Miner-Rewards in {miner_dir}/, "
           f"unvollständige Blöcke (falls vorhanden) in {incomplete_log}.")
 
 
@@ -275,8 +271,8 @@ def determine_initial_range_90d(session, current_height):
 def main():
     run_backfill(
         state_file=STATE_FILE,
-        output_file=OUTPUT_FILE,
-        miner_file_path=MINER_OUTPUT_FILE,
+        output_dir=OUTPUT_DIR,
+        miner_dir=MINER_OUTPUT_DIR,
         incomplete_log=INCOMPLETE_LOG,
         determine_initial_range=determine_initial_range_90d,
         auto_extend_end=True,

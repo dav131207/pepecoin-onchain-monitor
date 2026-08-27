@@ -1,6 +1,6 @@
 """
 Dormancy-Analyse für bekannte Wal-Adressen (known_whales.json): wie lange liegt
-die letzte große Auszahlung (>= 1M PEP, aus large_transfers_3m.jsonl) einer
+die letzte große Auszahlung (>= 1M PEP, aus large_transfers/*.jsonl) einer
 Wal-Adresse zurück? Rein lokale Auswertung bereits gesammelter Dateien, keine
 zusätzlichen API-Calls.
 
@@ -15,8 +15,9 @@ import json
 import os
 from datetime import datetime, timezone, timedelta
 
+from pep_client import LARGE_TRANSFERS_DIR, read_jsonl_dir
+
 KNOWN_WHALES_FILE = "known_whales.json"
-LARGE_TRANSFERS_FILE = "large_transfers_3m.jsonl"
 HEAD_BACKFILL_STATE_FILE = "backfill_state.json"
 GENESIS_BACKFILL_STATE_FILE = "backfill_genesis_state.json"
 OUTPUT_FILE = "whale_dormancy.json"
@@ -62,25 +63,16 @@ def main():
         known_whales = json.load(f)
 
     last_outflow = {}
-    if os.path.exists(LARGE_TRANSFERS_FILE):
-        with open(LARGE_TRANSFERS_FILE) as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    t = json.loads(line)
-                except json.JSONDecodeError:
-                    continue
-                ts = t.get("time")
-                if ts is None:
-                    continue
-                for src in t.get("from", []):
-                    addr = src.get("address")
-                    if not addr:
-                        continue
-                    if addr not in last_outflow or ts > last_outflow[addr]:
-                        last_outflow[addr] = ts
+    for t in read_jsonl_dir(LARGE_TRANSFERS_DIR):
+        ts = t.get("time")
+        if ts is None:
+            continue
+        for src in t.get("from", []):
+            addr = src.get("address")
+            if not addr:
+                continue
+            if addr not in last_outflow or ts > last_outflow[addr]:
+                last_outflow[addr] = ts
 
     now = datetime.now(timezone.utc)
     cov_start, cov_end = _overall_coverage()
