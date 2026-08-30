@@ -1,496 +1,5403 @@
 {
   "coingecko_id": "pepecoin-network",
   "daily": {
+    "2024-12-10": {
+      "high_usd": 0.0029372,
+      "low_usd": 0.00148916,
+      "open_usd": 0.0017179,
+      "price_usd": 0.00176,
+      "source": "coinex",
+      "volume_usd": 183212.4922360043
+    },
+    "2024-12-11": {
+      "high_usd": 0.00187,
+      "low_usd": 0.00122,
+      "open_usd": 0.00175999,
+      "price_usd": 0.00125,
+      "source": "coinex",
+      "volume_usd": 140258.26987389722
+    },
+    "2024-12-12": {
+      "high_usd": 0.0014862,
+      "low_usd": 0.0011286,
+      "open_usd": 0.00125,
+      "price_usd": 0.00130567,
+      "source": "coinex",
+      "volume_usd": 164506.4562405302
+    },
+    "2024-12-13": {
+      "high_usd": 0.00146578,
+      "low_usd": 0.0011603,
+      "open_usd": 0.00130306,
+      "price_usd": 0.00121933,
+      "source": "coinex",
+      "volume_usd": 95997.39729366938
+    },
+    "2024-12-14": {
+      "high_usd": 0.00130843,
+      "low_usd": 0.00088259,
+      "open_usd": 0.0012192,
+      "price_usd": 0.00111726,
+      "source": "coinex",
+      "volume_usd": 135220.3615304158
+    },
+    "2024-12-15": {
+      "high_usd": 0.00113671,
+      "low_usd": 0.0008024,
+      "open_usd": 0.00111781,
+      "price_usd": 0.0009196,
+      "source": "coinex",
+      "volume_usd": 117332.44578299866
+    },
+    "2024-12-16": {
+      "high_usd": 0.00144,
+      "low_usd": 0.0009196,
+      "open_usd": 0.0009196,
+      "price_usd": 0.00130742,
+      "source": "coinex",
+      "volume_usd": 158619.4099402207
+    },
+    "2024-12-17": {
+      "high_usd": 0.0014174,
+      "low_usd": 0.00124257,
+      "open_usd": 0.00130999,
+      "price_usd": 0.00136043,
+      "source": "coinex",
+      "volume_usd": 159575.91026816104
+    },
+    "2024-12-18": {
+      "high_usd": 0.00137544,
+      "low_usd": 0.00111022,
+      "open_usd": 0.00136083,
+      "price_usd": 0.00111077,
+      "source": "coinex",
+      "volume_usd": 80712.2470438313
+    },
+    "2024-12-19": {
+      "high_usd": 0.00120856,
+      "low_usd": 0.0010897,
+      "open_usd": 0.00111084,
+      "price_usd": 0.00111135,
+      "source": "coinex",
+      "volume_usd": 67716.04548997927
+    },
+    "2024-12-20": {
+      "high_usd": 0.00115492,
+      "low_usd": 0.00084967,
+      "open_usd": 0.00111135,
+      "price_usd": 0.00111756,
+      "source": "coinex",
+      "volume_usd": 96209.47509198311
+    },
+    "2024-12-21": {
+      "high_usd": 0.0013227,
+      "low_usd": 0.00108824,
+      "open_usd": 0.00111925,
+      "price_usd": 0.00112737,
+      "source": "coinex",
+      "volume_usd": 71477.90461878628
+    },
+    "2024-12-22": {
+      "high_usd": 0.001188,
+      "low_usd": 0.001002,
+      "open_usd": 0.00112703,
+      "price_usd": 0.00107933,
+      "source": "coinex",
+      "volume_usd": 70887.85173008121
+    },
+    "2024-12-23": {
+      "high_usd": 0.0012273,
+      "low_usd": 0.00097952,
+      "open_usd": 0.00107933,
+      "price_usd": 0.0010617,
+      "source": "coinex",
+      "volume_usd": 111838.31168249973
+    },
+    "2024-12-24": {
+      "high_usd": 0.00108035,
+      "low_usd": 0.001,
+      "open_usd": 0.0010616,
+      "price_usd": 0.00104007,
+      "source": "coinex",
+      "volume_usd": 67644.02605560994
+    },
+    "2024-12-25": {
+      "high_usd": 0.0010521,
+      "low_usd": 0.00096422,
+      "open_usd": 0.00104007,
+      "price_usd": 0.00099523,
+      "source": "coinex",
+      "volume_usd": 70496.01076504827
+    },
+    "2024-12-26": {
+      "high_usd": 0.0010177,
+      "low_usd": 0.00094781,
+      "open_usd": 0.00099532,
+      "price_usd": 0.00095379,
+      "source": "coinex",
+      "volume_usd": 62137.70205133465
+    },
+    "2024-12-27": {
+      "high_usd": 0.00097636,
+      "low_usd": 0.00085094,
+      "open_usd": 0.00095389,
+      "price_usd": 0.0008565,
+      "source": "coinex",
+      "volume_usd": 72674.06771902464
+    },
+    "2024-12-28": {
+      "high_usd": 0.00112952,
+      "low_usd": 0.00085393,
+      "open_usd": 0.00085393,
+      "price_usd": 0.0010121,
+      "source": "coinex",
+      "volume_usd": 83155.06790135872
+    },
+    "2024-12-29": {
+      "high_usd": 0.00101211,
+      "low_usd": 0.00092272,
+      "open_usd": 0.00101189,
+      "price_usd": 0.00098061,
+      "source": "coinex",
+      "volume_usd": 38121.96844132904
+    },
+    "2024-12-30": {
+      "high_usd": 0.00098151,
+      "low_usd": 0.00089025,
+      "open_usd": 0.0009808,
+      "price_usd": 0.00091698,
+      "source": "coinex",
+      "volume_usd": 63246.43075251846
+    },
+    "2024-12-31": {
+      "high_usd": 0.00113244,
+      "low_usd": 0.00080871,
+      "open_usd": 0.00091642,
+      "price_usd": 0.00088255,
+      "source": "coinex",
+      "volume_usd": 119609.95022642775
+    },
+    "2025-01-01": {
+      "high_usd": 0.00094428,
+      "low_usd": 0.00082958,
+      "open_usd": 0.00088026,
+      "price_usd": 0.00089258,
+      "source": "coinex",
+      "volume_usd": 104958.7877823544
+    },
+    "2025-01-02": {
+      "high_usd": 0.00090114,
+      "low_usd": 0.00083,
+      "open_usd": 0.00089258,
+      "price_usd": 0.00086532,
+      "source": "coinex",
+      "volume_usd": 60361.00108856716
+    },
+    "2025-01-03": {
+      "high_usd": 0.00087218,
+      "low_usd": 0.00060141,
+      "open_usd": 0.00086601,
+      "price_usd": 0.00078583,
+      "source": "coinex",
+      "volume_usd": 124622.06661607047
+    },
+    "2025-01-04": {
+      "high_usd": 0.00080176,
+      "low_usd": 0.00057675,
+      "open_usd": 0.00078583,
+      "price_usd": 0.00066289,
+      "source": "coinex",
+      "volume_usd": 122181.92011123397
+    },
+    "2025-01-05": {
+      "high_usd": 0.00069,
+      "low_usd": 0.00039413,
+      "open_usd": 0.000663,
+      "price_usd": 0.00046237,
+      "source": "coinex",
+      "volume_usd": 153122.59026760136
+    },
+    "2025-01-06": {
+      "high_usd": 0.00063477,
+      "low_usd": 0.0004,
+      "open_usd": 0.0004625,
+      "price_usd": 0.00061992,
+      "source": "coinex",
+      "volume_usd": 148292.5466356292
+    },
+    "2025-01-07": {
+      "high_usd": 0.00062955,
+      "low_usd": 0.00041052,
+      "open_usd": 0.00062178,
+      "price_usd": 0.00045924,
+      "source": "coinex",
+      "volume_usd": 140489.0685130571
+    },
+    "2025-01-08": {
+      "high_usd": 0.0005046,
+      "low_usd": 0.00039,
+      "open_usd": 0.00045884,
+      "price_usd": 0.00047084,
+      "source": "coinex",
+      "volume_usd": 93557.67343415653
+    },
+    "2025-01-09": {
+      "high_usd": 0.00047721,
+      "low_usd": 0.00038493,
+      "open_usd": 0.00047078,
+      "price_usd": 0.00039836,
+      "source": "coinex",
+      "volume_usd": 52314.6454799149
+    },
+    "2025-01-10": {
+      "high_usd": 0.0004678,
+      "low_usd": 0.00037506,
+      "open_usd": 0.00039836,
+      "price_usd": 0.00042161,
+      "source": "coinex",
+      "volume_usd": 59642.60735826456
+    },
+    "2025-01-11": {
+      "high_usd": 0.00044957,
+      "low_usd": 0.00041314,
+      "open_usd": 0.00042169,
+      "price_usd": 0.00043904,
+      "source": "coinex",
+      "volume_usd": 24695.8471818063
+    },
+    "2025-01-12": {
+      "high_usd": 0.00058791,
+      "low_usd": 0.00043,
+      "open_usd": 0.00044035,
+      "price_usd": 0.00054216,
+      "source": "coinex",
+      "volume_usd": 106041.43445759169
+    },
+    "2025-01-13": {
+      "high_usd": 0.0005699,
+      "low_usd": 0.00049059,
+      "open_usd": 0.00054188,
+      "price_usd": 0.00052821,
+      "source": "coinex",
+      "volume_usd": 85459.41247108328
+    },
+    "2025-01-14": {
+      "high_usd": 0.00069,
+      "low_usd": 0.00050151,
+      "open_usd": 0.00052842,
+      "price_usd": 0.00060101,
+      "source": "coinex",
+      "volume_usd": 86506.34299599892
+    },
+    "2025-01-15": {
+      "high_usd": 0.00072,
+      "low_usd": 0.00057078,
+      "open_usd": 0.00060094,
+      "price_usd": 0.00062086,
+      "source": "coinex",
+      "volume_usd": 127953.18007782719
+    },
+    "2025-01-16": {
+      "high_usd": 0.0006563,
+      "low_usd": 0.00056,
+      "open_usd": 0.00062135,
+      "price_usd": 0.00064198,
+      "source": "coinex",
+      "volume_usd": 74805.65729804277
+    },
+    "2025-01-17": {
+      "high_usd": 0.00069177,
+      "low_usd": 0.00059999,
+      "open_usd": 0.00064172,
+      "price_usd": 0.0006673,
+      "source": "coinex",
+      "volume_usd": 70496.81678290875
+    },
+    "2025-01-18": {
+      "high_usd": 0.00069575,
+      "low_usd": 0.00054405,
+      "open_usd": 0.00066696,
+      "price_usd": 0.00055221,
+      "source": "coinex",
+      "volume_usd": 63292.22826880023
+    },
+    "2025-01-19": {
+      "high_usd": 0.00060587,
+      "low_usd": 0.00046972,
+      "open_usd": 0.00055227,
+      "price_usd": 0.00047366,
+      "source": "coinex",
+      "volume_usd": 90058.68472189033
+    },
+    "2025-01-20": {
+      "high_usd": 0.00076776,
+      "low_usd": 0.00042357,
+      "open_usd": 0.00047328,
+      "price_usd": 0.00065716,
+      "source": "coinex",
+      "volume_usd": 188488.63828424455
+    },
+    "2025-01-21": {
+      "high_usd": 0.00071158,
+      "low_usd": 0.000612,
+      "open_usd": 0.00065692,
+      "price_usd": 0.00069738,
+      "source": "coinex",
+      "volume_usd": 84779.1932266809
+    },
+    "2025-01-22": {
+      "high_usd": 0.00075,
+      "low_usd": 0.00065271,
+      "open_usd": 0.00069738,
+      "price_usd": 0.00072959,
+      "source": "coinex",
+      "volume_usd": 70930.9309988615
+    },
+    "2025-01-23": {
+      "high_usd": 0.00073845,
+      "low_usd": 0.00066018,
+      "open_usd": 0.00072959,
+      "price_usd": 0.00069739,
+      "source": "coinex",
+      "volume_usd": 54105.1543529048
+    },
+    "2025-01-24": {
+      "high_usd": 0.00086377,
+      "low_usd": 0.00065,
+      "open_usd": 0.0006973,
+      "price_usd": 0.00083603,
+      "source": "coinex",
+      "volume_usd": 89359.40277149284
+    },
+    "2025-01-25": {
+      "high_usd": 0.0010972,
+      "low_usd": 0.00082594,
+      "open_usd": 0.00083613,
+      "price_usd": 0.00102027,
+      "source": "coinex",
+      "volume_usd": 190203.95834275335
+    },
+    "2025-01-26": {
+      "high_usd": 0.00102026,
+      "low_usd": 0.00081136,
+      "open_usd": 0.00101996,
+      "price_usd": 0.00091855,
+      "source": "coinex",
+      "volume_usd": 90342.1600492097
+    },
+    "2025-01-27": {
+      "high_usd": 0.0009881,
+      "low_usd": 0.00074347,
+      "open_usd": 0.00091873,
+      "price_usd": 0.00081906,
+      "source": "coinex",
+      "volume_usd": 117848.64842020941
+    },
+    "2025-01-28": {
+      "high_usd": 0.00087444,
+      "low_usd": 0.00070505,
+      "open_usd": 0.00081955,
+      "price_usd": 0.00075429,
+      "source": "coinex",
+      "volume_usd": 69986.07969196471
+    },
+    "2025-01-29": {
+      "high_usd": 0.00083358,
+      "low_usd": 0.00074994,
+      "open_usd": 0.00075429,
+      "price_usd": 0.00077499,
+      "source": "coinex",
+      "volume_usd": 42223.68167078942
+    },
+    "2025-01-30": {
+      "high_usd": 0.00083385,
+      "low_usd": 0.00077532,
+      "open_usd": 0.00077532,
+      "price_usd": 0.00080061,
+      "source": "coinex",
+      "volume_usd": 39623.86718397858
+    },
+    "2025-01-31": {
+      "high_usd": 0.00080552,
+      "low_usd": 0.00067367,
+      "open_usd": 0.00080054,
+      "price_usd": 0.0007487,
+      "source": "coinex",
+      "volume_usd": 129660.82758494966
+    },
+    "2025-02-01": {
+      "high_usd": 0.0007951,
+      "low_usd": 0.0006803,
+      "open_usd": 0.0007484,
+      "price_usd": 0.00070795,
+      "source": "coinex",
+      "volume_usd": 88144.24323479856
+    },
+    "2025-02-02": {
+      "high_usd": 0.00072646,
+      "low_usd": 0.00057559,
+      "open_usd": 0.00070795,
+      "price_usd": 0.00062156,
+      "source": "coinex",
+      "volume_usd": 70546.57212899234
+    },
+    "2025-02-03": {
+      "high_usd": 0.00062118,
+      "low_usd": 0.00037827,
+      "open_usd": 0.00062118,
+      "price_usd": 0.0005906,
+      "source": "coinex",
+      "volume_usd": 105275.60220120968
+    },
+    "2025-02-04": {
+      "high_usd": 0.00061441,
+      "low_usd": 0.00054124,
+      "open_usd": 0.00059006,
+      "price_usd": 0.00058951,
+      "source": "coinex",
+      "volume_usd": 38306.683620435724
+    },
+    "2025-02-05": {
+      "high_usd": 0.00061723,
+      "low_usd": 0.00050081,
+      "open_usd": 0.00059023,
+      "price_usd": 0.00054591,
+      "source": "coinex",
+      "volume_usd": 39430.047451826904
+    },
+    "2025-02-06": {
+      "high_usd": 0.00059423,
+      "low_usd": 0.0003995,
+      "open_usd": 0.00054558,
+      "price_usd": 0.00051612,
+      "source": "coinex",
+      "volume_usd": 54602.38420835008
+    },
+    "2025-02-07": {
+      "high_usd": 0.00064215,
+      "low_usd": 0.00039,
+      "open_usd": 0.00051612,
+      "price_usd": 0.0004641,
+      "source": "coinex",
+      "volume_usd": 60568.71707579443
+    },
+    "2025-02-08": {
+      "high_usd": 0.00047051,
+      "low_usd": 0.00024802,
+      "open_usd": 0.00046409,
+      "price_usd": 0.00027168,
+      "source": "coinex",
+      "volume_usd": 160661.0092688487
+    },
+    "2025-02-09": {
+      "high_usd": 0.000388,
+      "low_usd": 0.00015705,
+      "open_usd": 0.0002736,
+      "price_usd": 0.00023508,
+      "source": "coinex",
+      "volume_usd": 227899.1360721576
+    },
+    "2025-02-10": {
+      "high_usd": 0.00036,
+      "low_usd": 0.0002,
+      "open_usd": 0.00023343,
+      "price_usd": 0.0003354,
+      "source": "coinex",
+      "volume_usd": 179060.9228277227
+    },
+    "2025-02-11": {
+      "high_usd": 0.0005,
+      "low_usd": 0.00032011,
+      "open_usd": 0.00033541,
+      "price_usd": 0.00042164,
+      "source": "coinex",
+      "volume_usd": 176730.04793267237
+    },
+    "2025-02-12": {
+      "high_usd": 0.00046645,
+      "low_usd": 0.0003303,
+      "open_usd": 0.00042238,
+      "price_usd": 0.00042206,
+      "source": "coinex",
+      "volume_usd": 87282.7988741507
+    },
+    "2025-02-13": {
+      "high_usd": 0.00042211,
+      "low_usd": 0.000303,
+      "open_usd": 0.00042207,
+      "price_usd": 0.00038,
+      "source": "coinex",
+      "volume_usd": 122227.91631462268
+    },
+    "2025-02-14": {
+      "high_usd": 0.000479,
+      "low_usd": 0.00036163,
+      "open_usd": 0.00038016,
+      "price_usd": 0.00047884,
+      "source": "coinex",
+      "volume_usd": 82028.76992112251
+    },
+    "2025-02-15": {
+      "high_usd": 0.000484,
+      "low_usd": 0.0004,
+      "open_usd": 0.00047885,
+      "price_usd": 0.00041276,
+      "source": "coinex",
+      "volume_usd": 77488.16315140632
+    },
+    "2025-02-16": {
+      "high_usd": 0.00069557,
+      "low_usd": 0.00039389,
+      "open_usd": 0.00041253,
+      "price_usd": 0.00069227,
+      "source": "coinex",
+      "volume_usd": 406033.6798943159
+    },
+    "2025-02-17": {
+      "high_usd": 0.0007,
+      "low_usd": 0.00049601,
+      "open_usd": 0.00069019,
+      "price_usd": 0.00050376,
+      "source": "coinex",
+      "volume_usd": 317337.2215331702
+    },
+    "2025-02-18": {
+      "high_usd": 0.0005125,
+      "low_usd": 0.00034963,
+      "open_usd": 0.00050376,
+      "price_usd": 0.00042611,
+      "source": "coinex",
+      "volume_usd": 167853.3317168696
+    },
+    "2025-02-19": {
+      "high_usd": 0.00042611,
+      "low_usd": 0.00035184,
+      "open_usd": 0.00042611,
+      "price_usd": 0.00039421,
+      "source": "coinex",
+      "volume_usd": 90096.45838091815
+    },
+    "2025-02-20": {
+      "high_usd": 0.0004,
+      "low_usd": 0.00035498,
+      "open_usd": 0.00039421,
+      "price_usd": 0.00037136,
+      "source": "coinex",
+      "volume_usd": 65739.76030172243
+    },
+    "2025-02-21": {
+      "high_usd": 0.0003845,
+      "low_usd": 0.000325,
+      "open_usd": 0.00037322,
+      "price_usd": 0.00032503,
+      "source": "coinex",
+      "volume_usd": 90544.18942660715
+    },
+    "2025-02-22": {
+      "high_usd": 0.00034888,
+      "low_usd": 0.00030111,
+      "open_usd": 0.00032513,
+      "price_usd": 0.00032391,
+      "source": "coinex",
+      "volume_usd": 41973.25186843537
+    },
+    "2025-02-23": {
+      "high_usd": 0.00035,
+      "low_usd": 0.0002552,
+      "open_usd": 0.00032394,
+      "price_usd": 0.00030255,
+      "source": "coinex",
+      "volume_usd": 96056.39429048811
+    },
+    "2025-02-24": {
+      "high_usd": 0.00030359,
+      "low_usd": 0.00020649,
+      "open_usd": 0.00030258,
+      "price_usd": 0.00025922,
+      "source": "coinex",
+      "volume_usd": 113845.33463177572
+    },
+    "2025-02-25": {
+      "high_usd": 0.0003,
+      "low_usd": 0.0001901,
+      "open_usd": 0.00026027,
+      "price_usd": 0.00028321,
+      "source": "coinex",
+      "volume_usd": 150403.88847462978
+    },
+    "2025-02-26": {
+      "high_usd": 0.0003585,
+      "low_usd": 0.0002513,
+      "open_usd": 0.00028309,
+      "price_usd": 0.00028577,
+      "source": "coinex",
+      "volume_usd": 175744.5575653249
+    },
+    "2025-02-27": {
+      "high_usd": 0.0003299,
+      "low_usd": 0.000265,
+      "open_usd": 0.00028551,
+      "price_usd": 0.00027999,
+      "source": "coinex",
+      "volume_usd": 61611.78118211111
+    },
+    "2025-02-28": {
+      "high_usd": 0.00030598,
+      "low_usd": 0.00025479,
+      "open_usd": 0.00027982,
+      "price_usd": 0.00029746,
+      "source": "coinex",
+      "volume_usd": 82688.55584355668
+    },
+    "2025-03-01": {
+      "high_usd": 0.00030554,
+      "low_usd": 0.00026104,
+      "open_usd": 0.00029896,
+      "price_usd": 0.0002911,
+      "source": "coinex",
+      "volume_usd": 62568.44840313525
+    },
+    "2025-03-02": {
+      "high_usd": 0.0003,
+      "low_usd": 0.0002601,
+      "open_usd": 0.0002911,
+      "price_usd": 0.00027628,
+      "source": "coinex",
+      "volume_usd": 85976.87753632141
+    },
+    "2025-03-03": {
+      "high_usd": 0.00028828,
+      "low_usd": 0.00025,
+      "open_usd": 0.00027611,
+      "price_usd": 0.00026478,
+      "source": "coinex",
+      "volume_usd": 78712.47562091076
+    },
+    "2025-03-04": {
+      "high_usd": 0.0002841,
+      "low_usd": 0.00024672,
+      "open_usd": 0.00026478,
+      "price_usd": 0.00027407,
+      "source": "coinex",
+      "volume_usd": 44281.49869926462
+    },
+    "2025-03-05": {
+      "high_usd": 0.00027871,
+      "low_usd": 0.00025,
+      "open_usd": 0.00027382,
+      "price_usd": 0.00026485,
+      "source": "coinex",
+      "volume_usd": 23358.48671236782
+    },
+    "2025-03-06": {
+      "high_usd": 0.00027999,
+      "low_usd": 0.00025,
+      "open_usd": 0.00026503,
+      "price_usd": 0.00025476,
+      "source": "coinex",
+      "volume_usd": 26148.938245275804
+    },
+    "2025-03-07": {
+      "high_usd": 0.00025906,
+      "low_usd": 0.00022774,
+      "open_usd": 0.00025476,
+      "price_usd": 0.00024341,
+      "source": "coinex",
+      "volume_usd": 56665.546875762615
+    },
+    "2025-03-08": {
+      "high_usd": 0.00027509,
+      "low_usd": 0.0002434,
+      "open_usd": 0.00024341,
+      "price_usd": 0.00026452,
+      "source": "coinex",
+      "volume_usd": 37962.20680657523
+    },
+    "2025-03-09": {
+      "high_usd": 0.00027415,
+      "low_usd": 0.000234,
+      "open_usd": 0.0002647,
+      "price_usd": 0.00023801,
+      "source": "coinex",
+      "volume_usd": 42663.4984945604
+    },
+    "2025-03-10": {
+      "high_usd": 0.00025302,
+      "low_usd": 0.0002,
+      "open_usd": 0.00023793,
+      "price_usd": 0.00022331,
+      "source": "coinex",
+      "volume_usd": 46391.18941863623
+    },
+    "2025-03-11": {
+      "high_usd": 0.00023102,
+      "low_usd": 0.00019062,
+      "open_usd": 0.00022342,
+      "price_usd": 0.00022403,
+      "source": "coinex",
+      "volume_usd": 47924.943270454016
+    },
+    "2025-03-12": {
+      "high_usd": 0.00022913,
+      "low_usd": 0.0001901,
+      "open_usd": 0.00022409,
+      "price_usd": 0.0002007,
+      "source": "coinex",
+      "volume_usd": 43599.08005974263
+    },
+    "2025-03-13": {
+      "high_usd": 0.00023,
+      "low_usd": 0.00019119,
+      "open_usd": 0.00020055,
+      "price_usd": 0.00021416,
+      "source": "coinex",
+      "volume_usd": 62822.086715881596
+    },
+    "2025-03-14": {
+      "high_usd": 0.00023415,
+      "low_usd": 0.00021039,
+      "open_usd": 0.00021407,
+      "price_usd": 0.00022459,
+      "source": "coinex",
+      "volume_usd": 38144.38254519258
+    },
+    "2025-03-15": {
+      "high_usd": 0.00028829,
+      "low_usd": 0.00022072,
+      "open_usd": 0.00022459,
+      "price_usd": 0.00028495,
+      "source": "coinex",
+      "volume_usd": 86198.07341823334
+    },
+    "2025-03-16": {
+      "high_usd": 0.00034092,
+      "low_usd": 0.00025156,
+      "open_usd": 0.00028469,
+      "price_usd": 0.00027549,
+      "source": "coinex",
+      "volume_usd": 70865.58595045345
+    },
+    "2025-03-17": {
+      "high_usd": 0.00031253,
+      "low_usd": 0.00026631,
+      "open_usd": 0.00027549,
+      "price_usd": 0.00030773,
+      "source": "coinex",
+      "volume_usd": 47725.252771609135
+    },
+    "2025-03-18": {
+      "high_usd": 0.0003641,
+      "low_usd": 0.0002978,
+      "open_usd": 0.00030772,
+      "price_usd": 0.00035965,
+      "source": "coinex",
+      "volume_usd": 84699.10045041457
+    },
+    "2025-03-19": {
+      "high_usd": 0.00041075,
+      "low_usd": 0.00032,
+      "open_usd": 0.00035993,
+      "price_usd": 0.00036986,
+      "source": "coinex",
+      "volume_usd": 93831.55906790502
+    },
+    "2025-03-20": {
+      "high_usd": 0.00038324,
+      "low_usd": 0.00031917,
+      "open_usd": 0.00036986,
+      "price_usd": 0.00035174,
+      "source": "coinex",
+      "volume_usd": 54689.53680917515
+    },
+    "2025-03-21": {
+      "high_usd": 0.00035215,
+      "low_usd": 0.00031201,
+      "open_usd": 0.00035198,
+      "price_usd": 0.00033161,
+      "source": "coinex",
+      "volume_usd": 33814.1884908543
+    },
+    "2025-03-22": {
+      "high_usd": 0.00034959,
+      "low_usd": 0.00031613,
+      "open_usd": 0.00033157,
+      "price_usd": 0.00031993,
+      "source": "coinex",
+      "volume_usd": 27678.69316090449
+    },
+    "2025-03-23": {
+      "high_usd": 0.00032363,
+      "low_usd": 0.0003123,
+      "open_usd": 0.00031993,
+      "price_usd": 0.00031655,
+      "source": "coinex",
+      "volume_usd": 17307.07847512644
+    },
+    "2025-03-24": {
+      "high_usd": 0.00037011,
+      "low_usd": 0.000315,
+      "open_usd": 0.00031658,
+      "price_usd": 0.00034099,
+      "source": "coinex",
+      "volume_usd": 40522.027071678574
+    },
+    "2025-03-25": {
+      "high_usd": 0.00034227,
+      "low_usd": 0.00032302,
+      "open_usd": 0.00034112,
+      "price_usd": 0.00033491,
+      "source": "coinex",
+      "volume_usd": 24025.980813670456
+    },
+    "2025-03-26": {
+      "high_usd": 0.00033811,
+      "low_usd": 0.00029,
+      "open_usd": 0.0003346,
+      "price_usd": 0.0003001,
+      "source": "coinex",
+      "volume_usd": 38340.676243138936
+    },
+    "2025-03-27": {
+      "high_usd": 0.00031778,
+      "low_usd": 0.00025,
+      "open_usd": 0.00030016,
+      "price_usd": 0.00029785,
+      "source": "coinex",
+      "volume_usd": 47950.030958360265
+    },
+    "2025-03-28": {
+      "high_usd": 0.00030177,
+      "low_usd": 0.00023114,
+      "open_usd": 0.00029805,
+      "price_usd": 0.00024476,
+      "source": "coinex",
+      "volume_usd": 75326.3436419661
+    },
+    "2025-03-29": {
+      "high_usd": 0.00026942,
+      "low_usd": 0.00023211,
+      "open_usd": 0.0002449,
+      "price_usd": 0.00024596,
+      "source": "coinex",
+      "volume_usd": 37852.40226420408
+    },
+    "2025-03-30": {
+      "high_usd": 0.0002557,
+      "low_usd": 0.00022466,
+      "open_usd": 0.000246,
+      "price_usd": 0.00022467,
+      "source": "coinex",
+      "volume_usd": 16206.688893551402
+    },
+    "2025-03-31": {
+      "high_usd": 0.00024492,
+      "low_usd": 0.000216,
+      "open_usd": 0.00022467,
+      "price_usd": 0.00023642,
+      "source": "coinex",
+      "volume_usd": 27665.328106801993
+    },
+    "2025-04-01": {
+      "high_usd": 0.000245,
+      "low_usd": 0.0002251,
+      "open_usd": 0.00023632,
+      "price_usd": 0.00022526,
+      "source": "coinex",
+      "volume_usd": 19629.588411303805
+    },
+    "2025-04-02": {
+      "high_usd": 0.000255,
+      "low_usd": 0.0002,
+      "open_usd": 0.00022511,
+      "price_usd": 0.00022759,
+      "source": "coinex",
+      "volume_usd": 36254.89552438296
+    },
+    "2025-04-03": {
+      "high_usd": 0.00024,
+      "low_usd": 0.00020968,
+      "open_usd": 0.00022759,
+      "price_usd": 0.00021587,
+      "source": "coinex",
+      "volume_usd": 19885.09109169909
+    },
+    "2025-04-04": {
+      "high_usd": 0.0002322,
+      "low_usd": 0.00020968,
+      "open_usd": 0.00021589,
+      "price_usd": 0.00022553,
+      "source": "coinex",
+      "volume_usd": 17182.009763065755
+    },
+    "2025-04-05": {
+      "high_usd": 0.00022791,
+      "low_usd": 0.00021585,
+      "open_usd": 0.00022532,
+      "price_usd": 0.00021995,
+      "source": "coinex",
+      "volume_usd": 11870.946211009521
+    },
+    "2025-04-06": {
+      "high_usd": 0.00022956,
+      "low_usd": 0.00019233,
+      "open_usd": 0.00021975,
+      "price_usd": 0.00019643,
+      "source": "coinex",
+      "volume_usd": 28399.929697235064
+    },
+    "2025-04-07": {
+      "high_usd": 0.00020833,
+      "low_usd": 0.0001666,
+      "open_usd": 0.00019643,
+      "price_usd": 0.00020689,
+      "source": "coinex",
+      "volume_usd": 44319.669577693654
+    },
+    "2025-04-08": {
+      "high_usd": 0.00022179,
+      "low_usd": 0.00016,
+      "open_usd": 0.00020689,
+      "price_usd": 0.00016193,
+      "source": "coinex",
+      "volume_usd": 36253.73211413968
+    },
+    "2025-04-09": {
+      "high_usd": 0.0001999,
+      "low_usd": 0.00015002,
+      "open_usd": 0.00016189,
+      "price_usd": 0.00019344,
+      "source": "coinex",
+      "volume_usd": 55672.70738448803
+    },
+    "2025-04-10": {
+      "high_usd": 0.0002,
+      "low_usd": 0.0001678,
+      "open_usd": 0.00019357,
+      "price_usd": 0.00018792,
+      "source": "coinex",
+      "volume_usd": 31141.047879909973
+    },
+    "2025-04-11": {
+      "high_usd": 0.000229,
+      "low_usd": 0.00018235,
+      "open_usd": 0.00018799,
+      "price_usd": 0.00021809,
+      "source": "coinex",
+      "volume_usd": 29526.772792478183
+    },
+    "2025-04-12": {
+      "high_usd": 0.00024918,
+      "low_usd": 0.00020562,
+      "open_usd": 0.00021803,
+      "price_usd": 0.00024255,
+      "source": "coinex",
+      "volume_usd": 30547.17604472353
+    },
+    "2025-04-13": {
+      "high_usd": 0.00024699,
+      "low_usd": 0.0002299,
+      "open_usd": 0.00024259,
+      "price_usd": 0.00023897,
+      "source": "coinex",
+      "volume_usd": 15772.09950119372
+    },
+    "2025-04-14": {
+      "high_usd": 0.00024273,
+      "low_usd": 0.00023205,
+      "open_usd": 0.00023899,
+      "price_usd": 0.00023682,
+      "source": "coinex",
+      "volume_usd": 20148.08468473451
+    },
+    "2025-04-15": {
+      "high_usd": 0.00025613,
+      "low_usd": 0.00019,
+      "open_usd": 0.000237,
+      "price_usd": 0.00021805,
+      "source": "coinex",
+      "volume_usd": 48361.25910199914
+    },
+    "2025-04-16": {
+      "high_usd": 0.00021826,
+      "low_usd": 0.00019,
+      "open_usd": 0.00021796,
+      "price_usd": 0.00020103,
+      "source": "coinex",
+      "volume_usd": 20797.973660692285
+    },
+    "2025-04-17": {
+      "high_usd": 0.00021,
+      "low_usd": 0.0001838,
+      "open_usd": 0.00020103,
+      "price_usd": 0.00020536,
+      "source": "coinex",
+      "volume_usd": 18591.643614017958
+    },
+    "2025-04-18": {
+      "high_usd": 0.00022,
+      "low_usd": 0.00017,
+      "open_usd": 0.00020536,
+      "price_usd": 0.00019587,
+      "source": "coinex",
+      "volume_usd": 42465.775175807
+    },
+    "2025-04-19": {
+      "high_usd": 0.00020367,
+      "low_usd": 0.0001908,
+      "open_usd": 0.00019585,
+      "price_usd": 0.00019774,
+      "source": "coinex",
+      "volume_usd": 14104.698309591271
+    },
+    "2025-04-20": {
+      "high_usd": 0.00019799,
+      "low_usd": 0.00017275,
+      "open_usd": 0.00019763,
+      "price_usd": 0.00018085,
+      "source": "coinex",
+      "volume_usd": 21077.53165194918
+    },
+    "2025-04-21": {
+      "high_usd": 0.00019453,
+      "low_usd": 0.00018077,
+      "open_usd": 0.00018087,
+      "price_usd": 0.00018938,
+      "source": "coinex",
+      "volume_usd": 21404.38599997922
+    },
+    "2025-04-22": {
+      "high_usd": 0.00022421,
+      "low_usd": 0.000175,
+      "open_usd": 0.00018938,
+      "price_usd": 0.00021196,
+      "source": "coinex",
+      "volume_usd": 40842.89440203852
+    },
+    "2025-04-23": {
+      "high_usd": 0.00021382,
+      "low_usd": 0.00019676,
+      "open_usd": 0.00021185,
+      "price_usd": 0.00020988,
+      "source": "coinex",
+      "volume_usd": 21889.631526869092
+    },
+    "2025-04-24": {
+      "high_usd": 0.00023653,
+      "low_usd": 0.00020169,
+      "open_usd": 0.00021002,
+      "price_usd": 0.00023267,
+      "source": "coinex",
+      "volume_usd": 30560.585379953827
+    },
+    "2025-04-25": {
+      "high_usd": 0.0002869,
+      "low_usd": 0.00022187,
+      "open_usd": 0.00023283,
+      "price_usd": 0.00028,
+      "source": "coinex",
+      "volume_usd": 58857.28749736824
+    },
+    "2025-04-26": {
+      "high_usd": 0.00030028,
+      "low_usd": 0.00024891,
+      "open_usd": 0.00028,
+      "price_usd": 0.000274,
+      "source": "coinex",
+      "volume_usd": 38632.81560973305
+    },
+    "2025-04-27": {
+      "high_usd": 0.00027857,
+      "low_usd": 0.0002158,
+      "open_usd": 0.00027389,
+      "price_usd": 0.0002303,
+      "source": "coinex",
+      "volume_usd": 29632.091245485786
+    },
+    "2025-04-28": {
+      "high_usd": 0.00024839,
+      "low_usd": 0.00021093,
+      "open_usd": 0.00023048,
+      "price_usd": 0.00021932,
+      "source": "coinex",
+      "volume_usd": 35289.6679878567
+    },
+    "2025-04-29": {
+      "high_usd": 0.000244,
+      "low_usd": 0.00020409,
+      "open_usd": 0.00021921,
+      "price_usd": 0.00021018,
+      "source": "coinex",
+      "volume_usd": 30610.100408025268
+    },
+    "2025-04-30": {
+      "high_usd": 0.00022223,
+      "low_usd": 0.00020586,
+      "open_usd": 0.00021013,
+      "price_usd": 0.00021456,
+      "source": "coinex",
+      "volume_usd": 18238.45076180856
+    },
+    "2025-05-01": {
+      "high_usd": 0.000235,
+      "low_usd": 0.00020603,
+      "open_usd": 0.00021466,
+      "price_usd": 0.00021989,
+      "source": "coinex",
+      "volume_usd": 22183.019055733228
+    },
+    "2025-05-02": {
+      "high_usd": 0.00022879,
+      "low_usd": 0.00020914,
+      "open_usd": 0.00021969,
+      "price_usd": 0.00021136,
+      "source": "coinex",
+      "volume_usd": 28392.73002981024
+    },
+    "2025-05-03": {
+      "high_usd": 0.000225,
+      "low_usd": 0.00019909,
+      "open_usd": 0.00021012,
+      "price_usd": 0.00020192,
+      "source": "coinex",
+      "volume_usd": 37406.0255575963
+    },
+    "2025-05-04": {
+      "high_usd": 0.00020728,
+      "low_usd": 0.00019319,
+      "open_usd": 0.00020183,
+      "price_usd": 0.0002025,
+      "source": "coinex",
+      "volume_usd": 16428.617843931497
+    },
+    "2025-05-05": {
+      "high_usd": 0.00020495,
+      "low_usd": 0.00019,
+      "open_usd": 0.0002025,
+      "price_usd": 0.00019358,
+      "source": "coinex",
+      "volume_usd": 20217.371281694737
+    },
+    "2025-05-06": {
+      "high_usd": 0.00019993,
+      "low_usd": 0.00018128,
+      "open_usd": 0.00019373,
+      "price_usd": 0.00018845,
+      "source": "coinex",
+      "volume_usd": 20269.012102390363
+    },
+    "2025-05-07": {
+      "high_usd": 0.00020321,
+      "low_usd": 0.00018372,
+      "open_usd": 0.00018846,
+      "price_usd": 0.00018883,
+      "source": "coinex",
+      "volume_usd": 16954.819523582562
+    },
+    "2025-05-08": {
+      "high_usd": 0.0002289,
+      "low_usd": 0.0001804,
+      "open_usd": 0.00018869,
+      "price_usd": 0.00021226,
+      "source": "coinex",
+      "volume_usd": 43256.24908218666
+    },
+    "2025-05-09": {
+      "high_usd": 0.00022311,
+      "low_usd": 0.00019603,
+      "open_usd": 0.00021219,
+      "price_usd": 0.00022168,
+      "source": "coinex",
+      "volume_usd": 29063.872349781148
+    },
+    "2025-05-10": {
+      "high_usd": 0.00022182,
+      "low_usd": 0.00020784,
+      "open_usd": 0.00022156,
+      "price_usd": 0.00021877,
+      "source": "coinex",
+      "volume_usd": 18291.891915019878
+    },
+    "2025-05-11": {
+      "high_usd": 0.00022,
+      "low_usd": 0.00018,
+      "open_usd": 0.00021879,
+      "price_usd": 0.00018985,
+      "source": "coinex",
+      "volume_usd": 44276.840078414745
+    },
+    "2025-05-12": {
+      "high_usd": 0.00020124,
+      "low_usd": 0.000184,
+      "open_usd": 0.00018983,
+      "price_usd": 0.00019474,
+      "source": "coinex",
+      "volume_usd": 48907.635412090094
+    },
+    "2025-05-13": {
+      "high_usd": 0.00020588,
+      "low_usd": 0.00018699,
+      "open_usd": 0.00019474,
+      "price_usd": 0.00019417,
+      "source": "coinex",
+      "volume_usd": 26680.91315520808
+    },
+    "2025-05-14": {
+      "high_usd": 0.00021999,
+      "low_usd": 0.00019194,
+      "open_usd": 0.00019424,
+      "price_usd": 0.00020172,
+      "source": "coinex",
+      "volume_usd": 38120.000403217455
+    },
+    "2025-05-15": {
+      "high_usd": 0.000224,
+      "low_usd": 0.00020028,
+      "open_usd": 0.0002019,
+      "price_usd": 0.00021191,
+      "source": "coinex",
+      "volume_usd": 31946.482292583332
+    },
+    "2025-05-16": {
+      "high_usd": 0.00022654,
+      "low_usd": 0.000206,
+      "open_usd": 0.00021209,
+      "price_usd": 0.00021085,
+      "source": "coinex",
+      "volume_usd": 18864.551034089924
+    },
+    "2025-05-17": {
+      "high_usd": 0.00021312,
+      "low_usd": 0.00020347,
+      "open_usd": 0.00021089,
+      "price_usd": 0.00020862,
+      "source": "coinex",
+      "volume_usd": 12700.104427708717
+    },
+    "2025-05-18": {
+      "high_usd": 0.00021203,
+      "low_usd": 0.00020086,
+      "open_usd": 0.00020849,
+      "price_usd": 0.00020208,
+      "source": "coinex",
+      "volume_usd": 21661.74014152154
+    },
+    "2025-05-19": {
+      "high_usd": 0.00020398,
+      "low_usd": 0.00019455,
+      "open_usd": 0.00020296,
+      "price_usd": 0.00020025,
+      "source": "coinex",
+      "volume_usd": 15815.6742136814
+    },
+    "2025-05-20": {
+      "high_usd": 0.00020409,
+      "low_usd": 0.000184,
+      "open_usd": 0.00020029,
+      "price_usd": 0.00020031,
+      "source": "coinex",
+      "volume_usd": 21847.203083801916
+    },
+    "2025-05-21": {
+      "high_usd": 0.0002045,
+      "low_usd": 0.00018929,
+      "open_usd": 0.00020037,
+      "price_usd": 0.00019694,
+      "source": "coinex",
+      "volume_usd": 17721.410837783304
+    },
+    "2025-05-22": {
+      "high_usd": 0.0002025,
+      "low_usd": 0.00018759,
+      "open_usd": 0.00019693,
+      "price_usd": 0.00019588,
+      "source": "coinex",
+      "volume_usd": 22951.91315926157
+    },
+    "2025-05-23": {
+      "high_usd": 0.00020215,
+      "low_usd": 0.00018996,
+      "open_usd": 0.00019576,
+      "price_usd": 0.00019101,
+      "source": "coinex",
+      "volume_usd": 21870.47219588509
+    },
+    "2025-05-24": {
+      "high_usd": 0.00019509,
+      "low_usd": 0.00019,
+      "open_usd": 0.00019101,
+      "price_usd": 0.0001904,
+      "source": "coinex",
+      "volume_usd": 8798.820577581298
+    },
+    "2025-05-25": {
+      "high_usd": 0.00019995,
+      "low_usd": 0.00018574,
+      "open_usd": 0.00019049,
+      "price_usd": 0.00019046,
+      "source": "coinex",
+      "volume_usd": 12448.994279033159
+    },
+    "2025-05-26": {
+      "high_usd": 0.00019638,
+      "low_usd": 0.000184,
+      "open_usd": 0.00019053,
+      "price_usd": 0.00018654,
+      "source": "coinex",
+      "volume_usd": 13858.042680010929
+    },
+    "2025-05-27": {
+      "high_usd": 0.00021153,
+      "low_usd": 0.00018274,
+      "open_usd": 0.00018657,
+      "price_usd": 0.0002082,
+      "source": "coinex",
+      "volume_usd": 21434.046223926598
+    },
+    "2025-05-28": {
+      "high_usd": 0.00029,
+      "low_usd": 0.00020609,
+      "open_usd": 0.0002082,
+      "price_usd": 0.00023877,
+      "source": "coinex",
+      "volume_usd": 123705.07386488772
+    },
+    "2025-05-29": {
+      "high_usd": 0.00025037,
+      "low_usd": 0.00021201,
+      "open_usd": 0.00023877,
+      "price_usd": 0.00023896,
+      "source": "coinex",
+      "volume_usd": 24134.98597184377
+    },
+    "2025-05-30": {
+      "high_usd": 0.00024151,
+      "low_usd": 0.00021646,
+      "open_usd": 0.00023896,
+      "price_usd": 0.00022399,
+      "source": "coinex",
+      "volume_usd": 14682.040459254036
+    },
+    "2025-05-31": {
+      "high_usd": 0.0002548,
+      "low_usd": 0.00022155,
+      "open_usd": 0.00022399,
+      "price_usd": 0.00025009,
+      "source": "coinex",
+      "volume_usd": 20344.29037083747
+    },
+    "2025-06-01": {
+      "high_usd": 0.00027,
+      "low_usd": 0.00024001,
+      "open_usd": 0.00025009,
+      "price_usd": 0.00026079,
+      "source": "coinex",
+      "volume_usd": 22350.002464740188
+    },
+    "2025-06-02": {
+      "high_usd": 0.00028391,
+      "low_usd": 0.00025209,
+      "open_usd": 0.00026063,
+      "price_usd": 0.00027785,
+      "source": "coinex",
+      "volume_usd": 30116.133066291895
+    },
+    "2025-06-03": {
+      "high_usd": 0.00028182,
+      "low_usd": 0.00023,
+      "open_usd": 0.00027785,
+      "price_usd": 0.00024959,
+      "source": "coinex",
+      "volume_usd": 73213.32152570398
+    },
+    "2025-06-04": {
+      "high_usd": 0.00028759,
+      "low_usd": 0.00024966,
+      "open_usd": 0.00024966,
+      "price_usd": 0.00026646,
+      "source": "coinex",
+      "volume_usd": 27045.60712353136
+    },
+    "2025-06-05": {
+      "high_usd": 0.00027392,
+      "low_usd": 0.0002406,
+      "open_usd": 0.00026635,
+      "price_usd": 0.00025494,
+      "source": "coinex",
+      "volume_usd": 27495.379606611437
+    },
+    "2025-06-06": {
+      "high_usd": 0.0002552,
+      "low_usd": 0.00022001,
+      "open_usd": 0.00025511,
+      "price_usd": 0.00023428,
+      "source": "coinex",
+      "volume_usd": 27751.874528651868
+    },
+    "2025-06-07": {
+      "high_usd": 0.00025109,
+      "low_usd": 0.0002308,
+      "open_usd": 0.0002343,
+      "price_usd": 0.00023714,
+      "source": "coinex",
+      "volume_usd": 18422.032491029375
+    },
+    "2025-06-08": {
+      "high_usd": 0.00024146,
+      "low_usd": 0.0002244,
+      "open_usd": 0.00023879,
+      "price_usd": 0.00022889,
+      "source": "coinex",
+      "volume_usd": 12885.918011445588
+    },
+    "2025-06-09": {
+      "high_usd": 0.00023466,
+      "low_usd": 0.0002103,
+      "open_usd": 0.00022893,
+      "price_usd": 0.00021738,
+      "source": "coinex",
+      "volume_usd": 22100.940091191882
+    },
+    "2025-06-10": {
+      "high_usd": 0.0002675,
+      "low_usd": 0.000215,
+      "open_usd": 0.00021737,
+      "price_usd": 0.0002278,
+      "source": "coinex",
+      "volume_usd": 27745.84314280417
+    },
+    "2025-06-11": {
+      "high_usd": 0.00023999,
+      "low_usd": 0.00022606,
+      "open_usd": 0.00022939,
+      "price_usd": 0.00022997,
+      "source": "coinex",
+      "volume_usd": 10915.593978519155
+    },
+    "2025-06-12": {
+      "high_usd": 0.00023841,
+      "low_usd": 0.00021416,
+      "open_usd": 0.00022983,
+      "price_usd": 0.00023082,
+      "source": "coinex",
+      "volume_usd": 19253.077328640065
+    },
+    "2025-06-13": {
+      "high_usd": 0.00023644,
+      "low_usd": 0.0002003,
+      "open_usd": 0.00023075,
+      "price_usd": 0.00022645,
+      "source": "coinex",
+      "volume_usd": 25738.732156692382
+    },
+    "2025-06-14": {
+      "high_usd": 0.000235,
+      "low_usd": 0.00020354,
+      "open_usd": 0.00022645,
+      "price_usd": 0.00023239,
+      "source": "coinex",
+      "volume_usd": 19224.153898773173
+    },
+    "2025-06-15": {
+      "high_usd": 0.00024758,
+      "low_usd": 0.000215,
+      "open_usd": 0.00023239,
+      "price_usd": 0.0002187,
+      "source": "coinex",
+      "volume_usd": 16170.34498197047
+    },
+    "2025-06-16": {
+      "high_usd": 0.00022555,
+      "low_usd": 0.00020353,
+      "open_usd": 0.0002187,
+      "price_usd": 0.00021348,
+      "source": "coinex",
+      "volume_usd": 19313.985414983857
+    },
+    "2025-06-17": {
+      "high_usd": 0.00021991,
+      "low_usd": 0.0002,
+      "open_usd": 0.00021341,
+      "price_usd": 0.00020085,
+      "source": "coinex",
+      "volume_usd": 23867.214008439267
+    },
+    "2025-06-18": {
+      "high_usd": 0.00021553,
+      "low_usd": 0.00019742,
+      "open_usd": 0.00020085,
+      "price_usd": 0.00019976,
+      "source": "coinex",
+      "volume_usd": 9077.5941762228
+    },
+    "2025-06-19": {
+      "high_usd": 0.00020524,
+      "low_usd": 0.000195,
+      "open_usd": 0.00019977,
+      "price_usd": 0.00020521,
+      "source": "coinex",
+      "volume_usd": 9325.612507207543
+    },
+    "2025-06-20": {
+      "high_usd": 0.00021006,
+      "low_usd": 0.0001791,
+      "open_usd": 0.00020537,
+      "price_usd": 0.00018686,
+      "source": "coinex",
+      "volume_usd": 30943.006336616025
+    },
+    "2025-06-21": {
+      "high_usd": 0.00019893,
+      "low_usd": 0.00018001,
+      "open_usd": 0.00018697,
+      "price_usd": 0.00019586,
+      "source": "coinex",
+      "volume_usd": 13722.26180547472
+    },
+    "2025-06-22": {
+      "high_usd": 0.00019593,
+      "low_usd": 0.00016,
+      "open_usd": 0.00019586,
+      "price_usd": 0.00017707,
+      "source": "coinex",
+      "volume_usd": 35191.06425486664
+    },
+    "2025-06-23": {
+      "high_usd": 0.0002,
+      "low_usd": 0.00016229,
+      "open_usd": 0.0001771,
+      "price_usd": 0.00019289,
+      "source": "coinex",
+      "volume_usd": 23342.004666434368
+    },
+    "2025-06-24": {
+      "high_usd": 0.0001962,
+      "low_usd": 0.00016802,
+      "open_usd": 0.00019283,
+      "price_usd": 0.00017385,
+      "source": "coinex",
+      "volume_usd": 26824.28541760758
+    },
+    "2025-06-25": {
+      "high_usd": 0.000185,
+      "low_usd": 0.0001711,
+      "open_usd": 0.0001739,
+      "price_usd": 0.00017876,
+      "source": "coinex",
+      "volume_usd": 19091.628508716585
+    },
+    "2025-06-26": {
+      "high_usd": 0.00018427,
+      "low_usd": 0.00017212,
+      "open_usd": 0.0001787,
+      "price_usd": 0.0001826,
+      "source": "coinex",
+      "volume_usd": 10429.120897408207
+    },
+    "2025-06-27": {
+      "high_usd": 0.00019088,
+      "low_usd": 0.0001712,
+      "open_usd": 0.00018243,
+      "price_usd": 0.00018956,
+      "source": "coinex",
+      "volume_usd": 15112.633511062733
+    },
+    "2025-06-28": {
+      "high_usd": 0.00023019,
+      "low_usd": 0.00018963,
+      "open_usd": 0.00018963,
+      "price_usd": 0.00022166,
+      "source": "coinex",
+      "volume_usd": 37019.58477997346
+    },
+    "2025-06-29": {
+      "high_usd": 0.00024309,
+      "low_usd": 0.00022,
+      "open_usd": 0.00022166,
+      "price_usd": 0.00022631,
+      "source": "coinex",
+      "volume_usd": 19188.541991500813
+    },
+    "2025-06-30": {
+      "high_usd": 0.00024889,
+      "low_usd": 0.00022463,
+      "open_usd": 0.00022635,
+      "price_usd": 0.00023763,
+      "source": "coinex",
+      "volume_usd": 20808.0302805358
+    },
+    "2025-07-01": {
+      "high_usd": 0.00024609,
+      "low_usd": 0.0002052,
+      "open_usd": 0.00023763,
+      "price_usd": 0.00020665,
+      "source": "coinex",
+      "volume_usd": 18163.38008564888
+    },
+    "2025-07-02": {
+      "high_usd": 0.0002191,
+      "low_usd": 0.00020202,
+      "open_usd": 0.00020679,
+      "price_usd": 0.00020202,
+      "source": "coinex",
+      "volume_usd": 13925.337163420141
+    },
+    "2025-07-03": {
+      "high_usd": 0.00022801,
+      "low_usd": 0.00019601,
+      "open_usd": 0.00020218,
+      "price_usd": 0.00021715,
+      "source": "coinex",
+      "volume_usd": 19089.76146712258
+    },
+    "2025-07-04": {
+      "high_usd": 0.00022121,
+      "low_usd": 0.00020277,
+      "open_usd": 0.00021712,
+      "price_usd": 0.00020983,
+      "source": "coinex",
+      "volume_usd": 17377.462713765046
+    },
+    "2025-07-05": {
+      "high_usd": 0.00021302,
+      "low_usd": 0.00020173,
+      "open_usd": 0.00021001,
+      "price_usd": 0.0002069,
+      "source": "coinex",
+      "volume_usd": 11924.432037031615
+    },
+    "2025-07-06": {
+      "high_usd": 0.00021049,
+      "low_usd": 0.000201,
+      "open_usd": 0.00020682,
+      "price_usd": 0.00020644,
+      "source": "coinex",
+      "volume_usd": 7500.024348458475
+    },
+    "2025-07-07": {
+      "high_usd": 0.00022197,
+      "low_usd": 0.00019482,
+      "open_usd": 0.00020654,
+      "price_usd": 0.00019612,
+      "source": "coinex",
+      "volume_usd": 11938.950679751944
+    },
+    "2025-07-08": {
+      "high_usd": 0.00021831,
+      "low_usd": 0.00019324,
+      "open_usd": 0.00019612,
+      "price_usd": 0.00020001,
+      "source": "coinex",
+      "volume_usd": 13400.639549177811
+    },
+    "2025-07-09": {
+      "high_usd": 0.00020645,
+      "low_usd": 0.00019601,
+      "open_usd": 0.00020019,
+      "price_usd": 0.00020215,
+      "source": "coinex",
+      "volume_usd": 8763.85606249374
+    },
+    "2025-07-10": {
+      "high_usd": 0.00023,
+      "low_usd": 0.00020186,
+      "open_usd": 0.00020215,
+      "price_usd": 0.0002218,
+      "source": "coinex",
+      "volume_usd": 23121.625507080487
+    },
+    "2025-07-11": {
+      "high_usd": 0.00025273,
+      "low_usd": 0.00021223,
+      "open_usd": 0.0002218,
+      "price_usd": 0.00023101,
+      "source": "coinex",
+      "volume_usd": 38269.817275887755
+    },
+    "2025-07-12": {
+      "high_usd": 0.00024039,
+      "low_usd": 0.00022456,
+      "open_usd": 0.00023121,
+      "price_usd": 0.00023769,
+      "source": "coinex",
+      "volume_usd": 14434.474733573852
+    },
+    "2025-07-13": {
+      "high_usd": 0.00024558,
+      "low_usd": 0.00022714,
+      "open_usd": 0.00023768,
+      "price_usd": 0.0002411,
+      "source": "coinex",
+      "volume_usd": 20445.127346814974
+    },
+    "2025-07-14": {
+      "high_usd": 0.00029998,
+      "low_usd": 0.00024073,
+      "open_usd": 0.00024112,
+      "price_usd": 0.00027362,
+      "source": "coinex",
+      "volume_usd": 42941.04541099285
+    },
+    "2025-07-15": {
+      "high_usd": 0.00027382,
+      "low_usd": 0.00023879,
+      "open_usd": 0.00027364,
+      "price_usd": 0.00026529,
+      "source": "coinex",
+      "volume_usd": 28278.88655724628
+    },
+    "2025-07-16": {
+      "high_usd": 0.00028128,
+      "low_usd": 0.00025402,
+      "open_usd": 0.00026529,
+      "price_usd": 0.00025534,
+      "source": "coinex",
+      "volume_usd": 22550.027079633473
+    },
+    "2025-07-17": {
+      "high_usd": 0.00028,
+      "low_usd": 0.00025121,
+      "open_usd": 0.00025549,
+      "price_usd": 0.00027068,
+      "source": "coinex",
+      "volume_usd": 18931.866325485465
+    },
+    "2025-07-18": {
+      "high_usd": 0.0002805,
+      "low_usd": 0.00025593,
+      "open_usd": 0.0002707,
+      "price_usd": 0.00026689,
+      "source": "coinex",
+      "volume_usd": 27280.4888847355
+    },
+    "2025-07-19": {
+      "high_usd": 0.00027923,
+      "low_usd": 0.00025352,
+      "open_usd": 0.00026685,
+      "price_usd": 0.00025808,
+      "source": "coinex",
+      "volume_usd": 27576.429584649228
+    },
+    "2025-07-20": {
+      "high_usd": 0.000263,
+      "low_usd": 0.00024537,
+      "open_usd": 0.00025798,
+      "price_usd": 0.00024982,
+      "source": "coinex",
+      "volume_usd": 20097.471784557605
+    },
+    "2025-07-21": {
+      "high_usd": 0.00027336,
+      "low_usd": 0.00024972,
+      "open_usd": 0.00024989,
+      "price_usd": 0.00025583,
+      "source": "coinex",
+      "volume_usd": 17158.070892028038
+    },
+    "2025-07-22": {
+      "high_usd": 0.00026879,
+      "low_usd": 0.00025177,
+      "open_usd": 0.00025562,
+      "price_usd": 0.0002633,
+      "source": "coinex",
+      "volume_usd": 15858.799656884326
+    },
+    "2025-07-23": {
+      "high_usd": 0.00029887,
+      "low_usd": 0.00026076,
+      "open_usd": 0.0002633,
+      "price_usd": 0.00029122,
+      "source": "coinex",
+      "volume_usd": 34276.38708264678
+    },
+    "2025-07-24": {
+      "high_usd": 0.00048463,
+      "low_usd": 0.00027978,
+      "open_usd": 0.00029123,
+      "price_usd": 0.00044286,
+      "source": "coinex",
+      "volume_usd": 117622.62702862996
+    },
+    "2025-07-25": {
+      "high_usd": 0.00049538,
+      "low_usd": 0.00038002,
+      "open_usd": 0.00044286,
+      "price_usd": 0.00047166,
+      "source": "coinex",
+      "volume_usd": 151589.07662003124
+    },
+    "2025-07-26": {
+      "high_usd": 0.00088065,
+      "low_usd": 0.00046931,
+      "open_usd": 0.00047166,
+      "price_usd": 0.00070878,
+      "source": "coinex",
+      "volume_usd": 412215.61441488104
+    },
+    "2025-07-27": {
+      "high_usd": 0.00075127,
+      "low_usd": 0.00055826,
+      "open_usd": 0.00070879,
+      "price_usd": 0.00059397,
+      "source": "coinex",
+      "volume_usd": 195315.74950595733
+    },
+    "2025-07-28": {
+      "high_usd": 0.000675,
+      "low_usd": 0.00055029,
+      "open_usd": 0.00059379,
+      "price_usd": 0.00060646,
+      "source": "coinex",
+      "volume_usd": 136339.5236552067
+    },
+    "2025-07-29": {
+      "high_usd": 0.00062168,
+      "low_usd": 0.00054701,
+      "open_usd": 0.00060654,
+      "price_usd": 0.00058134,
+      "source": "coinex",
+      "volume_usd": 110221.59525885584
+    },
+    "2025-07-30": {
+      "high_usd": 0.00059989,
+      "low_usd": 0.00038018,
+      "open_usd": 0.00058122,
+      "price_usd": 0.00053978,
+      "source": "coinex",
+      "volume_usd": 221252.17190612623
+    },
+    "2025-07-31": {
+      "high_usd": 0.00069,
+      "low_usd": 0.00053133,
+      "open_usd": 0.0005401,
+      "price_usd": 0.00066158,
+      "source": "coinex",
+      "volume_usd": 175469.66534657576
+    },
+    "2025-08-01": {
+      "high_usd": 0.00067087,
+      "low_usd": 0.00054078,
+      "open_usd": 0.00066111,
+      "price_usd": 0.00060434,
+      "source": "coinex",
+      "volume_usd": 169280.3690419517
+    },
+    "2025-08-02": {
+      "high_usd": 0.00063637,
+      "low_usd": 0.00053456,
+      "open_usd": 0.00060421,
+      "price_usd": 0.00056541,
+      "source": "coinex",
+      "volume_usd": 101471.64569106365
+    },
+    "2025-08-03": {
+      "high_usd": 0.00063245,
+      "low_usd": 0.0005457,
+      "open_usd": 0.00056541,
+      "price_usd": 0.00059153,
+      "source": "coinex",
+      "volume_usd": 79526.38864374462
+    },
+    "2025-08-04": {
+      "high_usd": 0.000615,
+      "low_usd": 0.00053577,
+      "open_usd": 0.00059153,
+      "price_usd": 0.00059871,
+      "source": "coinex",
+      "volume_usd": 80603.98013835408
+    },
+    "2025-08-05": {
+      "high_usd": 0.00064145,
+      "low_usd": 0.00058001,
+      "open_usd": 0.00059859,
+      "price_usd": 0.00063825,
+      "source": "coinex",
+      "volume_usd": 80165.41629082775
+    },
+    "2025-08-06": {
+      "high_usd": 0.00065,
+      "low_usd": 0.00059052,
+      "open_usd": 0.00063825,
+      "price_usd": 0.00060984,
+      "source": "coinex",
+      "volume_usd": 69523.03248243731
+    },
+    "2025-08-07": {
+      "high_usd": 0.00076671,
+      "low_usd": 0.00059001,
+      "open_usd": 0.00060996,
+      "price_usd": 0.00065415,
+      "source": "coinex",
+      "volume_usd": 137827.21318468504
+    },
+    "2025-08-08": {
+      "high_usd": 0.00071995,
+      "low_usd": 0.0006491,
+      "open_usd": 0.00065473,
+      "price_usd": 0.00070999,
+      "source": "coinex",
+      "volume_usd": 55037.37349190316
+    },
+    "2025-08-09": {
+      "high_usd": 0.00071365,
+      "low_usd": 0.000648,
+      "open_usd": 0.00070942,
+      "price_usd": 0.00065648,
+      "source": "coinex",
+      "volume_usd": 73196.16291485864
+    },
+    "2025-08-10": {
+      "high_usd": 0.00077321,
+      "low_usd": 0.00064802,
+      "open_usd": 0.00065588,
+      "price_usd": 0.00070036,
+      "source": "coinex",
+      "volume_usd": 83445.2094714908
+    },
+    "2025-08-11": {
+      "high_usd": 0.00074946,
+      "low_usd": 0.00066048,
+      "open_usd": 0.00070007,
+      "price_usd": 0.00067752,
+      "source": "coinex",
+      "volume_usd": 86387.59666008962
+    },
+    "2025-08-12": {
+      "high_usd": 0.00069353,
+      "low_usd": 0.00062352,
+      "open_usd": 0.00067704,
+      "price_usd": 0.00066245,
+      "source": "coinex",
+      "volume_usd": 85222.35922388009
+    },
+    "2025-08-13": {
+      "high_usd": 0.0006881,
+      "low_usd": 0.000605,
+      "open_usd": 0.00066238,
+      "price_usd": 0.00061501,
+      "source": "coinex",
+      "volume_usd": 68626.75592718068
+    },
+    "2025-08-14": {
+      "high_usd": 0.00062451,
+      "low_usd": 0.00056501,
+      "open_usd": 0.00061501,
+      "price_usd": 0.00061721,
+      "source": "coinex",
+      "volume_usd": 62775.238361010895
+    },
+    "2025-08-15": {
+      "high_usd": 0.00066156,
+      "low_usd": 0.00056759,
+      "open_usd": 0.00061745,
+      "price_usd": 0.00057844,
+      "source": "coinex",
+      "volume_usd": 45282.3591138433
+    },
+    "2025-08-16": {
+      "high_usd": 0.00060968,
+      "low_usd": 0.000551,
+      "open_usd": 0.00057844,
+      "price_usd": 0.00060496,
+      "source": "coinex",
+      "volume_usd": 38703.64509459482
+    },
+    "2025-08-17": {
+      "high_usd": 0.00062298,
+      "low_usd": 0.00056869,
+      "open_usd": 0.00060499,
+      "price_usd": 0.00057683,
+      "source": "coinex",
+      "volume_usd": 36867.22919649551
+    },
+    "2025-08-18": {
+      "high_usd": 0.0005882,
+      "low_usd": 0.00050957,
+      "open_usd": 0.00057656,
+      "price_usd": 0.00052754,
+      "source": "coinex",
+      "volume_usd": 43660.4586441707
+    },
+    "2025-08-19": {
+      "high_usd": 0.00068416,
+      "low_usd": 0.00052369,
+      "open_usd": 0.00052753,
+      "price_usd": 0.00059708,
+      "source": "coinex",
+      "volume_usd": 67086.88013870311
+    },
+    "2025-08-20": {
+      "high_usd": 0.00064,
+      "low_usd": 0.00055303,
+      "open_usd": 0.00059715,
+      "price_usd": 0.00057729,
+      "source": "coinex",
+      "volume_usd": 49407.89222118492
+    },
+    "2025-08-21": {
+      "high_usd": 0.00058636,
+      "low_usd": 0.00055391,
+      "open_usd": 0.00057752,
+      "price_usd": 0.00056346,
+      "source": "coinex",
+      "volume_usd": 36786.78809734756
+    },
+    "2025-08-22": {
+      "high_usd": 0.0005757,
+      "low_usd": 0.00054,
+      "open_usd": 0.00056362,
+      "price_usd": 0.00055101,
+      "source": "coinex",
+      "volume_usd": 31016.041727591815
+    },
+    "2025-08-23": {
+      "high_usd": 0.00056,
+      "low_usd": 0.00052798,
+      "open_usd": 0.00055101,
+      "price_usd": 0.00054466,
+      "source": "coinex",
+      "volume_usd": 29371.495062797367
+    },
+    "2025-08-24": {
+      "high_usd": 0.00054438,
+      "low_usd": 0.00045663,
+      "open_usd": 0.00054438,
+      "price_usd": 0.00052201,
+      "source": "coinex",
+      "volume_usd": 40376.931847769105
+    },
+    "2025-08-25": {
+      "high_usd": 0.00056676,
+      "low_usd": 0.00044588,
+      "open_usd": 0.00052201,
+      "price_usd": 0.00047355,
+      "source": "coinex",
+      "volume_usd": 60529.32394415125
+    },
+    "2025-08-26": {
+      "high_usd": 0.00047457,
+      "low_usd": 0.00041148,
+      "open_usd": 0.00047366,
+      "price_usd": 0.00042137,
+      "source": "coinex",
+      "volume_usd": 48835.38282696499
+    },
+    "2025-08-27": {
+      "high_usd": 0.00043023,
+      "low_usd": 0.00038069,
+      "open_usd": 0.00042294,
+      "price_usd": 0.00038814,
+      "source": "coinex",
+      "volume_usd": 42499.28800550164
+    },
+    "2025-08-28": {
+      "high_usd": 0.00046,
+      "low_usd": 0.000347,
+      "open_usd": 0.00038802,
+      "price_usd": 0.00044458,
+      "source": "coinex",
+      "volume_usd": 53665.50832534257
+    },
+    "2025-08-29": {
+      "high_usd": 0.0005607,
+      "low_usd": 0.00039012,
+      "open_usd": 0.00044449,
+      "price_usd": 0.00049145,
+      "source": "coinex",
+      "volume_usd": 82285.05513473006
+    },
+    "2025-08-30": {
+      "high_usd": 0.0005295,
+      "low_usd": 0.00042124,
+      "open_usd": 0.000491,
+      "price_usd": 0.00043138,
+      "source": "coinex",
+      "volume_usd": 40765.721575594915
+    },
+    "2025-08-31": {
+      "high_usd": 0.00048071,
+      "low_usd": 0.00042032,
+      "market_cap_usd": 43094704.71136863,
+      "open_usd": 0.00043176,
+      "price_usd": 0.00044202,
+      "source": "coinex",
+      "volume_usd": 37661.84862282687
+    },
+    "2025-09-01": {
+      "high_usd": 0.00044858,
+      "low_usd": 0.00035283,
+      "market_cap_usd": 44086635.49621464,
+      "open_usd": 0.00044224,
+      "price_usd": 0.0003694,
+      "source": "coinex",
+      "volume_usd": 43567.27386969498
+    },
+    "2025-09-02": {
+      "high_usd": 0.0004109,
+      "low_usd": 0.00036944,
+      "market_cap_usd": 36701296.29593618,
+      "open_usd": 0.00036944,
+      "price_usd": 0.00037902,
+      "source": "coinex",
+      "volume_usd": 24641.838297845206
+    },
+    "2025-09-03": {
+      "high_usd": 0.00043,
+      "low_usd": 0.00037424,
+      "market_cap_usd": 36987161.065733135,
+      "open_usd": 0.0003791,
+      "price_usd": 0.00037898,
+      "source": "coinex",
+      "volume_usd": 30954.449670791633
+    },
+    "2025-09-04": {
+      "high_usd": 0.00040828,
+      "low_usd": 0.0003743,
+      "market_cap_usd": 38142033.53871827,
+      "open_usd": 0.00037898,
+      "price_usd": 0.00038429,
+      "source": "coinex",
+      "volume_usd": 19689.549555958234
+    },
+    "2025-09-05": {
+      "high_usd": 0.00038468,
+      "low_usd": 0.000351,
+      "market_cap_usd": 37552850.5164306,
+      "open_usd": 0.00038424,
+      "price_usd": 0.00036373,
+      "source": "coinex",
+      "volume_usd": 26522.15067667346
+    },
+    "2025-09-06": {
+      "high_usd": 0.00039911,
+      "low_usd": 0.00035,
+      "market_cap_usd": 35974239.52688436,
+      "open_usd": 0.00036373,
+      "price_usd": 0.00036856,
+      "source": "coinex",
+      "volume_usd": 19382.25164804966
+    },
+    "2025-09-07": {
+      "high_usd": 0.00038503,
+      "low_usd": 0.00036011,
+      "market_cap_usd": 37128658.317664586,
+      "open_usd": 0.00036861,
+      "price_usd": 0.00036096,
+      "source": "coinex",
+      "volume_usd": 12396.57780338799
+    },
+    "2025-09-08": {
+      "high_usd": 0.00038,
+      "low_usd": 0.00035409,
+      "market_cap_usd": 36329834.37397094,
+      "open_usd": 0.00036103,
+      "price_usd": 0.00035807,
+      "source": "coinex",
+      "volume_usd": 14932.242410154939
+    },
+    "2025-09-09": {
+      "high_usd": 0.00039078,
+      "low_usd": 0.00035,
+      "market_cap_usd": 35777436.93520695,
+      "open_usd": 0.0003581,
+      "price_usd": 0.00035328,
+      "source": "coinex",
+      "volume_usd": 35283.1331097295
+    },
+    "2025-09-10": {
+      "high_usd": 0.00039713,
+      "low_usd": 0.00035011,
+      "market_cap_usd": 35557276.1228794,
+      "open_usd": 0.00035339,
+      "price_usd": 0.00036956,
+      "source": "coinex",
+      "volume_usd": 28638.463508455105
+    },
+    "2025-09-11": {
+      "high_usd": 0.00039,
+      "low_usd": 0.00036501,
+      "market_cap_usd": 37321724.396597266,
+      "open_usd": 0.00036952,
+      "price_usd": 0.00036856,
+      "source": "coinex",
+      "volume_usd": 19919.093961742587
+    },
+    "2025-09-12": {
+      "high_usd": 0.00039111,
+      "low_usd": 0.00036509,
+      "market_cap_usd": 36369091.98959913,
+      "open_usd": 0.00036856,
+      "price_usd": 0.00036879,
+      "source": "coinex",
+      "volume_usd": 37358.43514015969
+    },
+    "2025-09-13": {
+      "high_usd": 0.00048028,
+      "low_usd": 0.00035,
+      "market_cap_usd": 35905064.882661514,
+      "open_usd": 0.00036901,
+      "price_usd": 0.00040941,
+      "source": "coinex",
+      "volume_usd": 89393.89671907091
+    },
+    "2025-09-14": {
+      "high_usd": 0.00042803,
+      "low_usd": 0.00039309,
+      "market_cap_usd": 41013237.530840345,
+      "open_usd": 0.00040889,
+      "price_usd": 0.00039325,
+      "source": "coinex",
+      "volume_usd": 28776.630304173043
+    },
+    "2025-09-15": {
+      "high_usd": 0.00039999,
+      "low_usd": 0.0003692,
+      "market_cap_usd": 38775017.45663422,
+      "open_usd": 0.00039325,
+      "price_usd": 0.00039227,
+      "source": "coinex",
+      "volume_usd": 21286.71666513516
+    },
+    "2025-09-16": {
+      "high_usd": 0.0004,
+      "low_usd": 0.00037,
+      "market_cap_usd": 38727801.04454395,
+      "open_usd": 0.00039227,
+      "price_usd": 0.00037464,
+      "source": "coinex",
+      "volume_usd": 24724.0187951843
+    },
+    "2025-09-17": {
+      "high_usd": 0.00041062,
+      "low_usd": 0.00036056,
+      "market_cap_usd": 37537325.6648718,
+      "open_usd": 0.00037437,
+      "price_usd": 0.00040099,
+      "source": "coinex",
+      "volume_usd": 38700.89242593822
+    },
+    "2025-09-18": {
+      "high_usd": 0.000432,
+      "low_usd": 0.00039501,
+      "market_cap_usd": 39502211.767340496,
+      "open_usd": 0.00040119,
+      "price_usd": 0.00040283,
+      "source": "coinex",
+      "volume_usd": 31672.230205490963
+    },
+    "2025-09-19": {
+      "high_usd": 0.00040617,
+      "low_usd": 0.00036921,
+      "market_cap_usd": 39917589.42218824,
+      "open_usd": 0.00040262,
+      "price_usd": 0.00037855,
+      "source": "coinex",
+      "volume_usd": 23944.557633197954
+    },
+    "2025-09-20": {
+      "high_usd": 0.00037912,
+      "low_usd": 0.00036119,
+      "market_cap_usd": 38017346.41383371,
+      "open_usd": 0.00037849,
+      "price_usd": 0.00037162,
+      "source": "coinex",
+      "volume_usd": 18565.8542935726
+    },
+    "2025-09-21": {
+      "high_usd": 0.00037522,
+      "low_usd": 0.00033485,
+      "market_cap_usd": 36834499.84423286,
+      "open_usd": 0.00037173,
+      "price_usd": 0.00035516,
+      "source": "coinex",
+      "volume_usd": 27442.959911389466
+    },
+    "2025-09-22": {
+      "high_usd": 0.00036234,
+      "low_usd": 0.00030248,
+      "market_cap_usd": 34214659.84250249,
+      "open_usd": 0.00035516,
+      "price_usd": 0.0003176,
+      "source": "coinex",
+      "volume_usd": 32367.64803940985
+    },
+    "2025-09-23": {
+      "high_usd": 0.0004,
+      "low_usd": 0.0003173,
+      "market_cap_usd": 32119078.31579195,
+      "open_usd": 0.0003176,
+      "price_usd": 0.00035105,
+      "source": "coinex",
+      "volume_usd": 52310.01865796128
+    },
+    "2025-09-24": {
+      "high_usd": 0.0003533,
+      "low_usd": 0.00031,
+      "market_cap_usd": 34885683.33025854,
+      "open_usd": 0.00035104,
+      "price_usd": 0.00031616,
+      "source": "coinex",
+      "volume_usd": 18300.470628516032
+    },
+    "2025-09-25": {
+      "high_usd": 0.00032282,
+      "low_usd": 0.00029763,
+      "market_cap_usd": 30855321.311879076,
+      "open_usd": 0.00031628,
+      "price_usd": 0.0002981,
+      "source": "coinex",
+      "volume_usd": 15345.49293981368
+    },
+    "2025-09-26": {
+      "high_usd": 0.00031951,
+      "low_usd": 0.00028533,
+      "market_cap_usd": 28994178.700614657,
+      "open_usd": 0.0002981,
+      "price_usd": 0.00029179,
+      "source": "coinex",
+      "volume_usd": 39162.11664723989
+    },
+    "2025-09-27": {
+      "high_usd": 0.00030984,
+      "low_usd": 0.0002875,
+      "market_cap_usd": 29234660.905386236,
+      "open_usd": 0.00029191,
+      "price_usd": 0.00029687,
+      "source": "coinex",
+      "volume_usd": 16263.824184719093
+    },
+    "2025-09-28": {
+      "high_usd": 0.00031095,
+      "low_usd": 0.0002827,
+      "market_cap_usd": 29752385.604705073,
+      "open_usd": 0.00029687,
+      "price_usd": 0.00030967,
+      "source": "coinex",
+      "volume_usd": 16166.101177829176
+    },
+    "2025-09-29": {
+      "high_usd": 0.00031433,
+      "low_usd": 0.0002899,
+      "market_cap_usd": 30515671.42796828,
+      "open_usd": 0.00030967,
+      "price_usd": 0.00030339,
+      "source": "coinex",
+      "volume_usd": 13930.26994718346
+    },
+    "2025-09-30": {
+      "high_usd": 0.00030339,
+      "low_usd": 0.00029015,
+      "market_cap_usd": 29764386.307836235,
+      "open_usd": 0.00030263,
+      "price_usd": 0.0002939,
+      "source": "coinex",
+      "volume_usd": 11577.62736780691
+    },
+    "2025-10-01": {
+      "high_usd": 0.00033,
+      "low_usd": 0.00028038,
+      "market_cap_usd": 29314191.938376088,
+      "open_usd": 0.0002939,
+      "price_usd": 0.00031017,
+      "source": "coinex",
+      "volume_usd": 22116.68640154479
+    },
+    "2025-10-02": {
+      "high_usd": 0.00033097,
+      "low_usd": 0.00029465,
+      "market_cap_usd": 30554861.014107194,
+      "open_usd": 0.00031027,
+      "price_usd": 0.00030644,
+      "source": "coinex",
+      "volume_usd": 31567.69184579369
+    },
+    "2025-10-03": {
+      "high_usd": 0.00030666,
+      "low_usd": 0.00028207,
+      "market_cap_usd": 29984164.810781177,
+      "open_usd": 0.00030644,
+      "price_usd": 0.00029717,
+      "source": "coinex",
+      "volume_usd": 17839.36118180732
+    },
+    "2025-10-04": {
+      "high_usd": 0.00029717,
+      "low_usd": 0.00027884,
+      "market_cap_usd": 29190327.411617044,
+      "open_usd": 0.00029717,
+      "price_usd": 0.00029191,
+      "source": "coinex",
+      "volume_usd": 17534.568871075782
+    },
+    "2025-10-05": {
+      "high_usd": 0.00030268,
+      "low_usd": 0.000281,
+      "market_cap_usd": 28996896.308516376,
+      "open_usd": 0.00029191,
+      "price_usd": 0.00030192,
+      "source": "coinex",
+      "volume_usd": 18861.500210378712
+    },
+    "2025-10-06": {
+      "high_usd": 0.00032397,
+      "low_usd": 0.00028587,
+      "market_cap_usd": 29707791.69948085,
+      "open_usd": 0.00030117,
+      "price_usd": 0.00030609,
+      "source": "coinex",
+      "volume_usd": 31328.593303258243
+    },
+    "2025-10-07": {
+      "high_usd": 0.00032455,
+      "low_usd": 0.00029133,
+      "market_cap_usd": 30731861.296101764,
+      "open_usd": 0.00030609,
+      "price_usd": 0.00030679,
+      "source": "coinex",
+      "volume_usd": 26186.142233511913
+    },
+    "2025-10-08": {
+      "high_usd": 0.00031676,
+      "low_usd": 0.00029007,
+      "market_cap_usd": 30109145.280030537,
+      "open_usd": 0.00030617,
+      "price_usd": 0.00030914,
+      "source": "coinex",
+      "volume_usd": 22910.786334203804
+    },
+    "2025-10-09": {
+      "high_usd": 0.00031492,
+      "low_usd": 0.00029,
+      "market_cap_usd": 30387996.62000466,
+      "open_usd": 0.00030903,
+      "price_usd": 0.00029399,
+      "source": "coinex",
+      "volume_usd": 15363.269060063909
+    },
+    "2025-10-10": {
+      "high_usd": 0.00030358,
+      "low_usd": 0.00026884,
+      "market_cap_usd": 29594495.024297625,
+      "open_usd": 0.00029399,
+      "price_usd": 0.00027606,
+      "source": "coinex",
+      "volume_usd": 27037.139642675556
+    },
+    "2025-10-11": {
+      "high_usd": 0.00029166,
+      "low_usd": 0.00025594,
+      "market_cap_usd": 27693926.064276077,
+      "open_usd": 0.00027606,
+      "price_usd": 0.00028097,
+      "source": "coinex",
+      "volume_usd": 26193.645855017578
+    },
+    "2025-10-12": {
+      "high_usd": 0.00028658,
+      "low_usd": 0.00026313,
+      "market_cap_usd": 28184697.474094216,
+      "open_usd": 0.00028077,
+      "price_usd": 0.00028384,
+      "source": "coinex",
+      "volume_usd": 17614.745913461007
+    },
+    "2025-10-13": {
+      "high_usd": 0.00029264,
+      "low_usd": 0.00028027,
+      "market_cap_usd": 28037589.64224192,
+      "open_usd": 0.00028384,
+      "price_usd": 0.00028746,
+      "source": "coinex",
+      "volume_usd": 16872.353631986123
+    },
+    "2025-10-14": {
+      "high_usd": 0.00029786,
+      "low_usd": 0.00028727,
+      "market_cap_usd": 28390333.145034064,
+      "open_usd": 0.00028746,
+      "price_usd": 0.00029484,
+      "source": "coinex",
+      "volume_usd": 17675.942275623245
+    },
+    "2025-10-15": {
+      "high_usd": 0.00030695,
+      "low_usd": 0.00028762,
+      "market_cap_usd": 29571347.22655012,
+      "open_usd": 0.00029484,
+      "price_usd": 0.0002915,
+      "source": "coinex",
+      "volume_usd": 13555.400505740703
+    },
+    "2025-10-16": {
+      "high_usd": 0.00031,
+      "low_usd": 0.00027138,
+      "market_cap_usd": 29143284.83775888,
+      "open_usd": 0.0002915,
+      "price_usd": 0.00027976,
+      "source": "coinex",
+      "volume_usd": 18256.833969693304
+    },
+    "2025-10-17": {
+      "high_usd": 0.00028605,
+      "low_usd": 0.00026045,
+      "market_cap_usd": 28018704.472386327,
+      "open_usd": 0.00027976,
+      "price_usd": 0.00028077,
+      "source": "coinex",
+      "volume_usd": 12247.398018507536
+    },
+    "2025-10-18": {
+      "high_usd": 0.00029049,
+      "low_usd": 0.0002651,
+      "market_cap_usd": 27785909.55175241,
+      "open_usd": 0.00028077,
+      "price_usd": 0.00026799,
+      "source": "coinex",
+      "volume_usd": 13199.433889196305
+    },
+    "2025-10-19": {
+      "high_usd": 0.00027253,
+      "low_usd": 0.00025428,
+      "market_cap_usd": 26835524.86903847,
+      "open_usd": 0.00026799,
+      "price_usd": 0.00026473,
+      "source": "coinex",
+      "volume_usd": 11103.195614182556
+    },
+    "2025-10-20": {
+      "high_usd": 0.00026986,
+      "low_usd": 0.00022945,
+      "market_cap_usd": 26530818.51700011,
+      "open_usd": 0.00026473,
+      "price_usd": 0.00024386,
+      "source": "coinex",
+      "volume_usd": 29080.323876017654
+    },
+    "2025-10-21": {
+      "high_usd": 0.00027132,
+      "low_usd": 0.00023701,
+      "market_cap_usd": 24762433.524111852,
+      "open_usd": 0.00024386,
+      "price_usd": 0.00026347,
+      "source": "coinex",
+      "volume_usd": 13321.057779346078
+    },
+    "2025-10-22": {
+      "high_usd": 0.00026562,
+      "low_usd": 0.00024,
+      "market_cap_usd": 26277657.85924341,
+      "open_usd": 0.00026347,
+      "price_usd": 0.000258,
+      "source": "coinex",
+      "volume_usd": 14881.066373834125
+    },
+    "2025-10-23": {
+      "high_usd": 0.000258,
+      "low_usd": 0.00024215,
+      "market_cap_usd": 25518840.017878614,
+      "open_usd": 0.000258,
+      "price_usd": 0.0002458,
+      "source": "coinex",
+      "volume_usd": 11112.987454519935
+    },
+    "2025-10-24": {
+      "high_usd": 0.00025231,
+      "low_usd": 0.00023868,
+      "market_cap_usd": 24747693.209392775,
+      "open_usd": 0.0002458,
+      "price_usd": 0.00024261,
+      "source": "coinex",
+      "volume_usd": 11793.524795009369
+    },
+    "2025-10-25": {
+      "high_usd": 0.00024268,
+      "low_usd": 0.00023284,
+      "market_cap_usd": 24668349.781710327,
+      "open_usd": 0.00024261,
+      "price_usd": 0.00023584,
+      "source": "coinex",
+      "volume_usd": 8576.452178511863
+    },
+    "2025-10-26": {
+      "high_usd": 0.000252,
+      "low_usd": 0.00023323,
+      "market_cap_usd": 23919645.11420824,
+      "open_usd": 0.00023584,
+      "price_usd": 0.00024978,
+      "source": "coinex",
+      "volume_usd": 10476.341960346743
+    },
+    "2025-10-27": {
+      "high_usd": 0.000255,
+      "low_usd": 0.00023965,
+      "market_cap_usd": 24499539.9867117,
+      "open_usd": 0.00024978,
+      "price_usd": 0.00025458,
+      "source": "coinex",
+      "volume_usd": 12243.432520138613
+    },
+    "2025-10-28": {
+      "high_usd": 0.00030743,
+      "low_usd": 0.00025439,
+      "market_cap_usd": 25050371.757403817,
+      "open_usd": 0.00025458,
+      "price_usd": 0.00025961,
+      "source": "coinex",
+      "volume_usd": 39071.469715212224
+    },
+    "2025-10-29": {
+      "high_usd": 0.00034785,
+      "low_usd": 0.00025,
+      "market_cap_usd": 26445120.01820962,
+      "open_usd": 0.00025961,
+      "price_usd": 0.00030348,
+      "source": "coinex",
+      "volume_usd": 40691.728390376025
+    },
+    "2025-10-30": {
+      "high_usd": 0.00030607,
+      "low_usd": 0.00026,
+      "market_cap_usd": 30646013.44458933,
+      "open_usd": 0.00030338,
+      "price_usd": 0.00027355,
+      "source": "coinex",
+      "volume_usd": 22100.716198303664
+    },
+    "2025-10-31": {
+      "high_usd": 0.00029456,
+      "low_usd": 0.00026122,
+      "market_cap_usd": 27023738.511207737,
+      "open_usd": 0.00027355,
+      "price_usd": 0.00027413,
+      "source": "coinex",
+      "volume_usd": 15086.479509761844
+    },
+    "2025-11-01": {
+      "high_usd": 0.00028301,
+      "low_usd": 0.00027116,
+      "market_cap_usd": 27132842.48605121,
+      "open_usd": 0.00027417,
+      "price_usd": 0.00027305,
+      "source": "coinex",
+      "volume_usd": 7330.053835691483
+    },
+    "2025-11-02": {
+      "high_usd": 0.00027399,
+      "low_usd": 0.00025005,
+      "market_cap_usd": 26974223.98505572,
+      "open_usd": 0.00027305,
+      "price_usd": 0.0002646,
+      "source": "coinex",
+      "volume_usd": 10299.183246212273
+    },
+    "2025-11-03": {
+      "high_usd": 0.0002646,
+      "low_usd": 0.00024625,
+      "market_cap_usd": 26155302.51250592,
+      "open_usd": 0.0002646,
+      "price_usd": 0.00024741,
+      "source": "coinex",
+      "volume_usd": 11952.926078310562
+    },
+    "2025-11-04": {
+      "high_usd": 0.0002607,
+      "low_usd": 0.000239,
+      "market_cap_usd": 24853420.31525325,
+      "open_usd": 0.00024741,
+      "price_usd": 0.00024096,
+      "source": "coinex",
+      "volume_usd": 14769.142584346453
+    },
+    "2025-11-05": {
+      "high_usd": 0.00025207,
+      "low_usd": 0.00023,
+      "market_cap_usd": 24338797.84497942,
+      "open_usd": 0.00024096,
+      "price_usd": 0.00023608,
+      "source": "coinex",
+      "volume_usd": 8894.579304307892
+    },
+    "2025-11-06": {
+      "high_usd": 0.00042619,
+      "low_usd": 0.00023001,
+      "market_cap_usd": 24190845.69340961,
+      "open_usd": 0.00023608,
+      "price_usd": 0.00034501,
+      "source": "coinex",
+      "volume_usd": 204130.95091300522
+    },
+    "2025-11-07": {
+      "high_usd": 0.0003957,
+      "low_usd": 0.0003304,
+      "market_cap_usd": 35032068.77759788,
+      "open_usd": 0.00034721,
+      "price_usd": 0.00037324,
+      "source": "coinex",
+      "volume_usd": 51781.34434074034
+    },
+    "2025-11-08": {
+      "high_usd": 0.00041605,
+      "low_usd": 0.00035189,
+      "market_cap_usd": 37724890.25097589,
+      "open_usd": 0.00037336,
+      "price_usd": 0.00038267,
+      "source": "coinex",
+      "volume_usd": 84032.79810447218
+    },
+    "2025-11-09": {
+      "high_usd": 0.00039961,
+      "low_usd": 0.00035238,
+      "market_cap_usd": 39075402.43640064,
+      "open_usd": 0.00038257,
+      "price_usd": 0.00035722,
+      "source": "coinex",
+      "volume_usd": 19543.90303474315
+    },
+    "2025-11-10": {
+      "high_usd": 0.0003932,
+      "low_usd": 0.00035417,
+      "market_cap_usd": 36345106.70022336,
+      "open_usd": 0.00035722,
+      "price_usd": 0.00038225,
+      "source": "coinex",
+      "volume_usd": 20334.64504838478
+    },
+    "2025-11-11": {
+      "high_usd": 0.00039414,
+      "low_usd": 0.00034565,
+      "market_cap_usd": 37544266.116047665,
+      "open_usd": 0.00038225,
+      "price_usd": 0.00035972,
+      "source": "coinex",
+      "volume_usd": 48023.13881303172
+    },
+    "2025-11-12": {
+      "high_usd": 0.00037934,
+      "low_usd": 0.00032136,
+      "market_cap_usd": 35934834.759312645,
+      "open_usd": 0.00035972,
+      "price_usd": 0.00037424,
+      "source": "coinex",
+      "volume_usd": 30847.474966044687
+    },
+    "2025-11-13": {
+      "high_usd": 0.0004,
+      "low_usd": 0.000363,
+      "market_cap_usd": 38910891.983098485,
+      "open_usd": 0.00037418,
+      "price_usd": 0.00036737,
+      "source": "coinex",
+      "volume_usd": 26790.647563237453
+    },
+    "2025-11-14": {
+      "high_usd": 0.000394,
+      "low_usd": 0.00036246,
+      "market_cap_usd": 37067026.26832332,
+      "open_usd": 0.0003673,
+      "price_usd": 0.00036577,
+      "source": "coinex",
+      "volume_usd": 35215.37222117153
+    },
+    "2025-11-15": {
+      "high_usd": 0.00038172,
+      "low_usd": 0.00035213,
+      "market_cap_usd": 36614687.87581026,
+      "open_usd": 0.00036577,
+      "price_usd": 0.00037388,
+      "source": "coinex",
+      "volume_usd": 22493.88247765444
+    },
+    "2025-11-16": {
+      "high_usd": 0.00037539,
+      "low_usd": 0.00035,
+      "market_cap_usd": 38431633.89462872,
+      "open_usd": 0.00037388,
+      "price_usd": 0.00035854,
+      "source": "coinex",
+      "volume_usd": 14296.41150225979
+    },
+    "2025-11-17": {
+      "high_usd": 0.00036,
+      "low_usd": 0.00030001,
+      "market_cap_usd": 35385959.44172748,
+      "open_usd": 0.00035865,
+      "price_usd": 0.00031428,
+      "source": "coinex",
+      "volume_usd": 36684.56398955225
+    },
+    "2025-11-18": {
+      "high_usd": 0.00033368,
+      "low_usd": 0.00031151,
+      "market_cap_usd": 31338678.827353414,
+      "open_usd": 0.00031428,
+      "price_usd": 0.00032806,
+      "source": "coinex",
+      "volume_usd": 18833.939713629075
+    },
+    "2025-11-19": {
+      "high_usd": 0.000339,
+      "low_usd": 0.0003,
+      "market_cap_usd": 32630737.38410121,
+      "open_usd": 0.00032806,
+      "price_usd": 0.00030826,
+      "source": "coinex",
+      "volume_usd": 33130.627801425224
+    },
+    "2025-11-20": {
+      "high_usd": 0.00032327,
+      "low_usd": 0.00027256,
+      "market_cap_usd": 30546679.956208065,
+      "open_usd": 0.00030826,
+      "price_usd": 0.00028457,
+      "source": "coinex",
+      "volume_usd": 39745.84142209478
+    },
+    "2025-11-21": {
+      "high_usd": 0.00029785,
+      "low_usd": 0.00027384,
+      "market_cap_usd": 28337382.71053752,
+      "open_usd": 0.00028457,
+      "price_usd": 0.00028211,
+      "source": "coinex",
+      "volume_usd": 21348.65552293185
+    },
+    "2025-11-22": {
+      "high_usd": 0.0003275,
+      "low_usd": 0.00028211,
+      "market_cap_usd": 28076539.893655173,
+      "open_usd": 0.00028211,
+      "price_usd": 0.00031653,
+      "source": "coinex",
+      "volume_usd": 24426.234998763175
+    },
+    "2025-11-23": {
+      "high_usd": 0.00032995,
+      "low_usd": 0.00031501,
+      "market_cap_usd": 32059594.504856728,
+      "open_usd": 0.00031653,
+      "price_usd": 0.00032138,
+      "source": "coinex",
+      "volume_usd": 16033.53698840844
+    },
+    "2025-11-24": {
+      "high_usd": 0.00034413,
+      "low_usd": 0.00032138,
+      "market_cap_usd": 32124056.823601764,
+      "open_usd": 0.00032138,
+      "price_usd": 0.0003301,
+      "source": "coinex",
+      "volume_usd": 40210.02246000863
+    },
+    "2025-11-25": {
+      "high_usd": 0.00034597,
+      "low_usd": 0.00031353,
+      "market_cap_usd": 33501298.88691561,
+      "open_usd": 0.00033073,
+      "price_usd": 0.00032438,
+      "source": "coinex",
+      "volume_usd": 39822.50164773269
+    },
+    "2025-11-26": {
+      "high_usd": 0.00034473,
+      "low_usd": 0.0003,
+      "market_cap_usd": 33039499.612798374,
+      "open_usd": 0.00032438,
+      "price_usd": 0.00032121,
+      "source": "coinex",
+      "volume_usd": 39725.97894854934
+    },
+    "2025-11-27": {
+      "high_usd": 0.00036,
+      "low_usd": 0.00032109,
+      "market_cap_usd": 32322510.254037213,
+      "open_usd": 0.00032121,
+      "price_usd": 0.00033301,
+      "source": "coinex",
+      "volume_usd": 27452.882989434565
+    },
+    "2025-11-28": {
+      "high_usd": 0.00033571,
+      "low_usd": 0.00033,
+      "market_cap_usd": 33325846.766670164,
+      "open_usd": 0.000333,
+      "price_usd": 0.00033317,
+      "source": "coinex",
+      "volume_usd": 11490.889783200486
+    },
+    "2025-11-29": {
+      "high_usd": 0.00033599,
+      "low_usd": 0.00031631,
+      "market_cap_usd": 32954975.773196314,
+      "open_usd": 0.00033233,
+      "price_usd": 0.00031947,
+      "source": "coinex",
+      "volume_usd": 15578.628939941353
+    },
+    "2025-11-30": {
+      "high_usd": 0.00032744,
+      "low_usd": 0.00031,
+      "market_cap_usd": 31812944.76243746,
+      "open_usd": 0.00031947,
+      "price_usd": 0.00032387,
+      "source": "coinex",
+      "volume_usd": 11966.272839356465
+    },
+    "2025-12-01": {
+      "high_usd": 0.00032501,
+      "low_usd": 0.000282,
+      "market_cap_usd": 32553212.27349156,
+      "open_usd": 0.00032383,
+      "price_usd": 0.00029767,
+      "source": "coinex",
+      "volume_usd": 18030.45210701869
+    },
+    "2025-12-02": {
+      "high_usd": 0.00032441,
+      "low_usd": 0.00028239,
+      "market_cap_usd": 29625606.511133943,
+      "open_usd": 0.00029767,
+      "price_usd": 0.00031783,
+      "source": "coinex",
+      "volume_usd": 22021.228349019133
+    },
+    "2025-12-03": {
+      "high_usd": 0.00031999,
+      "low_usd": 0.0003023,
+      "market_cap_usd": 31484005.405908715,
+      "open_usd": 0.00031783,
+      "price_usd": 0.00030844,
+      "source": "coinex",
+      "volume_usd": 11016.254154735389
+    },
+    "2025-12-04": {
+      "high_usd": 0.00030921,
+      "low_usd": 0.00028287,
+      "market_cap_usd": 30412046.70278827,
+      "open_usd": 0.00030838,
+      "price_usd": 0.00029197,
+      "source": "coinex",
+      "volume_usd": 16575.926533135145
+    },
+    "2025-12-05": {
+      "high_usd": 0.00029234,
+      "low_usd": 0.00026888,
+      "market_cap_usd": 29068993.642571986,
+      "open_usd": 0.00029197,
+      "price_usd": 0.00028186,
+      "source": "coinex",
+      "volume_usd": 20318.149539159447
+    },
+    "2025-12-06": {
+      "high_usd": 0.00028892,
+      "low_usd": 0.00027232,
+      "market_cap_usd": 28421982.602179125,
+      "open_usd": 0.00028186,
+      "price_usd": 0.00028356,
+      "source": "coinex",
+      "volume_usd": 10551.133275219534
+    },
+    "2025-12-07": {
+      "high_usd": 0.00032379,
+      "low_usd": 0.00028356,
+      "market_cap_usd": 28360965.508231174,
+      "open_usd": 0.00028356,
+      "price_usd": 0.0003127,
+      "source": "coinex",
+      "volume_usd": 16238.703195437518
+    },
+    "2025-12-08": {
+      "high_usd": 0.00031492,
+      "low_usd": 0.00028915,
+      "market_cap_usd": 31741411.156333327,
+      "open_usd": 0.0003127,
+      "price_usd": 0.00029015,
+      "source": "coinex",
+      "volume_usd": 15340.848034271798
+    },
+    "2025-12-09": {
+      "high_usd": 0.00029516,
+      "low_usd": 0.00028474,
+      "market_cap_usd": 29321253.038582776,
+      "open_usd": 0.00029015,
+      "price_usd": 0.00028551,
+      "source": "coinex",
+      "volume_usd": 10240.585064767154
+    },
+    "2025-12-10": {
+      "high_usd": 0.00029,
+      "low_usd": 0.00028001,
+      "market_cap_usd": 28884138.44665129,
+      "open_usd": 0.00028551,
+      "price_usd": 0.00028057,
+      "source": "coinex",
+      "volume_usd": 8029.890246133115
+    },
+    "2025-12-11": {
+      "high_usd": 0.0002856,
+      "low_usd": 0.00026403,
+      "market_cap_usd": 28001090.207725853,
+      "open_usd": 0.00028057,
+      "price_usd": 0.00027143,
+      "source": "coinex",
+      "volume_usd": 11534.799576767897
+    },
+    "2025-12-12": {
+      "high_usd": 0.0002766,
+      "low_usd": 0.00025434,
+      "market_cap_usd": 27207112.41004214,
+      "open_usd": 0.00027143,
+      "price_usd": 0.00026393,
+      "source": "coinex",
+      "volume_usd": 19946.636658942545
+    },
+    "2025-12-13": {
+      "high_usd": 0.00027291,
+      "low_usd": 0.00025225,
+      "market_cap_usd": 26486566.82020963,
+      "open_usd": 0.00026393,
+      "price_usd": 0.00027117,
+      "source": "coinex",
+      "volume_usd": 8803.795276700754
+    },
+    "2025-12-14": {
+      "high_usd": 0.00027185,
+      "low_usd": 0.00023,
+      "market_cap_usd": 27508570.8238033,
+      "open_usd": 0.00027117,
+      "price_usd": 0.00026171,
+      "source": "coinex",
+      "volume_usd": 28748.173906673208
+    },
+    "2025-12-15": {
+      "high_usd": 0.00026983,
+      "low_usd": 0.00023885,
+      "market_cap_usd": 26060997.466911532,
+      "open_usd": 0.0002612,
+      "price_usd": 0.0002557,
+      "source": "coinex",
+      "volume_usd": 14699.708791546052
+    },
+    "2025-12-16": {
+      "high_usd": 0.00025582,
+      "low_usd": 0.00024106,
+      "market_cap_usd": 25684257.20752195,
+      "open_usd": 0.00025582,
+      "price_usd": 0.00024888,
+      "source": "coinex",
+      "volume_usd": 7554.671757327286
+    },
+    "2025-12-17": {
+      "high_usd": 0.00026089,
+      "low_usd": 0.00023,
+      "market_cap_usd": 24856433.217442863,
+      "open_usd": 0.00024888,
+      "price_usd": 0.00024399,
+      "source": "coinex",
+      "volume_usd": 17204.218854053775
+    },
+    "2025-12-18": {
+      "high_usd": 0.00025,
+      "low_usd": 0.00021516,
+      "market_cap_usd": 24162348.337042622,
+      "open_usd": 0.00024278,
+      "price_usd": 0.0002157,
+      "source": "coinex",
+      "volume_usd": 17707.27260263933
+    },
+    "2025-12-19": {
+      "high_usd": 0.00024373,
+      "low_usd": 0.00021464,
+      "market_cap_usd": 21916602.038300343,
+      "open_usd": 0.0002157,
+      "price_usd": 0.00023864,
+      "source": "coinex",
+      "volume_usd": 18496.383114122353
+    },
+    "2025-12-20": {
+      "high_usd": 0.0002465,
+      "low_usd": 0.00022501,
+      "market_cap_usd": 23862030.175762087,
+      "open_usd": 0.00023864,
+      "price_usd": 0.00024475,
+      "source": "coinex",
+      "volume_usd": 17079.76282692748
+    },
+    "2025-12-21": {
+      "high_usd": 0.00025,
+      "low_usd": 0.00022983,
+      "market_cap_usd": 24564461.909645725,
+      "open_usd": 0.00024475,
+      "price_usd": 0.00023798,
+      "source": "coinex",
+      "volume_usd": 12140.045005935015
+    },
+    "2025-12-22": {
+      "high_usd": 0.00028,
+      "low_usd": 0.00022511,
+      "market_cap_usd": 23906594.837009694,
+      "open_usd": 0.00023798,
+      "price_usd": 0.00024889,
+      "source": "coinex",
+      "volume_usd": 23782.364304985418
+    },
+    "2025-12-23": {
+      "high_usd": 0.00025801,
+      "low_usd": 0.00023511,
+      "market_cap_usd": 25284594.166818045,
+      "open_usd": 0.00024889,
+      "price_usd": 0.00024782,
+      "source": "coinex",
+      "volume_usd": 12784.53097184451
+    },
+    "2025-12-24": {
+      "high_usd": 0.00024769,
+      "low_usd": 0.00023011,
+      "market_cap_usd": 24797690.407174077,
+      "open_usd": 0.00024769,
+      "price_usd": 0.00023758,
+      "source": "coinex",
+      "volume_usd": 9556.917313829897
+    },
+    "2025-12-25": {
+      "high_usd": 0.00024299,
+      "low_usd": 0.000216,
+      "market_cap_usd": 24106380.06863018,
+      "open_usd": 0.0002377,
+      "price_usd": 0.00023549,
+      "source": "coinex",
+      "volume_usd": 15053.989021099083
+    },
+    "2025-12-26": {
+      "high_usd": 0.00023947,
+      "low_usd": 0.00023001,
+      "market_cap_usd": 23439880.19405333,
+      "open_usd": 0.00023549,
+      "price_usd": 0.00023783,
+      "source": "coinex",
+      "volume_usd": 9506.66481051882
+    },
+    "2025-12-27": {
+      "high_usd": 0.00024069,
+      "low_usd": 0.00022511,
+      "market_cap_usd": 23640374.997995622,
+      "open_usd": 0.00023783,
+      "price_usd": 0.00023946,
+      "source": "coinex",
+      "volume_usd": 17150.58545890232
+    },
+    "2025-12-28": {
+      "high_usd": 0.0002423,
+      "low_usd": 0.00022698,
+      "market_cap_usd": 24247224.680160757,
+      "open_usd": 0.00023946,
+      "price_usd": 0.00023053,
+      "source": "coinex",
+      "volume_usd": 8154.235791256162
+    },
+    "2025-12-29": {
+      "high_usd": 0.00023957,
+      "low_usd": 0.00022,
+      "market_cap_usd": 22669264.083435744,
+      "open_usd": 0.00023049,
+      "price_usd": 0.00022291,
+      "source": "coinex",
+      "volume_usd": 11107.233140606824
+    },
+    "2025-12-30": {
+      "high_usd": 0.0003325,
+      "low_usd": 0.0002109,
+      "market_cap_usd": 22518037.46875076,
+      "open_usd": 0.00022291,
+      "price_usd": 0.00024287,
+      "source": "coinex",
+      "volume_usd": 52966.71596165088
+    },
+    "2025-12-31": {
+      "high_usd": 0.00028619,
+      "low_usd": 0.00024287,
+      "market_cap_usd": 25138332.2664608,
+      "open_usd": 0.00024287,
+      "price_usd": 0.00026352,
+      "source": "coinex",
+      "volume_usd": 30508.845491600907
+    },
+    "2026-01-01": {
+      "high_usd": 0.00026385,
+      "low_usd": 0.00024,
+      "market_cap_usd": 26569236.033484194,
+      "open_usd": 0.00026352,
+      "price_usd": 0.00024513,
+      "source": "coinex",
+      "volume_usd": 12080.385205416973
+    },
+    "2026-01-02": {
+      "high_usd": 0.00025868,
+      "low_usd": 0.00024161,
+      "market_cap_usd": 24531309.641167253,
+      "open_usd": 0.00024575,
+      "price_usd": 0.00024789,
+      "source": "coinex",
+      "volume_usd": 12478.550142805481
+    },
+    "2026-01-03": {
+      "high_usd": 0.00029043,
+      "low_usd": 0.00024758,
+      "market_cap_usd": 24953586.156265493,
+      "open_usd": 0.00024789,
+      "price_usd": 0.00027813,
+      "source": "coinex",
+      "volume_usd": 14468.693268370685
+    },
+    "2026-01-04": {
+      "high_usd": 0.00029414,
+      "low_usd": 0.00026993,
+      "market_cap_usd": 28451256.755861357,
+      "open_usd": 0.00027813,
+      "price_usd": 0.00028577,
+      "source": "coinex",
+      "volume_usd": 15536.620253198274
+    },
+    "2026-01-05": {
+      "high_usd": 0.00029311,
+      "low_usd": 0.00027013,
+      "market_cap_usd": 29282694.13729179,
+      "open_usd": 0.00028577,
+      "price_usd": 0.00027324,
+      "source": "coinex",
+      "volume_usd": 11394.334610606631
+    },
+    "2026-01-06": {
+      "high_usd": 0.00028209,
+      "low_usd": 0.00025334,
+      "market_cap_usd": 28068284.029733375,
+      "open_usd": 0.00027324,
+      "price_usd": 0.0002693,
+      "source": "coinex",
+      "volume_usd": 12690.91079271633
+    },
+    "2026-01-07": {
+      "high_usd": 0.000291,
+      "low_usd": 0.00026002,
+      "market_cap_usd": 27261632.78024844,
+      "open_usd": 0.0002693,
+      "price_usd": 0.00027898,
+      "source": "coinex",
+      "volume_usd": 15071.886884563562
+    },
+    "2026-01-08": {
+      "high_usd": 0.00028399,
+      "low_usd": 0.0002538,
+      "market_cap_usd": 28088080.058782507,
+      "open_usd": 0.00027898,
+      "price_usd": 0.00025542,
+      "source": "coinex",
+      "volume_usd": 13031.545516147778
+    },
+    "2026-01-09": {
+      "high_usd": 0.00026186,
+      "low_usd": 0.00024087,
+      "market_cap_usd": 26079173.16063253,
+      "open_usd": 0.00025542,
+      "price_usd": 0.00025785,
+      "source": "coinex",
+      "volume_usd": 10388.838559428379
+    },
+    "2026-01-10": {
+      "high_usd": 0.00026154,
+      "low_usd": 0.0002508,
+      "market_cap_usd": 43550477.41816995,
+      "open_usd": 0.00025785,
+      "price_usd": 0.00025492,
+      "source": "coinex",
+      "volume_usd": 6509.003427886262
+    },
+    "2026-01-11": {
+      "high_usd": 0.00026255,
+      "low_usd": 0.0002501,
+      "market_cap_usd": 42805466.53941012,
+      "open_usd": 0.00025492,
+      "price_usd": 0.00026192,
+      "source": "coinex",
+      "volume_usd": 5494.805824799863
+    },
+    "2026-01-12": {
+      "high_usd": 0.00026999,
+      "low_usd": 0.00025581,
+      "market_cap_usd": 44098468.30741666,
+      "open_usd": 0.00026192,
+      "price_usd": 0.00025581,
+      "source": "coinex",
+      "volume_usd": 12009.481052591304
+    },
+    "2026-01-13": {
+      "high_usd": 0.00033144,
+      "low_usd": 0.00024283,
+      "market_cap_usd": 43885349.40538529,
+      "open_usd": 0.00025591,
+      "price_usd": 0.00031536,
+      "source": "coinex",
+      "volume_usd": 32767.84932452951
+    },
+    "2026-01-14": {
+      "high_usd": 0.00033858,
+      "low_usd": 0.00029888,
+      "market_cap_usd": 43655959.355293944,
+      "open_usd": 0.00031536,
+      "price_usd": 0.00032118,
+      "source": "coinex",
+      "volume_usd": 50159.35459151067
+    },
+    "2026-01-15": {
+      "high_usd": 0.00034183,
+      "low_usd": 0.000285,
+      "market_cap_usd": 43598696.40668503,
+      "open_usd": 0.00032118,
+      "price_usd": 0.00033182,
+      "source": "coinex",
+      "volume_usd": 33149.51174456131
+    },
+    "2026-01-16": {
+      "high_usd": 0.00034147,
+      "low_usd": 0.00029601,
+      "market_cap_usd": 44685267.51111372,
+      "open_usd": 0.00033187,
+      "price_usd": 0.00030036,
+      "source": "coinex",
+      "volume_usd": 20243.983091009686
+    },
+    "2026-01-17": {
+      "high_usd": 0.00030441,
+      "low_usd": 0.00029603,
+      "market_cap_usd": 44422133.45645534,
+      "open_usd": 0.00030036,
+      "price_usd": 0.00030019,
+      "source": "coinex",
+      "volume_usd": 6257.5009352864145
+    },
+    "2026-01-18": {
+      "high_usd": 0.00030264,
+      "low_usd": 0.00028977,
+      "market_cap_usd": 30131574.060290784,
+      "open_usd": 0.00030019,
+      "price_usd": 0.00029196,
+      "source": "coinex",
+      "volume_usd": 13980.545868830197
+    },
+    "2026-01-19": {
+      "high_usd": 0.00032943,
+      "low_usd": 0.00027854,
+      "market_cap_usd": 45050661.30608305,
+      "open_usd": 0.00029196,
+      "price_usd": 0.00030416,
+      "source": "coinex",
+      "volume_usd": 27743.584893404262
+    },
+    "2026-01-20": {
+      "high_usd": 0.00030436,
+      "low_usd": 0.000269,
+      "market_cap_usd": 43988550.989063196,
+      "open_usd": 0.00030429,
+      "price_usd": 0.00027291,
+      "source": "coinex",
+      "volume_usd": 21140.32283512503
+    },
+    "2026-01-21": {
+      "high_usd": 0.00028368,
+      "low_usd": 0.0002585,
+      "market_cap_usd": 43495743.31399368,
+      "open_usd": 0.00027291,
+      "price_usd": 0.00027647,
+      "source": "coinex",
+      "volume_usd": 11846.209703685976
+    },
+    "2026-01-22": {
+      "high_usd": 0.00028251,
+      "low_usd": 0.00026792,
+      "market_cap_usd": 44087656.63654073,
+      "open_usd": 0.00027647,
+      "price_usd": 0.0002727,
+      "source": "coinex",
+      "volume_usd": 11467.009352884268
+    },
+    "2026-01-23": {
+      "high_usd": 0.000277,
+      "low_usd": 0.00026344,
+      "market_cap_usd": 44028774.14234775,
+      "open_usd": 0.00027262,
+      "price_usd": 0.00027374,
+      "source": "coinex",
+      "volume_usd": 11404.35854451881
+    },
+    "2026-01-24": {
+      "high_usd": 0.00028125,
+      "low_usd": 0.00026041,
+      "market_cap_usd": 44206808.32337989,
+      "open_usd": 0.00027374,
+      "price_usd": 0.00027677,
+      "source": "coinex",
+      "volume_usd": 8025.7379001692525
+    },
+    "2026-01-25": {
+      "high_usd": 0.00028027,
+      "low_usd": 0.00025836,
+      "market_cap_usd": 45267374.490592726,
+      "open_usd": 0.00027677,
+      "price_usd": 0.00025882,
+      "source": "coinex",
+      "volume_usd": 8915.8679735995
+    },
+    "2026-01-26": {
+      "high_usd": 0.00026805,
+      "low_usd": 0.00024502,
+      "market_cap_usd": 44869364.30753321,
+      "open_usd": 0.00025882,
+      "price_usd": 0.00025925,
+      "source": "coinex",
+      "volume_usd": 17234.918342763922
+    },
+    "2026-01-27": {
+      "high_usd": 0.00026546,
+      "low_usd": 0.00025191,
+      "market_cap_usd": 43184359.12327954,
+      "open_usd": 0.00025914,
+      "price_usd": 0.00026546,
+      "source": "coinex",
+      "volume_usd": 7208.352615290984
+    },
+    "2026-01-28": {
+      "high_usd": 0.00027833,
+      "low_usd": 0.00025866,
+      "market_cap_usd": 44185851.43095549,
+      "open_usd": 0.00026546,
+      "price_usd": 0.000261,
+      "source": "coinex",
+      "volume_usd": 13648.577908157444
+    },
+    "2026-01-29": {
+      "high_usd": 0.00026495,
+      "low_usd": 0.00023791,
+      "market_cap_usd": 43739972.77315351,
+      "open_usd": 0.000261,
+      "price_usd": 0.00024449,
+      "source": "coinex",
+      "volume_usd": 15588.970996694821
+    },
+    "2026-01-30": {
+      "high_usd": 0.00025636,
+      "low_usd": 0.00023687,
+      "market_cap_usd": 42749355.53052452,
+      "open_usd": 0.00024407,
+      "price_usd": 0.00023865,
+      "source": "coinex",
+      "volume_usd": 14423.609734438945
+    },
+    "2026-01-31": {
+      "high_usd": 0.00025107,
+      "low_usd": 0.00020798,
+      "market_cap_usd": 42623263.58737795,
+      "open_usd": 0.00023879,
+      "price_usd": 0.00021987,
+      "source": "coinex",
+      "volume_usd": 29411.428616905403
+    },
+    "2026-02-01": {
+      "high_usd": 0.00023268,
+      "low_usd": 0.00021932,
+      "market_cap_usd": 40831961.43505176,
+      "open_usd": 0.00021987,
+      "price_usd": 0.00022154,
+      "source": "coinex",
+      "volume_usd": 10451.2891192599
+    },
+    "2026-02-02": {
+      "high_usd": 0.00023808,
+      "low_usd": 0.00021537,
+      "market_cap_usd": 43229148.03524826,
+      "open_usd": 0.00022154,
+      "price_usd": 0.00022326,
+      "source": "coinex",
+      "volume_usd": 15460.501586283035
+    },
+    "2026-02-03": {
+      "high_usd": 0.00023097,
+      "low_usd": 0.00021642,
+      "market_cap_usd": 42389887.51896005,
+      "open_usd": 0.00022332,
+      "price_usd": 0.0002294,
+      "source": "coinex",
+      "volume_usd": 8644.000325692712
+    },
+    "2026-02-04": {
+      "high_usd": 0.00024019,
+      "low_usd": 0.00022539,
+      "market_cap_usd": 42620000.02107309,
+      "open_usd": 0.0002294,
+      "price_usd": 0.00023463,
+      "source": "coinex",
+      "volume_usd": 8661.407545675831
+    },
+    "2026-02-05": {
+      "high_usd": 0.00023463,
+      "low_usd": 0.00021325,
+      "market_cap_usd": 42451327.03689509,
+      "open_usd": 0.00023463,
+      "price_usd": 0.0002171,
+      "source": "coinex",
+      "volume_usd": 18421.088236421827
+    },
+    "2026-02-06": {
+      "high_usd": 0.00022737,
+      "low_usd": 0.00020828,
+      "market_cap_usd": 41426949.72736516,
+      "open_usd": 0.00021601,
+      "price_usd": 0.00021555,
+      "source": "coinex",
+      "volume_usd": 20840.940827557497
+    },
+    "2026-02-07": {
+      "high_usd": 0.00022771,
+      "low_usd": 0.00021227,
+      "market_cap_usd": 40737024.09096177,
+      "open_usd": 0.00021524,
+      "price_usd": 0.00022524,
+      "source": "coinex",
+      "volume_usd": 13048.36846183813
+    },
+    "2026-02-08": {
+      "high_usd": 0.00022792,
+      "low_usd": 0.000215,
+      "market_cap_usd": 42277985.893596396,
+      "open_usd": 0.00022524,
+      "price_usd": 0.00021847,
+      "source": "coinex",
+      "volume_usd": 5928.872822000842
+    },
+    "2026-02-09": {
+      "high_usd": 0.00021847,
+      "low_usd": 0.00019369,
+      "market_cap_usd": 43045232.71781898,
+      "open_usd": 0.00021847,
+      "price_usd": 0.00020694,
+      "source": "coinex",
+      "volume_usd": 29479.7253693841
+    },
+    "2026-02-10": {
+      "high_usd": 0.00033,
+      "low_usd": 0.00020694,
+      "market_cap_usd": 20754729.55789904,
+      "open_usd": 0.00020694,
+      "price_usd": 0.00026466,
+      "source": "coinex",
+      "volume_usd": 94126.4302587223
+    },
+    "2026-02-11": {
+      "high_usd": 0.00031837,
+      "low_usd": 0.00026004,
+      "market_cap_usd": 26911221.6557599,
+      "open_usd": 0.00026475,
+      "price_usd": 0.00030487,
+      "source": "coinex",
+      "volume_usd": 40614.38374967011
+    },
+    "2026-02-12": {
+      "high_usd": 0.000309,
+      "low_usd": 0.00026733,
+      "market_cap_usd": 42725843.46889259,
+      "open_usd": 0.00030494,
+      "price_usd": 0.00027053,
+      "source": "coinex",
+      "volume_usd": 14355.791073913004
+    },
+    "2026-02-13": {
+      "high_usd": 0.00027889,
+      "low_usd": 0.00023852,
+      "market_cap_usd": 42703194.30026665,
+      "open_usd": 0.00027053,
+      "price_usd": 0.00024412,
+      "source": "coinex",
+      "volume_usd": 16791.430186626665
+    },
+    "2026-02-14": {
+      "high_usd": 0.0002526,
+      "low_usd": 0.0002231,
+      "market_cap_usd": 41004801.67953278,
+      "open_usd": 0.00024413,
+      "price_usd": 0.00023042,
+      "source": "coinex",
+      "volume_usd": 23153.087920983115
+    },
+    "2026-02-15": {
+      "high_usd": 0.00024563,
+      "low_usd": 0.00022942,
+      "market_cap_usd": 39696930.44289197,
+      "open_usd": 0.00023053,
+      "price_usd": 0.00024563,
+      "source": "coinex",
+      "volume_usd": 12239.940895082023
+    },
+    "2026-02-16": {
+      "high_usd": 0.00028447,
+      "low_usd": 0.00024501,
+      "market_cap_usd": 39357329.97447809,
+      "open_usd": 0.00024555,
+      "price_usd": 0.00026294,
+      "source": "coinex",
+      "volume_usd": 25242.87303460079
+    },
+    "2026-02-17": {
+      "high_usd": 0.00026428,
+      "low_usd": 0.00025068,
+      "market_cap_usd": 39781888.304572575,
+      "open_usd": 0.00026295,
+      "price_usd": 0.0002568,
+      "source": "coinex",
+      "volume_usd": 8708.431514087122
+    },
+    "2026-02-18": {
+      "high_usd": 0.00025681,
+      "low_usd": 0.0002313,
+      "market_cap_usd": 42811309.04892155,
+      "open_usd": 0.0002568,
+      "price_usd": 0.00024589,
+      "source": "coinex",
+      "volume_usd": 17805.551271265947
+    },
+    "2026-02-19": {
+      "high_usd": 0.00024953,
+      "low_usd": 0.000234,
+      "market_cap_usd": 40305165.08530325,
+      "open_usd": 0.00024589,
+      "price_usd": 0.00024126,
+      "source": "coinex",
+      "volume_usd": 10946.104842959476
+    },
+    "2026-02-20": {
+      "high_usd": 0.00024187,
+      "low_usd": 0.000225,
+      "market_cap_usd": 42875938.17580349,
+      "open_usd": 0.00024126,
+      "price_usd": 0.00023187,
+      "source": "coinex",
+      "volume_usd": 14686.63358459018
+    },
+    "2026-02-21": {
+      "high_usd": 0.00023437,
+      "low_usd": 0.00021673,
+      "market_cap_usd": 40317881.58496594,
+      "open_usd": 0.00023187,
+      "price_usd": 0.00022422,
+      "source": "coinex",
+      "volume_usd": 5897.335848720202
+    },
+    "2026-02-22": {
+      "high_usd": 0.00023342,
+      "low_usd": 0.00022031,
+      "market_cap_usd": 41684750.67879768,
+      "open_usd": 0.00022422,
+      "price_usd": 0.00022275,
+      "source": "coinex",
+      "volume_usd": 10620.317321081122
+    },
+    "2026-02-23": {
+      "high_usd": 0.00022574,
+      "low_usd": 0.000215,
+      "market_cap_usd": 42107253.1860219,
+      "open_usd": 0.00022275,
+      "price_usd": 0.00022036,
+      "source": "coinex",
+      "volume_usd": 9069.49727538119
+    },
+    "2026-02-24": {
+      "high_usd": 0.000229,
+      "low_usd": 0.00021064,
+      "market_cap_usd": 41881977.494467,
+      "open_usd": 0.00022036,
+      "price_usd": 0.00022246,
+      "source": "coinex",
+      "volume_usd": 13386.733104211398
+    },
+    "2026-02-25": {
+      "high_usd": 0.00023673,
+      "low_usd": 0.00021886,
+      "market_cap_usd": 41639393.230933234,
+      "open_usd": 0.00022246,
+      "price_usd": 0.00022554,
+      "source": "coinex",
+      "volume_usd": 12742.697228343914
+    },
+    "2026-02-26": {
+      "high_usd": 0.00023204,
+      "low_usd": 0.00021439,
+      "market_cap_usd": 41733308.673138276,
+      "open_usd": 0.00022549,
+      "price_usd": 0.00021874,
+      "source": "coinex",
+      "volume_usd": 12847.921172014165
+    },
+    "2026-02-27": {
+      "high_usd": 0.00023135,
+      "low_usd": 0.00021,
+      "market_cap_usd": 41430588.743448876,
+      "open_usd": 0.00021875,
+      "price_usd": 0.00021701,
+      "source": "coinex",
+      "volume_usd": 12307.955828737326
+    },
+    "2026-02-28": {
+      "high_usd": 0.00022755,
+      "low_usd": 0.00020179,
+      "market_cap_usd": 41653722.51877541,
+      "open_usd": 0.00021687,
+      "price_usd": 0.00021278,
+      "source": "coinex",
+      "volume_usd": 12391.79604890175
+    },
+    "2026-03-01": {
+      "high_usd": 0.00021456,
+      "low_usd": 0.00020298,
+      "market_cap_usd": 38525666.19044666,
+      "open_usd": 0.00021278,
+      "price_usd": 0.00020369,
+      "source": "coinex",
+      "volume_usd": 9603.991323578188
+    },
+    "2026-03-02": {
+      "high_usd": 0.00021001,
+      "low_usd": 0.00019971,
+      "market_cap_usd": 41109115.36815271,
+      "open_usd": 0.00020369,
+      "price_usd": 0.00020352,
+      "source": "coinex",
+      "volume_usd": 17481.264868045033
+    },
+    "2026-03-03": {
+      "high_usd": 0.00020812,
+      "low_usd": 0.0002,
+      "market_cap_usd": 39059975.326895855,
+      "open_usd": 0.00020352,
+      "price_usd": 0.00020355,
+      "source": "coinex",
+      "volume_usd": 8108.34939650443
+    },
+    "2026-03-04": {
+      "high_usd": 0.00020812,
+      "low_usd": 0.00019577,
+      "market_cap_usd": 41659770.15706687,
+      "open_usd": 0.00020355,
+      "price_usd": 0.0002079,
+      "source": "coinex",
+      "volume_usd": 11647.550878817627
+    },
+    "2026-03-05": {
+      "high_usd": 0.0002105,
+      "low_usd": 0.00020371,
+      "market_cap_usd": 40346823.433446765,
+      "open_usd": 0.0002079,
+      "price_usd": 0.00020835,
+      "source": "coinex",
+      "volume_usd": 4644.46349465391
+    },
+    "2026-03-06": {
+      "high_usd": 0.00021428,
+      "low_usd": 0.000205,
+      "market_cap_usd": 41741699.29155564,
+      "open_usd": 0.00020825,
+      "price_usd": 0.00020826,
+      "source": "coinex",
+      "volume_usd": 6580.139777235671
+    },
+    "2026-03-07": {
+      "high_usd": 0.00021015,
+      "low_usd": 0.0001986,
+      "market_cap_usd": 42180473.29458995,
+      "open_usd": 0.00020826,
+      "price_usd": 0.00020285,
+      "source": "coinex",
+      "volume_usd": 7262.220997812785
+    },
+    "2026-03-08": {
+      "high_usd": 0.00020318,
+      "low_usd": 0.00019201,
+      "market_cap_usd": 41443147.03325372,
+      "open_usd": 0.00020285,
+      "price_usd": 0.00019533,
+      "source": "coinex",
+      "volume_usd": 4587.769396548465
+    },
+    "2026-03-09": {
+      "high_usd": 0.00020999,
+      "low_usd": 0.00019149,
+      "market_cap_usd": 41636352.92704592,
+      "open_usd": 0.00019533,
+      "price_usd": 0.00020196,
+      "source": "coinex",
+      "volume_usd": 8453.943371094168
+    },
+    "2026-03-10": {
+      "high_usd": 0.00020421,
+      "low_usd": 0.00019491,
+      "market_cap_usd": 40358788.30484478,
+      "open_usd": 0.00020196,
+      "price_usd": 0.00020074,
+      "source": "coinex",
+      "volume_usd": 6578.907176459927
+    },
+    "2026-03-11": {
+      "high_usd": 0.00020208,
+      "low_usd": 0.00018181,
+      "market_cap_usd": 41525302.00688583,
+      "open_usd": 0.00020125,
+      "price_usd": 0.00019366,
+      "source": "coinex",
+      "volume_usd": 12581.526580571051
+    },
+    "2026-03-12": {
+      "high_usd": 0.00019678,
+      "low_usd": 0.00018552,
+      "market_cap_usd": 19463908.5437751,
+      "open_usd": 0.00019366,
+      "price_usd": 0.00019098,
+      "source": "coinex",
+      "volume_usd": 7724.281727574466
+    },
+    "2026-03-13": {
+      "high_usd": 0.00020395,
+      "low_usd": 0.000184,
+      "market_cap_usd": 40558749.90490353,
+      "open_usd": 0.00019094,
+      "price_usd": 0.00019577,
+      "source": "coinex",
+      "volume_usd": 16819.514976098322
+    },
+    "2026-03-14": {
+      "high_usd": 0.00019973,
+      "low_usd": 0.00019267,
+      "market_cap_usd": 39427460.30378428,
+      "open_usd": 0.00019584,
+      "price_usd": 0.00019676,
+      "source": "coinex",
+      "volume_usd": 6343.180585519535
+    },
+    "2026-03-15": {
+      "high_usd": 0.00019676,
+      "low_usd": 0.00019001,
+      "market_cap_usd": 41767781.48069108,
+      "open_usd": 0.00019676,
+      "price_usd": 0.00019174,
+      "source": "coinex",
+      "volume_usd": 6055.060529405414
+    },
+    "2026-03-16": {
+      "high_usd": 0.00019718,
+      "low_usd": 0.00019013,
+      "market_cap_usd": 41373095.91457186,
+      "open_usd": 0.00019174,
+      "price_usd": 0.00019061,
+      "source": "coinex",
+      "volume_usd": 10519.159345292166
+    },
+    "2026-03-17": {
+      "high_usd": 0.00019267,
+      "low_usd": 0.00018201,
+      "market_cap_usd": 40016917.54164902,
+      "open_usd": 0.00019075,
+      "price_usd": 0.00018514,
+      "source": "coinex",
+      "volume_usd": 9545.169597964032
+    },
+    "2026-03-18": {
+      "high_usd": 0.00018913,
+      "low_usd": 0.00018162,
+      "market_cap_usd": 40569005.23651934,
+      "open_usd": 0.00018514,
+      "price_usd": 0.00018269,
+      "source": "coinex",
+      "volume_usd": 27213.62434733478
+    },
+    "2026-03-19": {
+      "high_usd": 0.00018308,
+      "low_usd": 0.00016726,
+      "market_cap_usd": 38438624.62518668,
+      "open_usd": 0.00018269,
+      "price_usd": 0.00017151,
+      "source": "coinex",
+      "volume_usd": 13342.715194718123
+    },
+    "2026-03-20": {
+      "high_usd": 0.00017463,
+      "low_usd": 0.00015326,
+      "market_cap_usd": 40862006.95397094,
+      "open_usd": 0.00017151,
+      "price_usd": 0.0001683,
+      "source": "coinex",
+      "volume_usd": 17484.999877426482
+    },
+    "2026-03-21": {
+      "high_usd": 0.00019118,
+      "low_usd": 0.00016629,
+      "market_cap_usd": 17676263.46806314,
+      "open_usd": 0.00016829,
+      "price_usd": 0.00018333,
+      "source": "coinex",
+      "volume_usd": 14087.43697923908
+    },
+    "2026-03-22": {
+      "high_usd": 0.00018427,
+      "low_usd": 0.00016532,
+      "market_cap_usd": 38671667.47560725,
+      "open_usd": 0.00018332,
+      "price_usd": 0.00016786,
+      "source": "coinex",
+      "volume_usd": 12037.987106587787
+    },
+    "2026-03-23": {
+      "high_usd": 0.00017403,
+      "low_usd": 0.00015802,
+      "market_cap_usd": 39803804.95592125,
+      "open_usd": 0.00016786,
+      "price_usd": 0.00015842,
+      "source": "coinex",
+      "volume_usd": 11349.087432051696
+    },
+    "2026-03-24": {
+      "high_usd": 0.0001739,
+      "low_usd": 0.00015842,
+      "market_cap_usd": 39285620.82481341,
+      "open_usd": 0.00015842,
+      "price_usd": 0.00016694,
+      "source": "coinex",
+      "volume_usd": 9436.99205893669
+    },
+    "2026-03-25": {
+      "high_usd": 0.00017153,
+      "low_usd": 0.00015612,
+      "market_cap_usd": 39093854.5880979,
+      "open_usd": 0.00016708,
+      "price_usd": 0.00015877,
+      "source": "coinex",
+      "volume_usd": 16101.619135451285
+    },
+    "2026-03-26": {
+      "high_usd": 0.00016416,
+      "low_usd": 0.00015515,
+      "market_cap_usd": 36235252.62576481,
+      "open_usd": 0.00015917,
+      "price_usd": 0.00015807,
+      "source": "coinex",
+      "volume_usd": 7573.068576212113
+    },
+    "2026-03-27": {
+      "high_usd": 0.00015972,
+      "low_usd": 0.00015223,
+      "market_cap_usd": 38344836.67055251,
+      "open_usd": 0.000158,
+      "price_usd": 0.00015499,
+      "source": "coinex",
+      "volume_usd": 6528.19869760345
+    },
+    "2026-03-28": {
+      "high_usd": 0.00016022,
+      "low_usd": 0.0001522,
+      "market_cap_usd": 15751039.751321467,
+      "open_usd": 0.00015499,
+      "price_usd": 0.00015819,
+      "source": "coinex",
+      "volume_usd": 6951.689424337272
+    },
+    "2026-03-29": {
+      "high_usd": 0.00015819,
+      "low_usd": 0.00015217,
+      "market_cap_usd": 16150682.716151746,
+      "open_usd": 0.00015819,
+      "price_usd": 0.00015383,
+      "source": "coinex",
+      "volume_usd": 6170.985766633725
+    },
+    "2026-03-30": {
+      "high_usd": 0.00015565,
+      "low_usd": 0.00014851,
+      "market_cap_usd": 15862497.919073349,
+      "open_usd": 0.00015383,
+      "price_usd": 0.00015228,
+      "source": "coinex",
+      "volume_usd": 10978.79142685897
+    },
+    "2026-03-31": {
+      "high_usd": 0.00015228,
+      "low_usd": 0.00012339,
+      "market_cap_usd": 15458169.85907489,
+      "open_usd": 0.00015228,
+      "price_usd": 0.00012514,
+      "source": "coinex",
+      "volume_usd": 31793.7141081468
+    },
+    "2026-04-01": {
+      "high_usd": 0.00016309,
+      "low_usd": 0.0001247,
+      "market_cap_usd": 12779396.031891795,
+      "open_usd": 0.0001247,
+      "price_usd": 0.00015428,
+      "source": "coinex",
+      "volume_usd": 18823.68004565607
+    },
+    "2026-04-02": {
+      "high_usd": 0.00017479,
+      "low_usd": 0.00014532,
+      "market_cap_usd": 15734262.979910849,
+      "open_usd": 0.00015428,
+      "price_usd": 0.00015882,
+      "source": "coinex",
+      "volume_usd": 15940.111567659678
+    },
+    "2026-04-03": {
+      "high_usd": 0.00016613,
+      "low_usd": 0.0001484,
+      "market_cap_usd": 15579528.617741164,
+      "open_usd": 0.00015882,
+      "price_usd": 0.00015035,
+      "source": "coinex",
+      "volume_usd": 12474.569581066553
+    },
+    "2026-04-04": {
+      "high_usd": 0.00016296,
+      "low_usd": 0.00015025,
+      "market_cap_usd": 15453948.543043701,
+      "open_usd": 0.00015035,
+      "price_usd": 0.00015398,
+      "source": "coinex",
+      "volume_usd": 9586.061364091245
+    },
+    "2026-04-05": {
+      "high_usd": 0.00015398,
+      "low_usd": 0.000143,
+      "market_cap_usd": 15541044.717487864,
+      "open_usd": 0.00015398,
+      "price_usd": 0.00014966,
+      "source": "coinex",
+      "volume_usd": 7264.301882959455
+    },
+    "2026-04-06": {
+      "high_usd": 0.00015156,
+      "low_usd": 0.00014087,
+      "market_cap_usd": 15270796.126615603,
+      "open_usd": 0.00014966,
+      "price_usd": 0.00014383,
+      "source": "coinex",
+      "volume_usd": 10254.642576033746
+    },
+    "2026-04-07": {
+      "high_usd": 0.00014492,
+      "low_usd": 0.00013532,
+      "market_cap_usd": 14785429.340272475,
+      "open_usd": 0.00014383,
+      "price_usd": 0.00013918,
+      "source": "coinex",
+      "volume_usd": 12702.104484042131
+    },
+    "2026-04-08": {
+      "high_usd": 0.00014913,
+      "low_usd": 0.00013584,
+      "market_cap_usd": 14251423.911318995,
+      "open_usd": 0.00013918,
+      "price_usd": 0.00014875,
+      "source": "coinex",
+      "volume_usd": 9435.887031971728
+    },
+    "2026-04-09": {
+      "high_usd": 0.00016583,
+      "low_usd": 0.0001487,
+      "market_cap_usd": 14914817.09141093,
+      "open_usd": 0.00014875,
+      "price_usd": 0.00016278,
+      "source": "coinex",
+      "volume_usd": 21158.8612980751
+    },
+    "2026-04-10": {
+      "high_usd": 0.00016608,
+      "low_usd": 0.00015302,
+      "market_cap_usd": 16370236.870563844,
+      "open_usd": 0.00016274,
+      "price_usd": 0.00015572,
+      "source": "coinex",
+      "volume_usd": 11191.478730587818
+    },
+    "2026-04-11": {
+      "high_usd": 0.00015602,
+      "low_usd": 0.000152,
+      "market_cap_usd": 15959177.863524033,
+      "open_usd": 0.00015572,
+      "price_usd": 0.00015462,
+      "source": "coinex",
+      "volume_usd": 5239.132322431067
+    },
+    "2026-04-12": {
+      "high_usd": 0.00015602,
+      "low_usd": 0.00014169,
+      "market_cap_usd": 15778059.276339687,
+      "open_usd": 0.00015462,
+      "price_usd": 0.00014408,
+      "source": "coinex",
+      "volume_usd": 9033.002020273143
+    },
+    "2026-04-13": {
+      "high_usd": 0.00014728,
+      "low_usd": 0.00013764,
+      "market_cap_usd": 15010557.165570088,
+      "open_usd": 0.00014408,
+      "price_usd": 0.00013849,
+      "source": "coinex",
+      "volume_usd": 10035.90639245268
+    },
+    "2026-04-14": {
+      "high_usd": 0.00014,
+      "low_usd": 0.00013074,
+      "market_cap_usd": 14427348.99176907,
+      "open_usd": 0.00013849,
+      "price_usd": 0.00013809,
+      "source": "coinex",
+      "volume_usd": 19864.396142487174
+    },
+    "2026-04-15": {
+      "high_usd": 0.00014457,
+      "low_usd": 0.00012639,
+      "market_cap_usd": 14069522.580228478,
+      "open_usd": 0.00013809,
+      "price_usd": 0.00013581,
+      "source": "coinex",
+      "volume_usd": 16900.26867461708
+    },
+    "2026-04-16": {
+      "high_usd": 0.0001396,
+      "low_usd": 0.00012593,
+      "market_cap_usd": 14001107.08234933,
+      "open_usd": 0.00013581,
+      "price_usd": 0.00012982,
+      "source": "coinex",
+      "volume_usd": 23502.944779132104
+    },
+    "2026-04-17": {
+      "high_usd": 0.00014273,
+      "low_usd": 0.00012705,
+      "market_cap_usd": 13325368.440948391,
+      "open_usd": 0.00012982,
+      "price_usd": 0.00013969,
+      "source": "coinex",
+      "volume_usd": 13549.641958156906
+    },
+    "2026-04-18": {
+      "high_usd": 0.00014011,
+      "low_usd": 0.000126,
+      "market_cap_usd": 14481448.415445043,
+      "open_usd": 0.00013969,
+      "price_usd": 0.00012934,
+      "source": "coinex",
+      "volume_usd": 9087.455991946592
+    },
+    "2026-04-19": {
+      "high_usd": 0.00012937,
+      "low_usd": 0.00012247,
+      "market_cap_usd": 13398651.96196719,
+      "open_usd": 0.00012934,
+      "price_usd": 0.00012247,
+      "source": "coinex",
+      "volume_usd": 6115.853997132631
+    },
+    "2026-04-20": {
+      "high_usd": 0.00012884,
+      "low_usd": 0.00012247,
+      "market_cap_usd": 12661258.773521913,
+      "open_usd": 0.00012247,
+      "price_usd": 0.00012749,
+      "source": "coinex",
+      "volume_usd": 5330.895985257701
+    },
+    "2026-04-21": {
+      "high_usd": 0.00012749,
+      "low_usd": 0.0001185,
+      "market_cap_usd": 12910208.737617284,
+      "open_usd": 0.00012749,
+      "price_usd": 0.00012042,
+      "source": "coinex",
+      "volume_usd": 12125.20468042271
+    },
+    "2026-04-22": {
+      "high_usd": 0.00012335,
+      "low_usd": 0.00011707,
+      "market_cap_usd": 12407158.626807041,
+      "open_usd": 0.00012042,
+      "price_usd": 0.00011976,
+      "source": "coinex",
+      "volume_usd": 9744.315020682823
+    },
+    "2026-04-23": {
+      "high_usd": 0.00012001,
+      "low_usd": 0.000111,
+      "market_cap_usd": 12403241.741756465,
+      "open_usd": 0.00011976,
+      "price_usd": 0.00011727,
+      "source": "coinex",
+      "volume_usd": 19799.27170210335
+    },
+    "2026-04-24": {
+      "high_usd": 0.00011948,
+      "low_usd": 0.00010526,
+      "market_cap_usd": 11919927.509713933,
+      "open_usd": 0.0001172,
+      "price_usd": 0.00011316,
+      "source": "coinex",
+      "volume_usd": 15257.282902233237
+    },
+    "2026-04-25": {
+      "high_usd": 0.00013025,
+      "low_usd": 0.00011288,
+      "market_cap_usd": 11536913.468479168,
+      "open_usd": 0.00011316,
+      "price_usd": 0.00012936,
+      "source": "coinex",
+      "volume_usd": 7135.467657361519
+    },
+    "2026-04-26": {
+      "high_usd": 0.00012937,
+      "low_usd": 0.00012163,
+      "market_cap_usd": 13190924.797749467,
+      "open_usd": 0.00012937,
+      "price_usd": 0.00012542,
+      "source": "coinex",
+      "volume_usd": 9325.770430745388
+    },
+    "2026-04-27": {
+      "high_usd": 0.00012757,
+      "low_usd": 0.00012178,
+      "market_cap_usd": 12754669.566448672,
+      "open_usd": 0.00012542,
+      "price_usd": 0.00012355,
+      "source": "coinex",
+      "volume_usd": 4169.141217898309
+    },
+    "2026-04-28": {
+      "high_usd": 0.00012376,
+      "low_usd": 0.00010932,
+      "market_cap_usd": 12532551.7658883,
+      "open_usd": 0.00012355,
+      "price_usd": 0.00011545,
+      "source": "coinex",
+      "volume_usd": 14665.28057714281
+    },
+    "2026-04-29": {
+      "high_usd": 0.000128,
+      "low_usd": 0.00011261,
+      "market_cap_usd": 11746427.531458165,
+      "open_usd": 0.00011538,
+      "price_usd": 0.00012377,
+      "source": "coinex",
+      "volume_usd": 12713.219091235445
+    },
+    "2026-04-30": {
+      "high_usd": 0.0001242,
+      "low_usd": 0.00011676,
+      "market_cap_usd": 12580677.720042774,
+      "open_usd": 0.00012377,
+      "price_usd": 0.00012148,
+      "source": "coinex",
+      "volume_usd": 9770.841023335477
+    },
+    "2026-05-01": {
+      "high_usd": 0.00012426,
+      "low_usd": 0.00012023,
+      "market_cap_usd": 12503491.643121481,
+      "open_usd": 0.00012133,
+      "price_usd": 0.00012277,
+      "source": "coinex",
+      "volume_usd": 4469.518669333833
+    },
+    "2026-05-02": {
+      "high_usd": 0.00012511,
+      "low_usd": 0.00012088,
+      "market_cap_usd": 12633011.649363643,
+      "open_usd": 0.00012277,
+      "price_usd": 0.00012471,
+      "source": "coinex",
+      "volume_usd": 5087.2976179928355
+    },
+    "2026-05-03": {
+      "high_usd": 0.000126,
+      "low_usd": 0.00012175,
+      "market_cap_usd": 12730616.106388476,
+      "open_usd": 0.00012471,
+      "price_usd": 0.00012338,
+      "source": "coinex",
+      "volume_usd": 4901.689085654291
+    },
+    "2026-05-04": {
+      "high_usd": 0.00012518,
+      "low_usd": 0.00011273,
+      "market_cap_usd": 12784152.91073068,
+      "open_usd": 0.00012338,
+      "price_usd": 0.00011332,
+      "source": "coinex",
+      "volume_usd": 11894.864165600917
+    },
+    "2026-05-05": {
+      "high_usd": 0.00011398,
+      "low_usd": 0.00010831,
+      "market_cap_usd": 11707459.616770023,
+      "open_usd": 0.00011322,
+      "price_usd": 0.00011326,
+      "source": "coinex",
+      "volume_usd": 7054.5393039724295
+    },
+    "2026-05-06": {
+      "high_usd": 0.00011565,
+      "low_usd": 0.00010917,
+      "market_cap_usd": 11415823.278414052,
+      "open_usd": 0.00011326,
+      "price_usd": 0.0001107,
+      "source": "coinex",
+      "volume_usd": 8869.282919014584
+    },
+    "2026-05-07": {
+      "high_usd": 0.00011233,
+      "low_usd": 0.00010705,
+      "market_cap_usd": 11437779.914722016,
+      "open_usd": 0.00011053,
+      "price_usd": 0.00010945,
+      "source": "coinex",
+      "volume_usd": 11163.156232649942
+    },
+    "2026-05-08": {
+      "high_usd": 0.00012292,
+      "low_usd": 0.00010741,
+      "market_cap_usd": 11249524.747349132,
+      "open_usd": 0.00010977,
+      "price_usd": 0.00011856,
+      "source": "coinex",
+      "volume_usd": 11305.997776919186
+    },
+    "2026-05-09": {
+      "high_usd": 0.00013654,
+      "low_usd": 0.0001174,
+      "market_cap_usd": 12402238.574741818,
+      "open_usd": 0.00011856,
+      "price_usd": 0.0001341,
+      "source": "coinex",
+      "volume_usd": 15130.018334129656
+    },
+    "2026-05-10": {
+      "high_usd": 0.00014317,
+      "low_usd": 0.000127,
+      "market_cap_usd": 13638164.914259173,
+      "open_usd": 0.0001341,
+      "price_usd": 0.00012794,
+      "source": "coinex",
+      "volume_usd": 14267.679652438143
+    },
+    "2026-05-11": {
+      "high_usd": 0.00013587,
+      "low_usd": 0.00012128,
+      "market_cap_usd": 13292924.854148192,
+      "open_usd": 0.00012787,
+      "price_usd": 0.00013427,
+      "source": "coinex",
+      "volume_usd": 9114.019002863208
+    },
+    "2026-05-12": {
+      "high_usd": 0.00013991,
+      "low_usd": 0.00012992,
+      "market_cap_usd": 13704569.862825979,
+      "open_usd": 0.00013432,
+      "price_usd": 0.00013803,
+      "source": "coinex",
+      "volume_usd": 11075.284964762588
+    },
+    "2026-05-13": {
+      "high_usd": 0.00013991,
+      "low_usd": 0.000119,
+      "market_cap_usd": 14176811.132306078,
+      "open_usd": 0.00013803,
+      "price_usd": 0.00012692,
+      "source": "coinex",
+      "volume_usd": 24451.168129937727
+    },
+    "2026-05-14": {
+      "high_usd": 0.00013,
+      "low_usd": 0.00012055,
+      "market_cap_usd": 12866643.884112457,
+      "open_usd": 0.00012692,
+      "price_usd": 0.00012598,
+      "source": "coinex",
+      "volume_usd": 9767.141924868187
+    },
+    "2026-05-15": {
+      "high_usd": 0.00012709,
+      "low_usd": 0.00012379,
+      "market_cap_usd": 12700491.601171631,
+      "open_usd": 0.00012598,
+      "price_usd": 0.00012496,
+      "source": "coinex",
+      "volume_usd": 4113.442658343086
+    },
+    "2026-05-16": {
+      "high_usd": 0.0001257,
+      "low_usd": 0.00012051,
+      "market_cap_usd": 12714258.64346695,
+      "open_usd": 0.00012496,
+      "price_usd": 0.00012371,
+      "source": "coinex",
+      "volume_usd": 5792.823799838216
+    },
+    "2026-05-17": {
+      "high_usd": 0.00012646,
+      "low_usd": 0.0001209,
+      "market_cap_usd": 12512974.927215327,
+      "open_usd": 0.00012371,
+      "price_usd": 0.0001224,
+      "source": "coinex",
+      "volume_usd": 4803.227134034737
+    },
+    "2026-05-18": {
+      "high_usd": 0.00012271,
+      "low_usd": 0.00011801,
+      "market_cap_usd": 12621220.263072712,
+      "open_usd": 0.0001224,
+      "price_usd": 0.00011865,
+      "source": "coinex",
+      "volume_usd": 6630.455792264091
+    },
+    "2026-05-19": {
+      "high_usd": 0.00012,
+      "low_usd": 0.0001163,
+      "market_cap_usd": 12408542.84617722,
+      "open_usd": 0.00011865,
+      "price_usd": 0.0001195,
+      "source": "coinex",
+      "volume_usd": 3698.732663367341
+    },
     "2026-05-20": {
-      "market_cap_usd": 13828243.844085867,
-      "price_usd": 0.00013468950170035063,
-      "volume_usd": 143064.9249350719
+      "high_usd": 0.000135,
+      "low_usd": 0.0001105,
+      "market_cap_usd": 12297051.167104138,
+      "open_usd": 0.00011957,
+      "price_usd": 0.00013169,
+      "source": "coinex",
+      "volume_usd": 22419.073665838627
     },
     "2026-05-21": {
-      "market_cap_usd": 13384368.036713427,
-      "price_usd": 0.00013036607408467373,
-      "volume_usd": 97360.7085870456
+      "high_usd": 0.000135,
+      "low_usd": 0.00012513,
+      "market_cap_usd": 13577691.006544553,
+      "open_usd": 0.00013169,
+      "price_usd": 0.00013079,
+      "source": "coinex",
+      "volume_usd": 7814.509172397901
     },
     "2026-05-22": {
-      "market_cap_usd": 13791305.045469854,
-      "price_usd": 0.00013432971137302514,
-      "volume_usd": 108778.42108123489
+      "high_usd": 0.00013648,
+      "low_usd": 0.00012593,
+      "market_cap_usd": 13371846.93097875,
+      "open_usd": 0.00013079,
+      "price_usd": 0.00013073,
+      "source": "coinex",
+      "volume_usd": 9109.812634897724
     },
     "2026-05-23": {
-      "market_cap_usd": 14352774.71254876,
-      "price_usd": 0.00013979852364820518,
-      "volume_usd": 117416.06417048661
+      "high_usd": 0.00014132,
+      "low_usd": 0.0001304,
+      "market_cap_usd": 13640824.293719726,
+      "open_usd": 0.00013073,
+      "price_usd": 0.00014061,
+      "source": "coinex",
+      "volume_usd": 9492.0025274582
     },
     "2026-05-24": {
-      "market_cap_usd": 15522220.02411651,
-      "price_usd": 0.00015118912451240942,
-      "volume_usd": 143347.3609495132
+      "high_usd": 0.00015798,
+      "low_usd": 0.00014096,
+      "market_cap_usd": 14386246.054801736,
+      "open_usd": 0.00014096,
+      "price_usd": 0.00015258,
+      "source": "coinex",
+      "volume_usd": 18075.849711858187
     },
     "2026-05-25": {
-      "market_cap_usd": 14807656.867923116,
-      "price_usd": 0.0001442291550089587,
-      "volume_usd": 104538.49900692239
+      "high_usd": 0.00015597,
+      "low_usd": 0.00014027,
+      "market_cap_usd": 15568275.171053719,
+      "open_usd": 0.00015258,
+      "price_usd": 0.00014273,
+      "source": "coinex",
+      "volume_usd": 13295.672995771352
     },
     "2026-05-26": {
-      "market_cap_usd": 13565949.34444067,
-      "price_usd": 0.0001321347076242349,
-      "volume_usd": 105345.1632645244
+      "high_usd": 0.00014322,
+      "low_usd": 0.00013116,
+      "market_cap_usd": 14826101.419125931,
+      "open_usd": 0.00014273,
+      "price_usd": 0.00013232,
+      "source": "coinex",
+      "volume_usd": 9873.397680995715
     },
     "2026-05-27": {
-      "market_cap_usd": 13572145.612051046,
-      "price_usd": 0.0001321950603491545,
-      "volume_usd": 90053.95819354008
+      "high_usd": 0.00013538,
+      "low_usd": 0.00013142,
+      "market_cap_usd": 13464435.463572735,
+      "open_usd": 0.00013232,
+      "price_usd": 0.00013518,
+      "source": "coinex",
+      "volume_usd": 5110.767001087685
     },
     "2026-05-28": {
-      "market_cap_usd": 13328114.665869473,
-      "price_usd": 0.00012981815646235197,
-      "volume_usd": 107589.41421500125
+      "high_usd": 0.00013542,
+      "low_usd": 0.00012713,
+      "market_cap_usd": 13615536.651418334,
+      "open_usd": 0.00013518,
+      "price_usd": 0.00012782,
+      "source": "coinex",
+      "volume_usd": 7605.077921492356
     },
     "2026-05-29": {
-      "market_cap_usd": 14325594.055165077,
-      "price_usd": 0.0001395337793147834,
-      "volume_usd": 98921.06645456876
+      "high_usd": 0.00014144,
+      "low_usd": 0.00012774,
+      "market_cap_usd": 13333939.019394815,
+      "open_usd": 0.00012782,
+      "price_usd": 0.0001395,
+      "source": "coinex",
+      "volume_usd": 7301.047343356153
     },
     "2026-05-30": {
-      "market_cap_usd": 13928185.899803024,
-      "price_usd": 0.00013566295471688892,
-      "volume_usd": 44992.84635027399
+      "high_usd": 0.00013969,
+      "low_usd": 0.00013595,
+      "market_cap_usd": 14333963.130682359,
+      "open_usd": 0.0001395,
+      "price_usd": 0.00013754,
+      "source": "coinex",
+      "volume_usd": 3642.1694852713176
     },
     "2026-05-31": {
-      "market_cap_usd": 14100580.866171662,
-      "price_usd": 0.00013734211169283213,
-      "volume_usd": 95595.30726743882
+      "high_usd": 0.00013776,
+      "low_usd": 0.00013149,
+      "market_cap_usd": 13950333.160186432,
+      "open_usd": 0.00013754,
+      "price_usd": 0.00013505,
+      "source": "coinex",
+      "volume_usd": 6712.177478198023
     },
     "2026-06-01": {
-      "market_cap_usd": 13454488.6241754,
-      "price_usd": 0.00013104906081029676,
-      "volume_usd": 95036.75985083969
+      "high_usd": 0.00013885,
+      "low_usd": 0.0001266,
+      "market_cap_usd": 14055391.10458479,
+      "open_usd": 0.00013505,
+      "price_usd": 0.00012757,
+      "source": "coinex",
+      "volume_usd": 14268.18535970585
     },
     "2026-06-02": {
-      "market_cap_usd": 12394122.597053085,
-      "price_usd": 0.00012072091116068184,
-      "volume_usd": 112814.86524764824
+      "high_usd": 0.0001329,
+      "low_usd": 0.0001185,
+      "market_cap_usd": 13290977.896709546,
+      "open_usd": 0.00012757,
+      "price_usd": 0.00011912,
+      "source": "coinex",
+      "volume_usd": 16144.56658731896
     },
     "2026-06-03": {
-      "market_cap_usd": 12641828.904659024,
-      "price_usd": 0.00012313361370741533,
-      "volume_usd": 91082.68647009615
+      "high_usd": 0.00012845,
+      "low_usd": 0.00011852,
+      "market_cap_usd": 12399747.786440792,
+      "open_usd": 0.00011912,
+      "price_usd": 0.00012158,
+      "source": "coinex",
+      "volume_usd": 10873.78224467501
     },
     "2026-06-04": {
-      "market_cap_usd": 12260401.399474341,
-      "price_usd": 0.00011941844342351087,
-      "volume_usd": 106831.18519922136
+      "high_usd": 0.00012453,
+      "low_usd": 0.000118,
+      "market_cap_usd": 12589362.826588618,
+      "open_usd": 0.00012158,
+      "price_usd": 0.00011803,
+      "source": "coinex",
+      "volume_usd": 7808.691022312639
     },
     "2026-06-05": {
-      "market_cap_usd": 11912854.63227754,
-      "price_usd": 0.00011603327742419092,
-      "volume_usd": 87505.71260753291
+      "high_usd": 0.00012013,
+      "low_usd": 0.00011394,
+      "market_cap_usd": 12321139.324543174,
+      "open_usd": 0.00011803,
+      "price_usd": 0.00011478,
+      "source": "coinex",
+      "volume_usd": 6223.798523316887
     },
     "2026-06-06": {
-      "market_cap_usd": 11658987.915645199,
-      "price_usd": 0.0001135605714213865,
-      "volume_usd": 84838.54538121479
+      "high_usd": 0.00011501,
+      "low_usd": 0.00011295,
+      "market_cap_usd": 11814735.29773608,
+      "open_usd": 0.00011478,
+      "price_usd": 0.00011333,
+      "source": "coinex",
+      "volume_usd": 6401.475110942298
     },
     "2026-06-07": {
-      "market_cap_usd": 11984058.42864618,
-      "price_usd": 0.00011672681479308589,
-      "volume_usd": 97014.7699475587
+      "high_usd": 0.00012037,
+      "low_usd": 0.00011296,
+      "market_cap_usd": 11727942.791964576,
+      "open_usd": 0.00011333,
+      "price_usd": 0.00011736,
+      "source": "coinex",
+      "volume_usd": 9812.724064606098
     },
     "2026-06-08": {
-      "market_cap_usd": 11659554.554769617,
-      "price_usd": 0.00011356609058507586,
-      "volume_usd": 69831.83571090462
+      "high_usd": 0.00011736,
+      "low_usd": 0.0001118,
+      "market_cap_usd": 11964382.85900952,
+      "open_usd": 0.00011736,
+      "price_usd": 0.00011465,
+      "source": "coinex",
+      "volume_usd": 5236.282776126959
     },
     "2026-06-09": {
-      "market_cap_usd": 11509137.493945707,
-      "price_usd": 0.0001121010022341593,
-      "volume_usd": 42549.65121357245
+      "high_usd": 0.00011484,
+      "low_usd": 0.00011088,
+      "market_cap_usd": 11679609.172784962,
+      "open_usd": 0.00011465,
+      "price_usd": 0.00011209,
+      "source": "coinex",
+      "volume_usd": 3525.242839877988
     },
     "2026-06-10": {
-      "market_cap_usd": 11984517.874957833,
-      "price_usd": 0.00011673128988012314,
-      "volume_usd": 95016.55770835627
+      "high_usd": 0.00011988,
+      "low_usd": 0.0001105,
+      "market_cap_usd": 11512105.728685662,
+      "open_usd": 0.0001117,
+      "price_usd": 0.00011799,
+      "source": "coinex",
+      "volume_usd": 6672.861346486422
     },
     "2026-06-11": {
-      "market_cap_usd": 11972480.079938874,
-      "price_usd": 0.00011661403966158812,
-      "volume_usd": 83325.21752991968
+      "high_usd": 0.00012032,
+      "low_usd": 0.00011543,
+      "market_cap_usd": 12047991.887311408,
+      "open_usd": 0.00011799,
+      "price_usd": 0.00011886,
+      "source": "coinex",
+      "volume_usd": 3932.936588637616
     },
     "2026-06-12": {
-      "market_cap_usd": 11722242.33906388,
-      "price_usd": 0.00011417668051424494,
-      "volume_usd": 85965.78503223666
+      "high_usd": 0.000119,
+      "low_usd": 0.00011285,
+      "market_cap_usd": 12036380.565596038,
+      "open_usd": 0.00011886,
+      "price_usd": 0.00011516,
+      "source": "coinex",
+      "volume_usd": 5240.132005328352
     },
     "2026-06-13": {
-      "market_cap_usd": 11626028.562625576,
-      "price_usd": 0.00011323954158675009,
-      "volume_usd": 78784.11157254386
+      "high_usd": 0.00011628,
+      "low_usd": 0.00011341,
+      "market_cap_usd": 11742543.216892194,
+      "open_usd": 0.00011516,
+      "price_usd": 0.00011541,
+      "source": "coinex",
+      "volume_usd": 3319.229685328258
     },
     "2026-06-14": {
-      "market_cap_usd": 11803178.762803156,
-      "price_usd": 0.00011496501536759033,
-      "volume_usd": 84476.39694511169
+      "high_usd": 0.00011743,
+      "low_usd": 0.00011109,
+      "market_cap_usd": 11630269.475594098,
+      "open_usd": 0.00011541,
+      "price_usd": 0.00011538,
+      "source": "coinex",
+      "volume_usd": 4394.958654383703
     },
     "2026-06-15": {
-      "market_cap_usd": 11418182.19086226,
-      "price_usd": 0.00011121508175232218,
-      "volume_usd": 74484.8603552561
+      "high_usd": 0.00011746,
+      "low_usd": 0.00011361,
+      "market_cap_usd": 11853018.512326634,
+      "open_usd": 0.00011538,
+      "price_usd": 0.00011394,
+      "source": "coinex",
+      "volume_usd": 4792.99060333538
     },
     "2026-06-16": {
-      "market_cap_usd": 11369680.555611834,
-      "price_usd": 0.0001107426673837886,
-      "volume_usd": 51032.744484128125
+      "high_usd": 0.00011755,
+      "low_usd": 0.0001105,
+      "market_cap_usd": 11490102.873374244,
+      "open_usd": 0.00011398,
+      "price_usd": 0.0001105,
+      "source": "coinex",
+      "volume_usd": 5294.098474608143
     },
     "2026-06-17": {
-      "market_cap_usd": 11121245.586459484,
-      "price_usd": 0.00010832286754677728,
-      "volume_usd": 92017.1112899092
+      "high_usd": 0.00011204,
+      "low_usd": 0.00010818,
+      "market_cap_usd": 11417534.047407987,
+      "open_usd": 0.0001105,
+      "price_usd": 0.00010937,
+      "source": "coinex",
+      "volume_usd": 4921.210632135278
     },
     "2026-06-18": {
-      "market_cap_usd": 11431940.151254285,
-      "price_usd": 0.00011134908668096737,
-      "volume_usd": 81172.67655755172
+      "high_usd": 0.00011628,
+      "low_usd": 0.00010889,
+      "market_cap_usd": 11128219.249758111,
+      "open_usd": 0.00010937,
+      "price_usd": 0.00010937,
+      "source": "coinex",
+      "volume_usd": 4484.964985589303
     },
     "2026-06-19": {
-      "market_cap_usd": 11031386.736210149,
-      "price_usd": 0.00010744762670637037,
-      "volume_usd": 88870.06642007902
+      "high_usd": 0.00011245,
+      "low_usd": 0.00010549,
+      "market_cap_usd": 11493224.451283881,
+      "open_usd": 0.00010937,
+      "price_usd": 0.00010867,
+      "source": "coinex",
+      "volume_usd": 4857.309585990706
     },
     "2026-06-20": {
-      "market_cap_usd": 10855793.381437413,
-      "price_usd": 0.00010573731687072572,
-      "volume_usd": 87647.38765159782
+      "high_usd": 0.00010901,
+      "low_usd": 0.00010146,
+      "market_cap_usd": 10980880.843266066,
+      "open_usd": 0.00010863,
+      "price_usd": 0.00010502,
+      "source": "coinex",
+      "volume_usd": 6450.913226127736
     },
     "2026-06-21": {
-      "market_cap_usd": 10650309.296528429,
-      "price_usd": 0.00010373586612138992,
-      "volume_usd": 79483.79063619085
+      "high_usd": 0.00010632,
+      "low_usd": 0.00010419,
+      "market_cap_usd": 10754265.309727548,
+      "open_usd": 0.00010502,
+      "price_usd": 0.00010547,
+      "source": "coinex",
+      "volume_usd": 3282.5617157042743
     },
     "2026-06-22": {
-      "market_cap_usd": 10724507.127056902,
-      "price_usd": 0.00010445856590408151,
-      "volume_usd": 87307.26740343022
+      "high_usd": 0.00010678,
+      "low_usd": 0.00010255,
+      "market_cap_usd": 10648268.344708996,
+      "open_usd": 0.0001051,
+      "price_usd": 0.00010364,
+      "source": "coinex",
+      "volume_usd": 4337.171195444419
     },
     "2026-06-23": {
-      "market_cap_usd": 10035113.669115279,
-      "price_usd": 9.774375364212165e-05,
-      "volume_usd": 105554.47134507318
+      "high_usd": 0.00010364,
+      "low_usd": 9.501e-05,
+      "market_cap_usd": 10715678.77147753,
+      "open_usd": 0.00010364,
+      "price_usd": 9.886e-05,
+      "source": "coinex",
+      "volume_usd": 8504.124931184033
     },
     "2026-06-24": {
-      "market_cap_usd": 9622257.998218376,
-      "price_usd": 9.372246755444175e-05,
-      "volume_usd": 101135.76678349622
+      "high_usd": 9.999e-05,
+      "low_usd": 9.147e-05,
+      "market_cap_usd": 10181685.247211603,
+      "open_usd": 9.886e-05,
+      "price_usd": 9.527e-05,
+      "source": "coinex",
+      "volume_usd": 12416.2726130139
     },
     "2026-06-25": {
-      "market_cap_usd": 9357778.544018138,
-      "price_usd": 9.114639164069178e-05,
-      "volume_usd": 85908.93130954605
+      "high_usd": 9.527e-05,
+      "low_usd": 9.009e-05,
+      "market_cap_usd": 9633271.297222583,
+      "open_usd": 9.527e-05,
+      "price_usd": 9.215e-05,
+      "source": "coinex",
+      "volume_usd": 5456.98186647559
     },
     "2026-06-26": {
-      "market_cap_usd": 8522725.14763598,
-      "price_usd": 8.301282622775605e-05,
-      "volume_usd": 109509.472943558
+      "high_usd": 9.215e-05,
+      "low_usd": 8.021e-05,
+      "market_cap_usd": 9354824.42891164,
+      "open_usd": 9.215e-05,
+      "price_usd": 8.362e-05,
+      "source": "coinex",
+      "volume_usd": 13466.528704162742
     },
     "2026-06-27": {
-      "market_cap_usd": 8629452.998518482,
-      "price_usd": 8.405237407020038e-05,
-      "volume_usd": 96935.54225459369
+      "high_usd": 9.189e-05,
+      "low_usd": 8.296e-05,
+      "market_cap_usd": 8511041.935055865,
+      "open_usd": 8.362e-05,
+      "price_usd": 8.441e-05,
+      "source": "coinex",
+      "volume_usd": 13477.24599486728
     },
     "2026-06-28": {
-      "market_cap_usd": 8498598.574394839,
-      "price_usd": 8.277782920541353e-05,
-      "volume_usd": 90712.93746211877
+      "high_usd": 8.531e-05,
+      "low_usd": 8.117e-05,
+      "market_cap_usd": 8610036.523949618,
+      "open_usd": 8.417e-05,
+      "price_usd": 8.141e-05,
+      "source": "coinex",
+      "volume_usd": 6152.941716890232
     },
     "2026-06-29": {
-      "market_cap_usd": 8150288.625706768,
-      "price_usd": 7.938522968554498e-05,
-      "volume_usd": 89464.84074020437
+      "high_usd": 8.231e-05,
+      "low_usd": 7.855e-05,
+      "market_cap_usd": 8388664.213609127,
+      "open_usd": 8.141e-05,
+      "price_usd": 8.028e-05,
+      "source": "coinex",
+      "volume_usd": 7908.951441179039
     },
     "2026-06-30": {
-      "market_cap_usd": 8362018.0087811155,
-      "price_usd": 8.144751072593922e-05,
-      "volume_usd": 91527.52443437646
+      "high_usd": 8.279e-05,
+      "low_usd": 7.853e-05,
+      "market_cap_usd": 8160938.107240638,
+      "open_usd": 8.028e-05,
+      "price_usd": 8.192e-05,
+      "source": "coinex",
+      "volume_usd": 6155.60554126996
     },
     "2026-07-01": {
-      "market_cap_usd": 7731364.249969022,
-      "price_usd": 7.530483335652166e-05,
-      "volume_usd": 101847.46130327223
+      "high_usd": 8.212e-05,
+      "low_usd": 7.046e-05,
+      "market_cap_usd": 8485984.542203667,
+      "open_usd": 8.192e-05,
+      "price_usd": 7.422e-05,
+      "source": "coinex",
+      "volume_usd": 11499.019033604189
     },
     "2026-07-02": {
-      "market_cap_usd": 7772210.416303649,
-      "price_usd": 7.570268212546229e-05,
-      "volume_usd": 101591.59403188378
+      "high_usd": 7.868e-05,
+      "low_usd": 7e-05,
+      "market_cap_usd": 7697092.334820547,
+      "open_usd": 7.433e-05,
+      "price_usd": 7.794e-05,
+      "source": "coinex",
+      "volume_usd": 9535.202885179962
     },
     "2026-07-03": {
-      "market_cap_usd": 8859894.766470127,
-      "price_usd": 8.62969169959913e-05,
-      "volume_usd": 95277.08630058459
+      "high_usd": 8.88e-05,
+      "low_usd": 7.768e-05,
+      "market_cap_usd": 8000469.819492115,
+      "open_usd": 7.789e-05,
+      "price_usd": 8.847e-05,
+      "source": "coinex",
+      "volume_usd": 9385.689501325669
     },
     "2026-07-04": {
-      "market_cap_usd": 9485150.554743009,
-      "price_usd": 9.23870171928975e-05,
-      "volume_usd": 101676.24231776972
+      "high_usd": 9.64e-05,
+      "low_usd": 8.747e-05,
+      "market_cap_usd": 8932915.663215928,
+      "open_usd": 8.847e-05,
+      "price_usd": 9.381e-05,
+      "source": "coinex",
+      "volume_usd": 8733.568715542418
     },
     "2026-07-05": {
-      "market_cap_usd": 9100186.34571214,
-      "price_usd": 8.863739879800544e-05,
-      "volume_usd": 92685.32623033719
+      "high_usd": 9.465e-05,
+      "low_usd": 8.56e-05,
+      "market_cap_usd": 9527490.564139705,
+      "open_usd": 9.381e-05,
+      "price_usd": 8.874e-05,
+      "source": "coinex",
+      "volume_usd": 7229.248448908845
     },
     "2026-07-06": {
-      "market_cap_usd": 8322861.1308683315,
-      "price_usd": 8.106611592023004e-05,
-      "volume_usd": 91515.28283447743
+      "high_usd": 8.85e-05,
+      "low_usd": 8.026e-05,
+      "market_cap_usd": 9108674.644335238,
+      "open_usd": 8.842e-05,
+      "price_usd": 8.174e-05,
+      "source": "coinex",
+      "volume_usd": 6839.650825564497
     },
     "2026-07-07": {
-      "market_cap_usd": 8282609.763803449,
-      "price_usd": 8.06740605996952e-05,
-      "volume_usd": 81375.36549862807
+      "high_usd": 8.341e-05,
+      "low_usd": 8e-05,
+      "market_cap_usd": 8303767.149074185,
+      "open_usd": 8.174e-05,
+      "price_usd": 8.145e-05,
+      "source": "coinex",
+      "volume_usd": 5168.931876742922
     },
     "2026-07-08": {
-      "market_cap_usd": 7874208.424259518,
-      "price_usd": 7.66961604746223e-05,
-      "volume_usd": 82221.25857656641
+      "high_usd": 8.149e-05,
+      "low_usd": 7.689e-05,
+      "market_cap_usd": 8301738.463047509,
+      "open_usd": 8.145e-05,
+      "price_usd": 7.769e-05,
+      "source": "coinex",
+      "volume_usd": 4521.557650586904
     },
     "2026-07-09": {
-      "market_cap_usd": 7544958.222382319,
-      "price_usd": 7.348920620583812e-05,
-      "volume_usd": 143693.20807716262
+      "high_usd": 7.978e-05,
+      "low_usd": 6.495e-05,
+      "market_cap_usd": 7834365.764585157,
+      "open_usd": 7.769e-05,
+      "price_usd": 7.223e-05,
+      "source": "coinex",
+      "volume_usd": 18910.810213568075
     },
     "2026-07-10": {
-      "market_cap_usd": 7244065.6113251895,
-      "price_usd": 7.055845980697887e-05,
-      "volume_usd": 92361.11396568363
+      "high_usd": 7.363e-05,
+      "low_usd": 6.758e-05,
+      "market_cap_usd": 7362060.201452725,
+      "open_usd": 7.223e-05,
+      "price_usd": 7.164e-05,
+      "source": "coinex",
+      "volume_usd": 6512.465573162123
     },
     "2026-07-11": {
-      "market_cap_usd": 7519924.85881018,
-      "price_usd": 7.324537688785446e-05,
-      "volume_usd": 97307.50206503236
+      "high_usd": 7.365e-05,
+      "low_usd": 6.908e-05,
+      "market_cap_usd": 7214581.024752494,
+      "open_usd": 7.164e-05,
+      "price_usd": 7.329e-05,
+      "source": "coinex",
+      "volume_usd": 4262.782594112806
     },
     "2026-07-12": {
-      "market_cap_usd": 7249442.227689704,
-      "price_usd": 7.061082898611221e-05,
-      "volume_usd": 90230.36655223306
+      "high_usd": 7.56e-05,
+      "low_usd": 7.052e-05,
+      "market_cap_usd": 7558581.817961315,
+      "open_usd": 7.329e-05,
+      "price_usd": 7.188e-05,
+      "source": "coinex",
+      "volume_usd": 6002.356107355373
     },
     "2026-07-13": {
-      "market_cap_usd": 6770326.2549425615,
-      "price_usd": 6.594415602650926e-05,
-      "volume_usd": 95455.87559647812
+      "high_usd": 7.205e-05,
+      "low_usd": 6.432e-05,
+      "market_cap_usd": 7236179.001491221,
+      "open_usd": 7.182e-05,
+      "price_usd": 6.616e-05,
+      "source": "coinex",
+      "volume_usd": 9131.868995979019
     },
     "2026-07-14": {
-      "market_cap_usd": 6851124.628896575,
-      "price_usd": 6.673114625092009e-05,
-      "volume_usd": 91051.77863833969
+      "high_usd": 7.039e-05,
+      "low_usd": 6.49e-05,
+      "market_cap_usd": 6766240.086366524,
+      "open_usd": 6.616e-05,
+      "price_usd": 6.495e-05,
+      "source": "coinex",
+      "volume_usd": 8513.734105725865
     },
     "2026-07-15": {
-      "market_cap_usd": 6820648.541005133,
-      "price_usd": 6.643430385081806e-05,
-      "volume_usd": 91483.22750446525
+      "high_usd": 6.983e-05,
+      "low_usd": 6.495e-05,
+      "market_cap_usd": 6768174.80426831,
+      "open_usd": 6.495e-05,
+      "price_usd": 6.829e-05,
+      "source": "coinex",
+      "volume_usd": 6870.010283342313
     },
     "2026-07-16": {
-      "market_cap_usd": 6589842.880505532,
-      "price_usd": 6.418621654827841e-05,
-      "volume_usd": 89076.14794141789
+      "high_usd": 6.853e-05,
+      "low_usd": 6.407e-05,
+      "market_cap_usd": 6802375.460467522,
+      "open_usd": 6.827e-05,
+      "price_usd": 6.515e-05,
+      "source": "coinex",
+      "volume_usd": 6209.3605426819395
     },
     "2026-07-17": {
-      "market_cap_usd": 6715748.486204331,
-      "price_usd": 6.541255906031798e-05,
-      "volume_usd": 96092.8142343678
+      "high_usd": 6.687e-05,
+      "low_usd": 6.177e-05,
+      "market_cap_usd": 6595507.644292887,
+      "open_usd": 6.515e-05,
+      "price_usd": 6.598e-05,
+      "source": "coinex",
+      "volume_usd": 6819.801823571964
     },
     "2026-07-18": {
-      "market_cap_usd": 7114875.640398921,
-      "price_usd": 6.930012700601487e-05,
-      "volume_usd": 92531.65866188756
+      "high_usd": 7.117e-05,
+      "low_usd": 6.363e-05,
+      "market_cap_usd": 6698964.674138129,
+      "open_usd": 6.602e-05,
+      "price_usd": 7.031e-05,
+      "source": "coinex",
+      "volume_usd": 6179.64427380442
     },
     "2026-07-19": {
-      "market_cap_usd": 7009114.628142749,
-      "price_usd": 6.826999634005898e-05,
-      "volume_usd": 80736.42778869602
+      "high_usd": 7.031e-05,
+      "low_usd": 6.843e-05,
+      "market_cap_usd": 7086559.890512793,
+      "open_usd": 7.031e-05,
+      "price_usd": 6.888e-05,
+      "source": "coinex",
+      "volume_usd": 3566.6543519393117
     },
     "2026-07-20": {
-      "market_cap_usd": 6711507.877387231,
-      "price_usd": 6.537125479240651e-05,
-      "volume_usd": 78155.8166872763
+      "high_usd": 6.914e-05,
+      "low_usd": 6.516e-05,
+      "market_cap_usd": 6965891.975727261,
+      "open_usd": 6.895e-05,
+      "price_usd": 6.531e-05,
+      "source": "coinex",
+      "volume_usd": 4101.278686669009
     },
     "2026-07-21": {
-      "market_cap_usd": 6931519.033836407,
-      "price_usd": 6.751420174682625e-05,
-      "volume_usd": 286974.03975498705
+      "high_usd": 7.129e-05,
+      "low_usd": 6.42e-05,
+      "market_cap_usd": 6684300.276461657,
+      "open_usd": 6.531e-05,
+      "price_usd": 6.6e-05,
+      "source": "coinex",
+      "volume_usd": 7028.148309132236
     },
     "2026-07-22": {
-      "market_cap_usd": 6713115.249020335,
-      "price_usd": 6.538691087185891e-05,
-      "volume_usd": 98080.92395355404
+      "high_usd": 7.119e-05,
+      "low_usd": 6.248e-05,
+      "market_cap_usd": 6818117.610897546,
+      "open_usd": 6.642e-05,
+      "price_usd": 6.404e-05,
+      "source": "coinex",
+      "volume_usd": 5426.768818667648
     },
     "2026-07-23": {
-      "market_cap_usd": 6459795.897683143,
-      "price_usd": 6.291953630229237e-05,
-      "volume_usd": 88897.64678392815
+      "high_usd": 6.627e-05,
+      "low_usd": 6.239e-05,
+      "market_cap_usd": 6671397.967497115,
+      "open_usd": 6.446e-05,
+      "price_usd": 6.399e-05,
+      "source": "coinex",
+      "volume_usd": 4436.468614979797
     },
     "2026-07-24": {
-      "market_cap_usd": 6629774.00827827,
-      "price_usd": 6.457515268237351e-05,
-      "volume_usd": 87451.71048363138
+      "high_usd": 6.479e-05,
+      "low_usd": 6.185e-05,
+      "market_cap_usd": 6451255.583678593,
+      "open_usd": 6.399e-05,
+      "price_usd": 6.387e-05,
+      "source": "coinex",
+      "volume_usd": 3008.675593273498
     },
     "2026-07-25": {
-      "market_cap_usd": 6642104.764415845,
-      "price_usd": 6.469525639319062e-05,
-      "volume_usd": 80052.76310332333
+      "high_usd": 6.621e-05,
+      "low_usd": 6.247e-05,
+      "market_cap_usd": 6614933.254754511,
+      "open_usd": 6.399e-05,
+      "price_usd": 6.462e-05,
+      "source": "coinex",
+      "volume_usd": 3707.941651183264
     },
     "2026-07-26": {
-      "market_cap_usd": 6446746.117755657,
-      "price_usd": 6.279242917462308e-05,
-      "volume_usd": 94165.61546373836
+      "high_usd": 7.1e-05,
+      "low_usd": 5.845e-05,
+      "market_cap_usd": 6655984.583917507,
+      "open_usd": 6.462e-05,
+      "price_usd": 6.271e-05,
+      "source": "coinex",
+      "volume_usd": 10797.237134716546
     },
     "2026-07-27": {
-      "market_cap_usd": 6914586.079619305,
-      "price_usd": 6.734927182575087e-05,
-      "volume_usd": 90951.9881687262
+      "high_usd": 6.671e-05,
+      "low_usd": 5.994e-05,
+      "market_cap_usd": 6433782.469067013,
+      "open_usd": 6.318e-05,
+      "price_usd": 6.343e-05,
+      "source": "coinex",
+      "volume_usd": 5381.21301893514
     },
     "2026-07-28": {
-      "market_cap_usd": 6656122.0710716285,
-      "price_usd": 6.483178739958128e-05,
-      "volume_usd": 84719.58366431485
+      "high_usd": 6.887e-05,
+      "low_usd": 6.317e-05,
+      "market_cap_usd": 6861491.01140469,
+      "open_usd": 6.343e-05,
+      "price_usd": 6.461e-05,
+      "source": "coinex",
+      "volume_usd": 5373.561365285321
     },
     "2026-07-29": {
-      "market_cap_usd": 6974654.68070825,
-      "price_usd": 6.793435045465915e-05,
-      "volume_usd": 89237.83542394354
+      "high_usd": 6.922e-05,
+      "low_usd": 6.367e-05,
+      "market_cap_usd": 6644255.602789184,
+      "open_usd": 6.51e-05,
+      "price_usd": 6.802e-05,
+      "source": "coinex",
+      "volume_usd": 4083.6426114878745
     },
     "2026-07-30": {
-      "market_cap_usd": 6954447.469853686,
-      "price_usd": 6.773752870408529e-05,
-      "volume_usd": 85000.77167667061
+      "high_usd": 6.871e-05,
+      "low_usd": 6.3e-05,
+      "market_cap_usd": 6953000.406491683,
+      "open_usd": 6.802e-05,
+      "price_usd": 6.741e-05,
+      "source": "coinex",
+      "volume_usd": 4312.311339936733
     },
     "2026-07-31": {
-      "market_cap_usd": 7014542.655229046,
-      "price_usd": 6.832286626856997e-05,
-      "volume_usd": 85931.03414909013
+      "high_usd": 7.038e-05,
+      "low_usd": 6.572e-05,
+      "market_cap_usd": 6962103.612019516,
+      "open_usd": 6.741e-05,
+      "price_usd": 7.038e-05,
+      "source": "coinex",
+      "volume_usd": 5640.855875464901
     },
     "2026-08-01": {
-      "market_cap_usd": 7304186.910217014,
-      "price_usd": 7.114405172165869e-05,
-      "volume_usd": 94917.04002705944
+      "high_usd": 7.215e-05,
+      "low_usd": 6.852e-05,
+      "market_cap_usd": 7032962.260276178,
+      "open_usd": 7.048e-05,
+      "price_usd": 7.007e-05,
+      "source": "coinex",
+      "volume_usd": 6029.266372142749
     },
     "2026-08-02": {
-      "market_cap_usd": 7102438.757207037,
-      "price_usd": 6.91789895992185e-05,
-      "volume_usd": 81227.36905079239
+      "high_usd": 7.104e-05,
+      "low_usd": 6.881e-05,
+      "market_cap_usd": 7300081.3417697335,
+      "open_usd": 7.007e-05,
+      "price_usd": 7.029e-05,
+      "source": "coinex",
+      "volume_usd": 4362.875763519382
     },
     "2026-08-03": {
-      "market_cap_usd": 6903421.652288244,
-      "price_usd": 6.724052836049635e-05,
-      "volume_usd": 92284.42721001618
+      "high_usd": 7.12e-05,
+      "low_usd": 6.282e-05,
+      "market_cap_usd": 7113636.16770026,
+      "open_usd": 7.029e-05,
+      "price_usd": 6.784e-05,
+      "source": "coinex",
+      "volume_usd": 8053.0541294688965
     },
     "2026-08-04": {
-      "market_cap_usd": 6431657.642295113,
-      "price_usd": 6.26454647976485e-05,
-      "volume_usd": 95951.68718408275
+      "high_usd": 6.823e-05,
+      "low_usd": 6.016e-05,
+      "market_cap_usd": 6869279.094222617,
+      "open_usd": 6.784e-05,
+      "price_usd": 6.395e-05,
+      "source": "coinex",
+      "volume_usd": 6864.437374794978
     },
     "2026-08-05": {
-      "market_cap_usd": 6637546.12738242,
-      "price_usd": 6.46508544751027e-05,
-      "volume_usd": 84341.06142526252
+      "high_usd": 6.768e-05,
+      "low_usd": 6.38e-05,
+      "market_cap_usd": 6481469.9201938575,
+      "open_usd": 6.395e-05,
+      "price_usd": 6.558e-05,
+      "source": "coinex",
+      "volume_usd": 3383.080913084087
     },
     "2026-08-06": {
-      "market_cap_usd": 6233744.704113219,
-      "price_usd": 6.0717758335112236e-05,
-      "volume_usd": 103926.1523248428
+      "high_usd": 6.926e-05,
+      "low_usd": 5.911e-05,
+      "market_cap_usd": 6632091.975788036,
+      "open_usd": 6.558e-05,
+      "price_usd": 6.139e-05,
+      "source": "coinex",
+      "volume_usd": 7902.051889757563
     },
     "2026-08-07": {
-      "market_cap_usd": 6387336.385366168,
-      "price_usd": 6.22137680415166e-05,
-      "volume_usd": 106769.47713517898
+      "high_usd": 6.855e-05,
+      "low_usd": 5.91e-05,
+      "market_cap_usd": 6244581.243848855,
+      "open_usd": 6.139e-05,
+      "price_usd": 6.152e-05,
+      "source": "coinex",
+      "volume_usd": 12136.877236484414
     },
     "2026-08-08": {
-      "market_cap_usd": 6325538.057675512,
-      "price_usd": 6.16118415744671e-05,
-      "volume_usd": 97676.5664486672
+      "high_usd": 6.318e-05,
+      "low_usd": 5.933e-05,
+      "market_cap_usd": 6339531.4782709405,
+      "open_usd": 6.143e-05,
+      "price_usd": 6.203e-05,
+      "source": "coinex",
+      "volume_usd": 5662.095159432479
     },
     "2026-08-09": {
-      "market_cap_usd": 6127086.820393244,
-      "price_usd": 5.967889198500796e-05,
-      "volume_usd": 86265.06049560406
+      "high_usd": 6.255e-05,
+      "low_usd": 5.904e-05,
+      "market_cap_usd": 6272322.210683969,
+      "open_usd": 6.191e-05,
+      "price_usd": 6.109e-05,
+      "source": "coinex",
+      "volume_usd": 5964.8916070125915
     },
     "2026-08-10": {
-      "market_cap_usd": 6078146.321288995,
-      "price_usd": 5.920220300615857e-05,
-      "volume_usd": 81737.46955959682
+      "high_usd": 6.216e-05,
+      "low_usd": 5.971e-05,
+      "market_cap_usd": 6129099.766087867,
+      "open_usd": 6.109e-05,
+      "price_usd": 6.053e-05,
+      "source": "coinex",
+      "volume_usd": 3801.804622045796
     },
     "2026-08-11": {
-      "market_cap_usd": 6421114.392361021,
-      "price_usd": 6.254277170834978e-05,
-      "volume_usd": 86671.33521318062
+      "high_usd": 6.444e-05,
+      "low_usd": 5.88e-05,
+      "market_cap_usd": 6102094.893263006,
+      "open_usd": 6.048e-05,
+      "price_usd": 6.36e-05,
+      "source": "coinex",
+      "volume_usd": 4379.932008496752
     },
     "2026-08-12": {
-      "market_cap_usd": 6450276.041397594,
-      "price_usd": 6.282681124524126e-05,
-      "volume_usd": 80808.57695063105
+      "high_usd": 6.413e-05,
+      "low_usd": 6.103e-05,
+      "market_cap_usd": 6421662.367904725,
+      "open_usd": 6.36e-05,
+      "price_usd": 6.185e-05,
+      "source": "coinex",
+      "volume_usd": 4788.047408650926
     },
     "2026-08-13": {
-      "market_cap_usd": 6544886.841499312,
-      "price_usd": 6.374833690423677e-05,
-      "volume_usd": 89637.03864860383
+      "high_usd": 6.597e-05,
+      "low_usd": 6.021e-05,
+      "market_cap_usd": 6414405.746045879,
+      "open_usd": 6.185e-05,
+      "price_usd": 6.433e-05,
+      "source": "coinex",
+      "volume_usd": 5792.438105351483
     },
     "2026-08-14": {
-      "market_cap_usd": 6863506.978719369,
-      "price_usd": 6.685175249321055e-05,
-      "volume_usd": 88213.97761687853
+      "high_usd": 6.773e-05,
+      "low_usd": 6.31e-05,
+      "market_cap_usd": 6550761.373142558,
+      "open_usd": 6.433e-05,
+      "price_usd": 6.646e-05,
+      "source": "coinex",
+      "volume_usd": 5048.8175848084165
     },
     "2026-08-15": {
-      "market_cap_usd": 7040049.150234302,
-      "price_usd": 6.857130396905567e-05,
-      "volume_usd": 90927.81112440035
+      "high_usd": 7.1e-05,
+      "low_usd": 6.521e-05,
+      "market_cap_usd": 6876073.296501401,
+      "open_usd": 6.646e-05,
+      "price_usd": 6.884e-05,
+      "source": "coinex",
+      "volume_usd": 5321.752099115773
     },
     "2026-08-16": {
-      "market_cap_usd": 8228510.037980238,
-      "price_usd": 8.01471198546945e-05,
-      "volume_usd": 103302.93199321037
+      "high_usd": 8.03e-05,
+      "low_usd": 6.828e-05,
+      "market_cap_usd": 7061501.256275306,
+      "open_usd": 6.876e-05,
+      "price_usd": 7.886e-05,
+      "source": "coinex",
+      "volume_usd": 7439.5573734311365
     },
     "2026-08-17": {
-      "market_cap_usd": 8014159.00560293,
-      "price_usd": 7.805930349381922e-05,
-      "volume_usd": 100191.72877895138
+      "high_usd": 8.061e-05,
+      "low_usd": 7.693e-05,
+      "market_cap_usd": 8243583.583294058,
+      "open_usd": 7.886e-05,
+      "price_usd": 7.72e-05,
+      "source": "coinex",
+      "volume_usd": 6036.49406188559
     },
     "2026-08-18": {
-      "market_cap_usd": 9405973.729791556,
-      "price_usd": 9.161582113798501e-05,
-      "volume_usd": 130384.80706044589
+      "high_usd": 0.00010002,
+      "low_usd": 7.685e-05,
+      "market_cap_usd": 8048528.08930445,
+      "open_usd": 7.72e-05,
+      "price_usd": 0.00010002,
+      "source": "coinex",
+      "volume_usd": 12977.606211490644
     },
     "2026-08-19": {
-      "market_cap_usd": 19861545.531054277,
-      "price_usd": 0.00019345491016349443,
-      "volume_usd": 797770.0801773081
+      "high_usd": 0.00024936,
+      "low_usd": 9.854e-05,
+      "market_cap_usd": 10172689.048365042,
+      "open_usd": 0.00010063,
+      "price_usd": 0.00022914,
+      "source": "coinex",
+      "volume_usd": 150458.52321938772
     },
     "2026-08-20": {
-      "market_cap_usd": 16726154.440882977,
-      "price_usd": 0.00016291565526371159,
-      "volume_usd": 402300.95379299537
+      "high_usd": 0.00023145,
+      "low_usd": 0.00013705,
+      "market_cap_usd": 23320186.631840616,
+      "open_usd": 0.00023029,
+      "price_usd": 0.0001598,
+      "source": "coinex",
+      "volume_usd": 80314.80484204949
     },
     "2026-08-21": {
-      "market_cap_usd": 14653591.158953719,
-      "price_usd": 0.00014272852819009662,
-      "volume_usd": 191409.6169002509
+      "high_usd": 0.00017281,
+      "low_usd": 0.00013,
+      "market_cap_usd": 16525600.089047318,
+      "open_usd": 0.00015909,
+      "price_usd": 0.0001396,
+      "source": "coinex",
+      "volume_usd": 23938.290063329583
     },
     "2026-08-22": {
-      "market_cap_usd": 13293244.22413342,
-      "price_usd": 0.00012947851229101284,
-      "volume_usd": 134760.79365112694
+      "high_usd": 0.00014401,
+      "low_usd": 0.0001244,
+      "market_cap_usd": 14556821.26479932,
+      "open_usd": 0.0001396,
+      "price_usd": 0.00013157,
+      "source": "coinex",
+      "volume_usd": 13909.286648195455
     },
     "2026-08-23": {
-      "market_cap_usd": 15016967.688465955,
-      "price_usd": 0.0001462678788293709,
-      "volume_usd": 170628.29168732686
+      "high_usd": 0.00015,
+      "low_usd": 0.00011031,
+      "market_cap_usd": 13453545.37412101,
+      "open_usd": 0.00013157,
+      "price_usd": 0.00014003,
+      "source": "coinex",
+      "volume_usd": 19544.21602764399
     },
     "2026-08-24": {
-      "market_cap_usd": 13470244.258801417,
-      "price_usd": 0.00013120252343365503,
-      "volume_usd": 111021.93894937757
+      "high_usd": 0.00014003,
+      "low_usd": 0.00012465,
+      "market_cap_usd": 14640186.55125412,
+      "open_usd": 0.00013932,
+      "price_usd": 0.00013256,
+      "source": "coinex",
+      "volume_usd": 12263.50419485867
     },
     "2026-08-25": {
-      "market_cap_usd": 12086477.975164365,
-      "price_usd": 0.00011772439900120716,
-      "volume_usd": 99920.500780667
+      "high_usd": 0.00013465,
+      "low_usd": 0.00011485,
+      "market_cap_usd": 13498479.592325492,
+      "open_usd": 0.00013256,
+      "price_usd": 0.00011757,
+      "source": "coinex",
+      "volume_usd": 8303.935758729209
+    },
+    "2026-08-26": {
+      "high_usd": 0.00012016,
+      "low_usd": 0.00010824,
+      "market_cap_usd": 11942961.177341372,
+      "open_usd": 0.00011757,
+      "price_usd": 0.00011218,
+      "source": "coinex",
+      "volume_usd": 7115.051109789576
+    },
+    "2026-08-27": {
+      "high_usd": 0.000135,
+      "low_usd": 0.00011158,
+      "market_cap_usd": 11721162.301902229,
+      "open_usd": 0.00011227,
+      "price_usd": 0.00012863,
+      "source": "coinex",
+      "volume_usd": 20602.429010689855
+    },
+    "2026-08-28": {
+      "high_usd": 0.00016104,
+      "low_usd": 0.00012749,
+      "market_cap_usd": 13186602.446624132,
+      "open_usd": 0.00012863,
+      "price_usd": 0.00015612,
+      "source": "coinex",
+      "volume_usd": 26645.508254885855
+    },
+    "2026-08-29": {
+      "high_usd": 0.00015835,
+      "low_usd": 0.00014265,
+      "market_cap_usd": 16008181.452060414,
+      "open_usd": 0.00015612,
+      "price_usd": 0.00014637,
+      "source": "coinex",
+      "volume_usd": 12114.57889930474
+    },
+    "2026-08-30": {
+      "high_usd": 0.00014637,
+      "low_usd": 0.00013954,
+      "market_cap_usd": 14423931.699913235,
+      "open_usd": 0.00014637,
+      "price_usd": 0.00013971,
+      "source": "coinex",
+      "volume_usd": 3329.8159881628485
     }
   },
-  "updated": "2026-08-25T21:08:20.091817+00:00"
+  "updated": "2026-08-30T14:21:24.458628+00:00"
 }
