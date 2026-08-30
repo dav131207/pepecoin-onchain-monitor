@@ -61,11 +61,21 @@ def save_price_history(history):
         json.dump(history, f, indent=2, sort_keys=True)
 
 
-def update_price_history(days=90):
+def update_price_history(days=365):
     """
     Best-effort: holt frische Daten und merged sie in die lokale Historie
     (bestehende Tage bleiben bei Fehlschlag unangetastet). Gibt True/False zurück,
     wirft nie — der Aufrufer (monitor.py) soll dadurch nicht blockiert werden.
+
+    days=365 ist das Maximum, das CoinGeckos kostenloser Tarif überhaupt noch
+    zulässt (getestet 30.08.2026: days=1000/"max" -> HTTP 401, error_code 10012
+    "Public API users are limited to a 365 day historical data view"). Echte
+    Preis-Historie bis zum Launch (30.01.2024, >365 Tage zurück) ist über diese
+    Quelle grundsätzlich NICHT erreichbar, egal welcher Wert hier steht — dafür
+    bräuchte es einen bezahlten CoinGecko-Plan oder eine andere Quelle. Der bereits
+    gesammelte lokale Verlauf (`history["daily"]`) bleibt aber über die Zeit
+    kumulativ vollständig, solange der Job regelmäßig läuft und nie länger als
+    365 Tage aussetzt.
     """
     history = load_price_history()
     try:
