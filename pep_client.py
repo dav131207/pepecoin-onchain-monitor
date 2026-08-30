@@ -28,10 +28,47 @@ SAT = 100_000_000
 
 LARGE_TRANSFERS_DIR = "large_transfers"
 MINER_REWARDS_DIR = "miner_rewards"
+ALL_TRANSACTIONS_DIR = "all_transactions"
 
 
 def month_key(ts):
     return datetime.fromtimestamp(ts, tz=timezone.utc).strftime("%Y-%m")
+
+
+def day_key(ts):
+    return datetime.fromtimestamp(ts, tz=timezone.utc).strftime("%Y-%m-%d")
+
+
+def _update_index(dir_path, new_keys):
+    """Pflegt dir_path/index.json (sortierte Liste der Datei-Keys ohne .jsonl) — das
+    Dashboard (statisches HTML, kein Server-Verzeichnislisting) braucht diese
+    Liste, um zu wissen, welche Dateien es per fetch() laden soll."""
+    index_path = os.path.join(dir_path, "index.json")
+    existing = set()
+    if os.path.exists(index_path):
+        with open(index_path) as f:
+            try:
+                existing = set(json.load(f))
+            except json.JSONDecodeError:
+                pass
+    updated = existing | new_keys
+    if updated != existing:
+        with open(index_path, "w") as f:
+            json.dump(sorted(updated), f)
+
+
+def _append_jsonl_bucketed(records, dir_path, key_fn):
+    if not records:
+        return
+    os.makedirs(dir_path, exist_ok=True)
+    by_key = {}
+    for r in records:
+        by_key.setdefault(key_fn(r["time"]), []).append(r)
+    for key, items in by_key.items():
+        with open(os.path.join(dir_path, f"{key}.jsonl"), "a") as f:
+            for r in items:
+                f.write(json.dumps(r) + "\n")
+    _update_index(dir_path, set(by_key.keys()))
 
 
 def append_jsonl_by_month(records, dir_path):
@@ -39,18 +76,19 @@ def append_jsonl_by_month(records, dir_path):
     Verteilt Records auf monatliche Dateien (dir_path/YYYY-MM.jsonl), damit keine
     einzelne Datei je in Richtung GitHubs 100-MB-Hard-Limit wächst (miner_rewards.jsonl
     riss das am 26.8. bei ~119 MB — jeder Push seitdem wurde hart abgelehnt, siehe
-    README). Jeder Record braucht ein "time"-Feld (Unix-Sekunden).
+    README). Jeder Record braucht ein "time"-Feld (Unix-Sekunden). Passend für Datensätze
+    mit niedriger Dichte (ein Eintrag pro Block oder seltener).
     """
-    if not records:
-        return
-    os.makedirs(dir_path, exist_ok=True)
-    by_month = {}
-    for r in records:
-        by_month.setdefault(month_key(r["time"]), []).append(r)
-    for month, items in by_month.items():
-        with open(os.path.join(dir_path, f"{month}.jsonl"), "a") as f:
-            for r in items:
-                f.write(json.dumps(r) + "\n")
+    _append_jsonl_bucketed(records, dir_path, month_key)
+
+
+def append_jsonl_by_day(records, dir_path):
+    """
+    Wie append_jsonl_by_month, aber pro Tag statt pro Monat — für dichtere Datensätze
+    (z.B. alle Transaktionen statt nur Großtransfers/Coinbase), bei denen ein Monat
+    zu groß würde (siehe README, all_transactions/).
+    """
+    _append_jsonl_bucketed(records, dir_path, day_key)
 
 
 def read_jsonl_dir(dir_path):
@@ -255,4 +293,76 @@ def extract_net_transfers(block_meta, txs, threshold_pep):
                 "from": [{"address": a, "amount": round(amt, 8)} for a, amt in input_addrs.items()],
                 "to": [o for o in outputs if o["address"] not in input_addrs],
             })
+    return results
+
+
+def extract_full_transactions(block_meta, txs):
+    """
+    JEDE Transaktion eines Blocks (nicht nur Netto-Transfers >= Schwelle), roh
+    (keine Wechselgeld-Nettoberechnung) — Grundlage für Analysen, die die
+    bestehenden ≥1M-PEP-Großtransfers nicht abdecken können: echtes Tx-Volumen,
+    Gebühren, und per Offline-Join über (txid, vout) Coin-Age/Coin-Days-Destroyed/
+    HODL-Waves sowie Common-Input-Adress-Clustering.
+
+    Jede Ausgabe (auch von Coinbase-Tx) wird mit ihrem eigenen "vout"-Index
+    zurückgegeben — das ist der spätere Join-Schlüssel: eine spätere Transaktion,
+    die diese Ausgabe ausgibt, referenziert sie exakt über
+    input["prev_txid"] == diese "txid" und input["prev_vout"] == dieser "vout".
+    Coinbase-Ausgaben MÜSSEN mit erfasst werden, sonst hat jede Münze, die noch
+    in ihrer ursprünglichen Mining-Auszahlung steckt, beim Spend keinen
+    Ursprungs-Eintrag zum Joinen (Coin-Age wäre für sie nicht berechenbar).
+
+    "inputs" bleibt pro Transaktion gruppiert (nicht über den Block aggregiert),
+    weil Adress-Clustering (Common-Input-Ownership-Heuristik: alle Eingabe-
+    Adressen einer Tx gehören vermutlich derselben Entität) genau diese Gruppierung
+    braucht.
+    """
+    results = []
+    for tx in txs:
+        coinbase = is_coinbase_tx(tx)
+
+        outputs = []
+        output_total = 0.0
+        for i, vout in enumerate(tx.get("vout", [])):
+            addr = vout.get("scriptpubkey_address")
+            value = vout["value"] / SAT
+            outputs.append({"vout": i, "address": addr, "amount": round(value, 8)})
+            output_total += value
+
+        if coinbase:
+            results.append({
+                "txid": tx["txid"],
+                "block": block_meta["height"],
+                "time": block_meta["timestamp"],
+                "is_coinbase": True,
+                "fee": None,
+                "inputs": [],
+                "outputs": outputs,
+            })
+            continue
+
+        inputs = []
+        input_total = 0.0
+        for v in tx.get("vin", []):
+            prevout = v.get("prevout")
+            if not prevout:
+                continue
+            value = prevout["value"] / SAT
+            input_total += value
+            inputs.append({
+                "prev_txid": v.get("txid"),
+                "prev_vout": v.get("vout"),
+                "address": prevout.get("scriptpubkey_address"),
+                "amount": round(value, 8),
+            })
+
+        results.append({
+            "txid": tx["txid"],
+            "block": block_meta["height"],
+            "time": block_meta["timestamp"],
+            "is_coinbase": False,
+            "fee": round(input_total - output_total, 8) if inputs else None,
+            "inputs": inputs,
+            "outputs": outputs,
+        })
     return results

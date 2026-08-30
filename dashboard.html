@@ -565,6 +565,16 @@ async function loadJSONL(url) {
     } catch (e) { return []; }
 }
 
+// large_transfers/ und miner_rewards/ sind monatlich aufgeteilt (GitHubs 100-MB-
+// Limit riss die frühere Einzeldatei) — index.json listet die vorhandenen
+// YYYY-MM-Dateien, die dann alle geladen und zusammengeführt werden.
+async function loadJSONLDir(dirUrl) {
+    const index = await loadJSON(`${dirUrl}/index.json`);
+    if (!index) return [];
+    const parts = await Promise.all(index.map(month => loadJSONL(`${dirUrl}/${month}.jsonl`)));
+    return parts.flat();
+}
+
 const SNAPSHOT_LOOKBACK_DAYS = 14;
 
 function shiftDayKey(dayKeyStr, daysBack) {
@@ -595,11 +605,11 @@ async function loadData() {
     const [knownWhales, exchangeData, backfillTransfers, backfillState, priceHistoryData, minerData, minerRewards, networkStatsData] = await Promise.all([
         loadJSON('known_whales.json'),
         loadJSON('exchange_candidates.json'),
-        loadJSONL('large_transfers_3m.jsonl'),
+        loadJSONLDir('large_transfers'),
         loadJSON('backfill_state.json'),
         loadJSON('price_history.json'),
         loadJSON('miner_wallets.json'),
-        loadJSONL('miner_rewards.jsonl'),
+        loadJSONLDir('miner_rewards'),
         loadJSON('network_stats.json'),
     ]);
 
