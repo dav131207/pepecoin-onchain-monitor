@@ -32,7 +32,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add backfill_genesis_state.json large_transfers/ miner_rewards/
+          for f in backfill_genesis_state.json large_transfers/ miner_rewards/; do
+            [ -e "$f" ] && git add "$f"
+          done
           git diff --cached --quiet || git commit -m "Genesis backfill progress $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           # Concurrency group already serializes this against weekly-monitor.yml,
           # but a manual/stray overlap could still race — retry a few times before
