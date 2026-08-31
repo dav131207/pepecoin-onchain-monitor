@@ -40,25 +40,18 @@ jobs:
       - name: Whale dormancy
         run: python whale_dormancy.py || true
 
-      - name: Address clustering (common-input heuristic)
-        run: python address_clustering.py || true
-
-      - name: Coin-age analysis (CDD, HODL waves)
-        run: python coin_age_analysis.py || true
-
       - name: Commit and push results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Einzeln statt als eine Zeile: ein fehlendes Pathspec (z.B. address_clusters.json,
-          # solange all_transactions/ noch leer ist) lässt sonst den GESAMTEN `git add`
-          # fehlschlagen und reißt jede andere Änderung dieses Laufs mit runter (passiert am
-          # 31.08.2026 — der komplette erste Sonntagslauf ging so verloren).
+          # Einzeln statt als eine Zeile: ein fehlendes Pathspec lässt sonst den
+          # GESAMTEN `git add` fehlschlagen und reißt jede andere Änderung dieses
+          # Laufs mit runter (passiert am 31.08.2026 — der komplette erste
+          # Sonntagslauf ging so verloren).
           for f in snapshots known_whales.json exchange_candidates.json miner_wallets.json \
             large_transfers/ miner_rewards/ price_history.json price_ohlc.json \
             network_stats.json backfill_state.json last_scanned_block.txt \
-            holder_distribution.json whale_dormancy.json address_clusters.json \
-            coin_days_destroyed.json hodl_waves.json; do
+            holder_distribution.json whale_dormancy.json; do
             [ -e "$f" ] && git add "$f"
           done
           git diff --cached --quiet || git commit -m "Weekly monitor run $(date -u +%Y-%m-%dT%H:%M:%SZ)"

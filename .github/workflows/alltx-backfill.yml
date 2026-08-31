@@ -32,7 +32,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          for f in backfill_alltx_state.json all_transactions/; do
+          for f in backfill_alltx_state.json utxo_index/ address_clusters_state.json \
+            address_clusters.json coin_days_destroyed.json hodl_waves.json \
+            fee_stats.json alltx_orphan_spends.json blocks_incomplete_alltx.txt; do
             [ -e "$f" ] && git add "$f"
           done
           git diff --cached --quiet || git commit -m "All-tx backfill progress $(date -u +%Y-%m-%dT%H:%M:%SZ)"

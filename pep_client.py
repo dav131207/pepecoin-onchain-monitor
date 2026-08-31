@@ -28,7 +28,7 @@ SAT = 100_000_000
 
 LARGE_TRANSFERS_DIR = "large_transfers"
 MINER_REWARDS_DIR = "miner_rewards"
-ALL_TRANSACTIONS_DIR = "all_transactions"
+UTXO_INDEX_DIR = "utxo_index"
 
 
 def month_key(ts):
@@ -82,13 +82,57 @@ def append_jsonl_by_month(records, dir_path):
     _append_jsonl_bucketed(records, dir_path, month_key)
 
 
-def append_jsonl_by_day(records, dir_path):
+def utxo_shard(txid):
+    """Shard-Schlüssel für den UTXO-Index: die ersten 2 Hex-Zeichen der Txid (256
+    Shards). Bewusst NICHT nach Zeit gesharded — das war genau der Fehler bei der
+    alten all_transactions/YYYY-MM-DD.jsonl-Speicherung: an dicht bespielten Tagen
+    (z.B. 2024-11-19, 311 MB) landete die gesamte Last in EINER Datei und riss
+    GitHubs 100-MB-Limit. Nach Txid-Präfix gesharded verteilt sich jede noch so
+    dichte Periode gleichmäßig über alle 256 Dateien."""
+    return txid[:2]
+
+
+def append_utxo_shard(dir_path, shard, suffix, lines):
+    """Hängt kompakte UTXO-Einträge an dir_path/{shard}.{suffix}.jsonl an
+    (suffix ist "outputs" oder "spent") — siehe backfill_alltx.py."""
+    if not lines:
+        return
+    os.makedirs(dir_path, exist_ok=True)
+    with open(os.path.join(dir_path, f"{shard}.{suffix}.jsonl"), "a") as f:
+        for line in lines:
+            f.write(json.dumps(line) + "\n")
+
+
+def load_utxo_index(dir_path=UTXO_INDEX_DIR):
     """
-    Wie append_jsonl_by_month, aber pro Tag statt pro Monat — für dichtere Datensätze
-    (z.B. alle Transaktionen statt nur Großtransfers/Coinbase), bei denen ein Monat
-    zu groß würde (siehe README, all_transactions/).
+    Lädt den kompletten, bislang von backfill_alltx.py gescannten UTXO-Index aus
+    den geshardeten Dateien in zwei kompakte In-Memory-Strukturen:
+    outputs: {(txid, vout): (address, value, time)} — jede je erzeugte Ausgabe.
+    spent:   {(txid, vout)}                          — jede je als Eingabe gesehene Referenz.
+    Bleibt klein (nur ein kompakter Eintrag pro UTXO, nicht die volle Rohtransaktion
+    mit allen Ein-/Ausgaben) — sicher komplett in den Speicher ladbar, siehe README.
     """
-    _append_jsonl_bucketed(records, dir_path, day_key)
+    outputs = {}
+    spent = set()
+    if not os.path.isdir(dir_path):
+        return outputs, spent
+    for path in sorted(glob.glob(os.path.join(dir_path, "*.outputs.jsonl"))):
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                r = json.loads(line)
+                outputs[(r["txid"], r["vout"])] = (r["address"], r["value"], r["time"])
+    for path in sorted(glob.glob(os.path.join(dir_path, "*.spent.jsonl"))):
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                r = json.loads(line)
+                spent.add((r["txid"], r["vout"]))
+    return outputs, spent
 
 
 def read_jsonl_dir(dir_path):
