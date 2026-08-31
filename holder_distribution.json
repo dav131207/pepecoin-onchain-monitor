@@ -7,5 +7,14 @@
     "gini": 0.99357,
     "top_1pct_share_pct": 89.9995,
     "top_10pct_share_pct": 99.9995
+  },
+  "2026-08-31": {
+    "timestamp": "2026-08-31T09:11:59.867618+00:00",
+    "addresses_counted": 293799,
+    "addresses_total_reported": 293798,
+    "complete": true,
+    "gini": 0.99357,
+    "top_1pct_share_pct": 90.0036,
+    "top_10pct_share_pct": 99.9995
   }
 }
