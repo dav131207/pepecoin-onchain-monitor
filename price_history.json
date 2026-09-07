@@ -5400,13 +5400,76 @@
     },
     "2026-08-31": {
       "high_usd": 0.00014163,
-      "low_usd": 0.00013004,
-      "market_cap_usd": 13616872.235832443,
+      "low_usd": 0.00012534,
+      "market_cap_usd": 14296303.829421578,
       "open_usd": 0.00013955,
-      "price_usd": 0.00013041,
+      "price_usd": 0.00012856,
       "source": "coinex",
-      "volume_usd": 6965.982194706251
+      "volume_usd": 12438.198890240164
+    },
+    "2026-09-01": {
+      "high_usd": 0.00013367,
+      "low_usd": 0.00011,
+      "market_cap_usd": 13155216.912180055,
+      "open_usd": 0.00012856,
+      "price_usd": 0.00011261,
+      "source": "coinex",
+      "volume_usd": 21193.764272013803
+    },
+    "2026-09-02": {
+      "high_usd": 0.00012967,
+      "low_usd": 0.00011121,
+      "market_cap_usd": 11619058.699003244,
+      "open_usd": 0.00011261,
+      "price_usd": 0.00012675,
+      "source": "coinex",
+      "volume_usd": 9482.839894673234
+    },
+    "2026-09-03": {
+      "high_usd": 0.00013599,
+      "low_usd": 0.00012161,
+      "market_cap_usd": 12885095.946095904,
+      "open_usd": 0.00012675,
+      "price_usd": 0.00013563,
+      "source": "coinex",
+      "volume_usd": 8607.31292933335
+    },
+    "2026-09-04": {
+      "high_usd": 0.00013612,
+      "low_usd": 0.00011925,
+      "market_cap_usd": 13717126.99563311,
+      "open_usd": 0.00013552,
+      "price_usd": 0.00012444,
+      "source": "coinex",
+      "volume_usd": 8451.589950595213
+    },
+    "2026-09-05": {
+      "high_usd": 0.00012597,
+      "low_usd": 0.0001195,
+      "market_cap_usd": 12583873.146075094,
+      "open_usd": 0.00012444,
+      "price_usd": 0.00012065,
+      "source": "coinex",
+      "volume_usd": 4591.4850552318
+    },
+    "2026-09-06": {
+      "high_usd": 0.00013211,
+      "low_usd": 0.00011812,
+      "market_cap_usd": 12422401.33452507,
+      "open_usd": 0.00012065,
+      "price_usd": 0.00012477,
+      "source": "coinex",
+      "volume_usd": 11960.37892949415
+    },
+    "2026-09-07": {
+      "high_usd": 0.00012509,
+      "low_usd": 0.00012413,
+      "market_cap_usd": 12634503.931586197,
+      "open_usd": 0.00012477,
+      "price_usd": 0.00012504,
+      "source": "coinex",
+      "volume_usd": 251.77682027552518
     }
   },
-  "updated": "2026-08-31T08:17:01.605071+00:00"
+  "updated": "2026-09-07T01:18:13.518269+00:00"
 }
