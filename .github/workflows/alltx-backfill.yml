@@ -8,8 +8,15 @@ on:
 permissions:
   contents: write
 
+# Eigene Concurrency-Gruppe (nicht die geteilte pep-data-pipeline): dieser Lauf
+# schreibt ausschließlich in utxo_index/ + die vier Reduktions-Dateien +
+# backfill_alltx_state.json — keine Überschneidung mit genesis-backfill/weekly-monitor
+# (large_transfers/, miner_rewards/, snapshots/ ...). In der geteilten Gruppe wurde
+# jeder 5h-Lauf reihum abgebrochen, bevor er committen konnte — 10 Tage ohne ein
+# einziges Ergebnis. Push-Konflikte auf main fängt die Retry-Schleife unten ab
+# (disjunkte Dateien -> sauberer Rebase).
 concurrency:
-  group: pep-data-pipeline
+  group: alltx-backfill
   cancel-in-progress: false
 
 jobs:
@@ -26,9 +33,16 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: Run all-transactions backfill (time-boxed)
-        run: timeout 5h python backfill_alltx.py || true
+        # 4h20m statt 5h: lässt ~1h30m Puffer bis zum Job-Timeout (350 min) für das
+        # SIGTERM-Handling (sauberer letzter Checkpoint, ~260 Shard-Dateien) plus
+        # Commit/Push-Retry-Schleife.
+        run: timeout 4h20m python backfill_alltx.py || true
 
       - name: Commit and push results
+        # if: always() — MUSS auch bei Cancel/Timeout des Backfill-Steps laufen, sonst
+        # geht der komplette (evtl. mehrstündige) Zwischenstand verloren, wenn der Lauf
+        # nicht exakt sauber durchläuft. Genau daran scheiterten bisher alle Läufe.
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
