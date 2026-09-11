@@ -40,6 +40,12 @@ jobs:
       - name: Whale dormancy
         run: python whale_dormancy.py || true
 
+      - name: Network stats backfill (Hashrate/Difficulty aus miner_rewards)
+        run: python network_stats_backfill.py || true
+
+      - name: Exchange netflow (aggregierte Tages-Zeitreihe)
+        run: python exchange_netflow.py || true
+
       - name: Commit and push results
         run: |
           git config user.name "github-actions[bot]"
@@ -51,7 +57,7 @@ jobs:
           for f in snapshots known_whales.json exchange_candidates.json miner_wallets.json \
             large_transfers/ miner_rewards/ price_history.json price_ohlc.json \
             network_stats.json backfill_state.json last_scanned_block.txt \
-            holder_distribution.json whale_dormancy.json; do
+            holder_distribution.json whale_dormancy.json exchange_netflow.json; do
             [ -e "$f" ] && git add "$f"
           done
           git diff --cached --quiet || git commit -m "Weekly monitor run $(date -u +%Y-%m-%dT%H:%M:%SZ)"
