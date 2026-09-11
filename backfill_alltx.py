@@ -47,7 +47,6 @@ bewusst dreifach von der API geholt, statt deren Fortschritt zu riskieren).
 """
 import json
 import os
-import signal
 import time
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -73,7 +72,9 @@ ORPHAN_FILE = "alltx_orphan_spends.json"
 CHUNK_SIZE = 500
 WORKERS = 16
 MIN_REQUEST_INTERVAL = 0.02
-CHECKPOINT_EVERY_CHUNKS = 20  # ~10.000 Blöcke zwischen Zwischenständen
+CHECKPOINT_EVERY_CHUNKS = 10  # ~5.000 Blöcke zwischen Zwischenständen (~3 Min. bei 28 Blöcke/s) —
+                               # eng, weil ein `timeout`-Abbruch jetzt IMMER alles seit dem letzten
+                               # Checkpoint verwirft (kein SIGTERM-Handling mehr, siehe main())
 MIN_CLUSTER_SIZE = 2
 
 HODL_BUCKETS_DAYS = [
@@ -380,18 +381,7 @@ class Aggregator:
         })
 
 
-class GracefulShutdown(Exception):
-    """Ausgelöst durch SIGTERM (z.B. `timeout 5h ...` im Workflow) — erlaubt einen
-    sauberen letzten Checkpoint statt eines abrupten Abbruchs mitten im Chunk-Fluss."""
-
-
-def _handle_sigterm(signum, frame):
-    raise GracefulShutdown()
-
-
 def main():
-    signal.signal(signal.SIGTERM, _handle_sigterm)
-
     session = requests.Session()
     limiter = RateLimiter(MIN_REQUEST_INTERVAL)
 
@@ -428,71 +418,77 @@ def main():
     start_time = time.time()
     chunks_drained = 0
 
+    # Bewusst KEIN eigenes SIGTERM-Handling mehr (frühere Version fing das Signal ab,
+    # um einen "sauberen" letzten Checkpoint zu schreiben) — in Produktion blieb der
+    # Prozess dabei über eine Stunde nach Ablauf von `timeout 260m` hängen (vermutlich
+    # ein Worker/Executor-Zustand, der den Signal-Check im Hauptthread nie erreicht),
+    # bis das Job-Timeout (350 min) den ganzen Lauf hart abbrach, OHNE dass der
+    # Commit-Schritt überhaupt lief — kompletter Lauf verloren. Stattdessen exakt das
+    # Muster, das bei backfill_genesis.py/backfill_history.py seit Monaten zuverlässig
+    # funktioniert: kein Handler, `timeout` beendet den Prozess sofort per Default-
+    # Aktion, und die periodischen Zwischen-Checkpoints (siehe CHECKPOINT_EVERY_CHUNKS)
+    # sind das alleinige Sicherheitsnetz — im schlimmsten Fall geht nur das seit dem
+    # letzten Checkpoint Gescannte verloren, nie der ganze Lauf.
     pool = ThreadPoolExecutor(max_workers=WORKERS)
-    try:
-        futures = {pool.submit(fetch_chunk, c, min(c + CHUNK_SIZE - 1, target_end_height), limiter): c
-                   for c in chunks}
-        pending_results = {}
-        expected = chunks[0]
+    futures = {pool.submit(fetch_chunk, c, min(c + CHUNK_SIZE - 1, target_end_height), limiter): c
+               for c in chunks}
+    pending_results = {}
+    expected = chunks[0]
 
-        for future in as_completed(futures):
-            chunk_start = futures[future]
-            try:
-                transactions, incomplete = future.result()
-            except Exception as e:
-                print(f"Alltx-Backfill: Chunk {chunk_start}: FEHLER {e} — erneuter Versuch beim nächsten Lauf.")
-                continue
-            pending_results[chunk_start] = (transactions, incomplete)
+    for future in as_completed(futures):
+        chunk_start = futures[future]
+        try:
+            transactions, incomplete = future.result()
+        except Exception as e:
+            print(f"Alltx-Backfill: Chunk {chunk_start}: FEHLER {e} — erneuter Versuch beim nächsten Lauf.")
+            continue
+        pending_results[chunk_start] = (transactions, incomplete)
 
-            while expected in pending_results:
-                transactions, incomplete = pending_results.pop(expected)
-                for tx in transactions:
-                    agg.process_tx(tx)
-                    covered_days.add(day_key(tx["time"]))
-                for height, err in incomplete:
-                    incomplete_f.write(f"{height}\t{err}\n")
-                incomplete_f.flush()
+        while expected in pending_results:
+            transactions, incomplete = pending_results.pop(expected)
+            for tx in transactions:
+                agg.process_tx(tx)
+                covered_days.add(day_key(tx["time"]))
+            for height, err in incomplete:
+                incomplete_f.write(f"{height}\t{err}\n")
+            incomplete_f.flush()
 
-                next_height = expected + CHUNK_SIZE
-                expected = next_height
-                chunks_drained += 1
+            next_height = expected + CHUNK_SIZE
+            expected = next_height
+            chunks_drained += 1
 
-                if chunks_drained % CHECKPOINT_EVERY_CHUNKS == 0:
-                    # Checkpoint IMMER vor dem State-Save: bricht der Prozess dazwischen
-                    # ab, zeigt backfill_alltx_state.json noch die ALTE next_height, und
-                    # der nächste Lauf verarbeitet den Bereich einfach erneut (sicher dank
-                    # append-only/idempotenter Shards). Umgekehrt (State zuerst) hätte
-                    # next_height Fortschritt behauptet, den die Aggregate nie bekommen
-                    # haben — genau das erzeugte beim ersten Testlauf 227 nie auflösbare
-                    # Orphan-Spends.
-                    covered_days_sorted = sorted(covered_days)
-                    agg.checkpoint(covered_days_sorted, target_end_height, next_height)
-                    state["next_height"] = next_height
-                    state["covered_days"] = covered_days_sorted
-                    save_state(state)
-                    elapsed = time.time() - start_time
-                    rate = chunks_drained / elapsed
-                    remaining = len(chunks) - chunks_drained
-                    eta_min = (remaining / rate / 60) if rate > 0 else float("inf")
-                    print(f"Alltx-Backfill: Checkpoint bei Block {next_height} "
-                          f"({chunks_drained}/{len(chunks)} Chunks, {elapsed/60:.1f} min, "
-                          f"ETA ~{eta_min:.0f} min, {agg.tx_count} Tx verarbeitet, "
-                          f"{len(agg.orphans)} offene Orphan-Spends)")
-    except GracefulShutdown:
-        print("Alltx-Backfill: SIGTERM erhalten (Timeout) — breche offene Chunks ab, speichere Zwischenstand...")
-    finally:
-        # cancel_futures verwirft noch nicht gestartete Chunks sofort, statt (wie das
-        # `with`-Statement es täte) auf ALLE ~tausend vorab eingereihten Futures zu
-        # warten — sonst hätte ein SIGTERM nie rechtzeitig zu einem sauberen Checkpoint
-        # geführt, bevor der Runner ohnehin hart gekillt wird.
-        pool.shutdown(wait=True, cancel_futures=True)
-        incomplete_f.close()
-        agg._flush_open_day()
-        covered_days_sorted = sorted(covered_days)
-        agg.checkpoint(covered_days_sorted, target_end_height, next_height)
-        state["next_height"] = next_height
-        state["covered_days"] = covered_days_sorted
-        save_state(state)
+            if chunks_drained % CHECKPOINT_EVERY_CHUNKS == 0:
+                # Checkpoint IMMER vor dem State-Save: bricht der Prozess dazwischen
+                # ab, zeigt backfill_alltx_state.json noch die ALTE next_height, und
+                # der nächste Lauf verarbeitet den Bereich einfach erneut (sicher dank
+                # append-only/idempotenter Shards). Umgekehrt (State zuerst) hätte
+                # next_height Fortschritt behauptet, den die Aggregate nie bekommen
+                # haben — genau das erzeugte beim ersten Testlauf 227 nie auflösbare
+                # Orphan-Spends.
+                covered_days_sorted = sorted(covered_days)
+                agg.checkpoint(covered_days_sorted, target_end_height, next_height)
+                state["next_height"] = next_height
+                state["covered_days"] = covered_days_sorted
+                save_state(state)
+                elapsed = time.time() - start_time
+                rate = chunks_drained / elapsed
+                remaining = len(chunks) - chunks_drained
+                eta_min = (remaining / rate / 60) if rate > 0 else float("inf")
+                print(f"Alltx-Backfill: Checkpoint bei Block {next_height} "
+                      f"({chunks_drained}/{len(chunks)} Chunks, {elapsed/60:.1f} min, "
+                      f"ETA ~{eta_min:.0f} min, {agg.tx_count} Tx verarbeitet, "
+                      f"{len(agg.orphans)} offene Orphan-Spends)")
+
+    # Nur bei ECHTEM Abschluss erreicht (alle Chunks fertig) — der Normalfall ist,
+    # dass `timeout` den Prozess vorher beendet und diese Zeilen nie laufen.
+    pool.shutdown(wait=True)
+    incomplete_f.close()
+    agg._flush_open_day()
+    covered_days_sorted = sorted(covered_days)
+    agg.checkpoint(covered_days_sorted, target_end_height, next_height)
+    state["next_height"] = next_height
+    state["covered_days"] = covered_days_sorted
+    save_state(state)
 
     print(f"\nAlltx-Backfill: Lauf beendet bei Block {next_height}/{target_end_height}. "
           f"{agg.tx_count} Tx verarbeitet, {len(agg.orphans)} offene Orphan-Spends.")
