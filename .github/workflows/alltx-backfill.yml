@@ -33,11 +33,12 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: Run all-transactions backfill (time-boxed)
-        # 260m (4h20m) statt 5h: lässt ~1h30m Puffer bis zum Job-Timeout (350 min)
-        # für das SIGTERM-Handling (sauberer letzter Checkpoint, ~260 Shard-Dateien)
-        # plus Commit/Push-Retry-Schleife. `timeout` akzeptiert nur ein einzelnes
-        # Suffix — "4h20m" ist ungültig und bricht sofort ab.
-        run: timeout 260m python backfill_alltx.py || true
+        # 320m statt 260m: ohne eigenes SIGTERM-Handling (entfernt, siehe backfill_alltx.py)
+        # braucht der Prozess selbst keinen Shutdown-Puffer mehr — `timeout` beendet ihn
+        # sofort. Die verbleibenden ~30 Min bis zum Job-Timeout (350) reichen für
+        # Commit/Push samt Retry-Schleife. `timeout` akzeptiert nur ein einzelnes Suffix
+        # — "4h20m"/"5h20m" wären ungültig und würden sofort abbrechen.
+        run: timeout 320m python backfill_alltx.py || true
 
       - name: Commit and push results
         # if: always() — MUSS auch bei Cancel/Timeout des Backfill-Steps laufen, sonst
