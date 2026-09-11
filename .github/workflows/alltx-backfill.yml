@@ -38,6 +38,11 @@ jobs:
         # sofort. Die verbleibenden ~30 Min bis zum Job-Timeout (350) reichen für
         # Commit/Push samt Retry-Schleife. `timeout` akzeptiert nur ein einzelnes Suffix
         # — "4h20m"/"5h20m" wären ungültig und würden sofort abbrechen.
+        # PYTHONUNBUFFERED: ohne das puffert Python stdout in einer Pipe komplett (kein
+        # Zeilen-Flush) — beim 48-Worker-Testlauf am 11.09. stand deshalb eine volle
+        # Stunde lang GAR KEINE Ausgabe im Log, obwohl (vermutlich) längst etwas schiefging.
+        env:
+          PYTHONUNBUFFERED: "1"
         run: timeout 320m python backfill_alltx.py || true
 
       - name: Commit and push results

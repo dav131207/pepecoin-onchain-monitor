@@ -70,15 +70,17 @@ HODL_OUTPUT_FILE = "hodl_waves.json"
 ORPHAN_FILE = "alltx_orphan_spends.json"
 
 CHUNK_SIZE = 500
-# Bewusst deutlich über dem bisher getesteten Wert (16 Worker / 0,02s, ~28 Blöcke/s —
-# von genesis-backfill.py seit Monaten unverändert genutzt). Nicht vorab per Burst-
-# Test abgesichert; auf Nutzerwunsch ("deutlich erhöhen") ohne Vortest hochgesetzt,
-# um den Vollscan-Rückstand schneller aufzuholen. Risiko: der Endpoint ist kein
-# öffentliches, robustes Setup, sondern ein einzelner, vom Chef bereitgestellter,
-# Cloudflare-geschützter Server, den sich alle vier Workflows teilen — bei 429s/
-# Fehlern hier zuerst WORKERS/MIN_REQUEST_INTERVAL wieder Richtung 16/0.02 senken.
-WORKERS = 48
-MIN_REQUEST_INTERVAL = 0.01  # globaler Token-Bucket über alle Worker -> Deckel ~100 req/s
+# Am 11.09.2026 kurz auf 48/0.01 (~3x) hochgesetzt, ohne Vortest, auf Nutzerwunsch.
+# Ergebnis: eine volle Stunde Laufzeit ohne EINEN einzigen Checkpoint (git diff nach
+# Abbruch: buchstäblich nichts geändert) — statt schneller praktisch auf Null
+# eingebrochen. Sehr wahrscheinlich: der geteilte, Cloudflare-geschützte Server
+# (vom Chef bereitgestellt, kein robustes öffentliches Setup) kam bei der Last nicht
+# mehr hinterher, und die Retry-Schleifen (5 Versuche mit exponentiellem Backoff pro
+# Block) haben sich gegenseitig ausgebremst statt zu scheitern und weiterzumachen.
+# Zurück auf den einzigen tatsächlich getesteten Wert (16 Worker / 0,02s, ~28
+# Blöcke/s, von genesis-backfill.py seit Monaten unverändert genutzt).
+WORKERS = 16
+MIN_REQUEST_INTERVAL = 0.02
 CHECKPOINT_EVERY_CHUNKS = 10  # ~5.000 Blöcke zwischen Zwischenständen — eng, weil ein
                                # `timeout`-Abbruch jetzt IMMER alles seit dem letzten
                                # Checkpoint verwirft (kein SIGTERM-Handling mehr, siehe main())
