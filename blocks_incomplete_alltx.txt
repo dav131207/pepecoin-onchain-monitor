@@ -57,3 +57,5 @@
 295062	'data'
 295068	'data'
 295481	Max retries exceeded for https://avivppblocks.realmasterkush.com/block/295481/__data.json
+295059	Max retries exceeded for https://avivppblocks.realmasterkush.com/block/295059/__data.json
+295060	Max retries exceeded for https://avivppblocks.realmasterkush.com/block/295060/__data.json
