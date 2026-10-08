@@ -81,8 +81,14 @@ CHUNK_SIZE = 500
 # Blöcke/s, von genesis-backfill.py seit Monaten unverändert genutzt).
 WORKERS = 16
 MIN_REQUEST_INTERVAL = 0.02
-CHECKPOINT_EVERY_CHUNKS = 10  # ~5.000 Blöcke zwischen Zwischenständen — eng, weil ein
-                               # `timeout`-Abbruch jetzt IMMER alles seit dem letzten
+CHECKPOINT_EVERY_CHUNKS = 4   # ~2.000 Blöcke zwischen Zwischenständen. War 10 (~5.000),
+                               # aber genau am 11.09.-08.10.2026 genügten selbst 5.000
+                               # Blöcke nicht für EINEN einzigen Checkpoint in 5h20m —
+                               # ein Lauf, der in diese historisch sehr dicht bespielte
+                               # Periode (viele hundert Tx/Block statt der sonst üblichen
+                               # ~2-5) hineinlief, blieb 27 Tage lang ohne jeden
+                               # Fortschritt, weil nicht mal der erste Checkpoint erreicht
+                               # wurde. Enger, weil ein `timeout`-Abbruch jetzt IMMER alles
                                # Checkpoint verwirft (kein SIGTERM-Handling mehr, siehe main())
 MIN_CLUSTER_SIZE = 2
 
@@ -172,10 +178,16 @@ def fetch_chunk(chunk_start, chunk_end, limiter):
     for height in range(chunk_start, chunk_end + 1):
         try:
             block_meta, txs = fetch_block(session, limiter, height)
+            # MUSS im selben try wie der Fetch stehen: eine Ausnahme hier (z.B. durch
+            # eine unerwartete Tx-Struktur in einem besonders großen/alten Block) würde
+            # sonst aus fetch_chunk herausfallen und den GANZEN Chunk als gescheitert
+            # erscheinen lassen — mit genau der Folge, die main() nicht abfedern kann
+            # (siehe Kommentar dort bei "except Exception as e: FEHLER").
+            block_transactions = extract_full_transactions(block_meta, txs)
         except Exception as e:
             incomplete.append((height, str(e)))
             continue
-        transactions.extend(extract_full_transactions(block_meta, txs))
+        transactions.extend(block_transactions)
     return transactions, incomplete
 
 
@@ -446,11 +458,21 @@ def main():
 
     for future in as_completed(futures):
         chunk_start = futures[future]
+        chunk_end = min(chunk_start + CHUNK_SIZE - 1, target_end_height)
         try:
             transactions, incomplete = future.result()
         except Exception as e:
-            print(f"Alltx-Backfill: Chunk {chunk_start}: FEHLER {e} — erneuter Versuch beim nächsten Lauf.")
-            continue
+            # KRITISCH: hier MUSS trotzdem ein Ergebnis in pending_results landen,
+            # sonst bleibt `expected` für immer auf diesem chunk_start stehen (er wird
+            # nie wieder angeboten) — jeder später fertige Chunk häuft sich nur noch
+            # unverarbeitet an, und der Lauf läuft bis zum Timeout durch, OHNE jemals
+            # wieder einen Checkpoint zu schreiben. Das leere Transactions-Ergebnis
+            # fügt bewusst KEINEN covered_days-Eintrag hinzu (covered_days wird nur
+            # pro tatsächlich verarbeiteter Tx gesetzt) — dieser Blockbereich bleibt
+            # also ehrlich als "nicht gescannt" sichtbar und wird im Log vermerkt.
+            print(f"Alltx-Backfill: Chunk {chunk_start}-{chunk_end}: FEHLER {e} — "
+                  f"als Lücke markiert, kein erneuter Versuch in diesem Lauf.")
+            transactions, incomplete = [], [(h, f"chunk-level Fehler: {e}") for h in range(chunk_start, chunk_end + 1)]
         pending_results[chunk_start] = (transactions, incomplete)
 
         while expected in pending_results:
@@ -465,6 +487,16 @@ def main():
             next_height = expected + CHUNK_SIZE
             expected = next_height
             chunks_drained += 1
+
+            # Heartbeat bei JEDEM fertigen Chunk, nicht nur bei Checkpoints — sonst
+            # sieht ein Lauf, der 5+ Stunden lang durch eine dicht bespielte Periode
+            # kriecht, im Log exakt so aus wie einer, der steckengeblieben ist (genau
+            # das passierte 27 Tage lang unbemerkt, bis next_height nie mehr vorrückte).
+            elapsed = time.time() - start_time
+            rate = chunks_drained / elapsed if elapsed > 0 else 0
+            print(f"Alltx-Backfill: Chunk {expected - CHUNK_SIZE} fertig "
+                  f"({chunks_drained}/{len(chunks)}, {rate*CHUNK_SIZE:.1f} Blöcke/s im Schnitt, "
+                  f"{agg.tx_count} Tx bisher)")
 
             if chunks_drained % CHECKPOINT_EVERY_CHUNKS == 0:
                 # Checkpoint IMMER vor dem State-Save: bricht der Prozess dazwischen
