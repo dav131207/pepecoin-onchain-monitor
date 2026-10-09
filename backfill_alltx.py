@@ -81,15 +81,19 @@ CHUNK_SIZE = 500
 # Blöcke/s, von genesis-backfill.py seit Monaten unverändert genutzt).
 WORKERS = 16
 MIN_REQUEST_INTERVAL = 0.02
-CHECKPOINT_EVERY_CHUNKS = 4   # ~2.000 Blöcke zwischen Zwischenständen. War 10 (~5.000),
-                               # aber genau am 11.09.-08.10.2026 genügten selbst 5.000
-                               # Blöcke nicht für EINEN einzigen Checkpoint in 5h20m —
-                               # ein Lauf, der in diese historisch sehr dicht bespielte
-                               # Periode (viele hundert Tx/Block statt der sonst üblichen
-                               # ~2-5) hineinlief, blieb 27 Tage lang ohne jeden
-                               # Fortschritt, weil nicht mal der erste Checkpoint erreicht
-                               # wurde. Enger, weil ein `timeout`-Abbruch jetzt IMMER alles
-                               # Checkpoint verwirft (kein SIGTERM-Handling mehr, siehe main())
+CHECKPOINT_EVERY_CHUNKS = 4   # ~2.000 Blöcke zwischen Zwischenständen (sinnvoll bei
+                               # normaler Dichte) — reicht aber NICHT bei einer extremen
+                               # Dichtespitze: am 08./09.10.2026 brauchte EIN Chunk
+                               # (295001-295500, 131.037 Tx = 262/Block) allein 77 Min.,
+                               # und ein kompletter 5h20m-Lauf schaffte in der ganzen Zeit
+                               # nur genau diesen einen Chunk — nie die nötigen vier für
+                               # einen Checkpoint. Deshalb zusätzlich zeitbasiert über
+                               # CHECKPOINT_MAX_MINUTES abgesichert (siehe main()).
+CHECKPOINT_MAX_MINUTES = 20   # Checkpoint spätestens alle 20 Minuten, sobald seit dem
+                               # letzten Mal mindestens ein Chunk fertig wurde — unabhängig
+                               # von CHECKPOINT_EVERY_CHUNKS. Das alleinige Sicherheitsnetz
+                               # gegen genau den Fall oben: lieber oft kleine Checkpoints
+                               # in einer dichten Phase als null Fortschritt in 5+ Stunden.
 MIN_CLUSTER_SIZE = 2
 
 HODL_BUCKETS_DAYS = [
@@ -437,6 +441,7 @@ def main():
 
     incomplete_f = open(INCOMPLETE_LOG, "a")
     start_time = time.time()
+    last_checkpoint_time = start_time
     chunks_drained = 0
 
     # Bewusst KEIN eigenes SIGTERM-Handling mehr (frühere Version fing das Signal ab,
@@ -498,7 +503,18 @@ def main():
                   f"({chunks_drained}/{len(chunks)}, {rate*CHUNK_SIZE:.1f} Blöcke/s im Schnitt, "
                   f"{agg.tx_count} Tx bisher)")
 
-            if chunks_drained % CHECKPOINT_EVERY_CHUNKS == 0:
+            # ZWEITE Bedingung (Zeit) ist der eigentliche Fix für den 08./09.10.2026-Fund:
+            # Chunk 295001-295500 allein enthielt 131.037 Tx (262/Block!) und brauchte
+            # 77 Minuten — ein kompletter 5h20m-Lauf schaffte daraufhin nur GENAU DIESEN
+            # EINEN Chunk, nie die für CHECKPOINT_EVERY_CHUNKS=4 nötigen vier. Ohne die
+            # Zeit-Bedingung hätte das reine Chunk-Zahl-Kriterium also wieder NULL
+            # Checkpoints in einem ganzen Lauf zugelassen — exakt der alte Datenverlust,
+            # nur aus einem anderen Grund (Dichte statt Deadlock). Jetzt erzwingt die
+            # Uhr spätestens alle CHECKPOINT_MAX_MINUTES einen Checkpoint, sobald
+            # überhaupt mindestens ein Chunk seit dem letzten Mal fertig wurde.
+            now = time.time()
+            if (chunks_drained % CHECKPOINT_EVERY_CHUNKS == 0
+                    or now - last_checkpoint_time >= CHECKPOINT_MAX_MINUTES * 60):
                 # Checkpoint IMMER vor dem State-Save: bricht der Prozess dazwischen
                 # ab, zeigt backfill_alltx_state.json noch die ALTE next_height, und
                 # der nächste Lauf verarbeitet den Bereich einfach erneut (sicher dank
@@ -511,6 +527,7 @@ def main():
                 state["next_height"] = next_height
                 state["covered_days"] = covered_days_sorted
                 save_state(state)
+                last_checkpoint_time = now
                 elapsed = time.time() - start_time
                 rate = chunks_drained / elapsed
                 remaining = len(chunks) - chunks_drained
