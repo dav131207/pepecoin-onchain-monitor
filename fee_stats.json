@@ -2365,13 +2365,13 @@
       "tx_count_with_fee": 613786
     },
     "2024-11-20": {
-      "avg_fee_pep": 0.17776303,
-      "median_fee_pep": 0.17,
-      "p90_fee_pep": 0.272,
-      "total_fee_pep": 469.64993479,
-      "tx_count_with_fee": 2642
+      "avg_fee_pep": 0.05161971,
+      "median_fee_pep": 0.01155,
+      "p90_fee_pep": 0.1026,
+      "total_fee_pep": 6738.28175388,
+      "tx_count_with_fee": 130537
     }
   },
   "unit": "PEP",
-  "updated": "2026-09-11T12:47:24.182993+00:00"
+  "updated": "2026-10-09T20:43:07.661030+00:00"
 }
