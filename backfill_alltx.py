@@ -69,7 +69,19 @@ FEE_OUTPUT_FILE = "fee_stats.json"
 HODL_OUTPUT_FILE = "hodl_waves.json"
 ORPHAN_FILE = "alltx_orphan_spends.json"
 
-CHUNK_SIZE = 500
+CHUNK_SIZE = 50
+# War 500 bis zum 11.10.2026. Grund für die Senkung: ein Chunk ist die kleinste
+# Einheit, die checkpointet werden kann — fetch_chunk() liefert erst nach ALLEN
+# 500 Blöcken ein Ergebnis zurück, es gibt keine Zwischenstände innerhalb eines
+# Chunks. In der extrem dichten Spätnov-2024-Periode (Chunk 295001-295500: 131.037
+# Tx = 262/Block, 77 Min. allein) reichte das dazu, dass selbst der zeitbasierte
+# Checkpoint-Fallback (CHECKPOINT_MAX_MINUTES, siehe main()) wirkungslos blieb: der
+# läuft NUR, wenn seit dem letzten Mal mindestens ein Chunk fertig wurde — bei
+# aufeinanderfolgenden, noch dichteren Chunks (295501-296001: 4 komplette 5h20m-
+# Läufe = 21+ Std. ohne jeden weiteren Fortschritt) kam er nie zum Zug. Bei
+# CHUNK_SIZE=50 wird dieselbe Tx-Last auf 1/10 so große Häppchen verteilt (~13k
+# Tx, ~8 Min. im dichtesten bisher beobachteten Fall) — mehrere Chunks sollten
+# auch in dieser Periode innerhalb eines Laufs fertig werden.
 # Am 11.09.2026 kurz auf 48/0.01 (~3x) hochgesetzt, ohne Vortest, auf Nutzerwunsch.
 # Ergebnis: eine volle Stunde Laufzeit ohne EINEN einzigen Checkpoint (git diff nach
 # Abbruch: buchstäblich nichts geändert) — statt schneller praktisch auf Null
