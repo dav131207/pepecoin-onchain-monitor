@@ -47,6 +47,7 @@ bewusst dreifach von der API geholt, statt deren Fortschritt zu riskieren).
 """
 import json
 import os
+import subprocess
 import time
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -106,6 +107,26 @@ CHECKPOINT_MAX_MINUTES = 20   # Checkpoint spätestens alle 20 Minuten, sobald s
                                # von CHECKPOINT_EVERY_CHUNKS. Das alleinige Sicherheitsnetz
                                # gegen genau den Fall oben: lieber oft kleine Checkpoints
                                # in einer dichten Phase als null Fortschritt in 5+ Stunden.
+
+PUSH_MIN_INTERVAL_MINUTES = 25  # Lauf 38161348082 (11.10.2026): 232 Chunks, 7,69 Mio Tx,
+                                 # viele lokale Checkpoints bis Block ~306901 — dann hat der
+                                 # GitHub-Runner selbst ein Shutdown-Signal bekommen ("The
+                                 # runner has received a shutdown signal"), bevor der
+                                 # Workflow-Schritt "Commit and push results" (if: always())
+                                 # überhaupt lief. Der Schritt wurde als "skipped" markiert,
+                                 # NICHT ausgeführt — if: always() deckt also einen
+                                 # Infrastruktur-Shutdown des ganzen Runners nicht ab. Der
+                                 # komplette Lauf war dadurch verloren, obwohl lokal längst
+                                 # mehrfach erfolgreich gecheckpointet war. Deshalb pusht
+                                 # dieses Skript jetzt selbst periodisch (siehe git_push()),
+                                 # unabhängig vom einmaligen Push am Lauf-Ende/-Abbruch im
+                                 # Workflow. Absichtlich SELTENER als CHECKPOINT_MAX_MINUTES
+                                 # (25 statt 20 Min) und mit eigener Zeit-Uhr (nicht bei jedem
+                                 # Checkpoint): git add/commit/pull --rebase/push über
+                                 # utxo_index/ (hunderte Dateien) dauert spürbar, und ein
+                                 # Checkpoint-Cluster (mehrere Sekunden hintereinander beim
+                                 # Leerlaufen des Reorder-Buffers) würde sonst denselben Push
+                                 # minütlich wiederholen, ohne neuen Nutzen.
 MIN_CLUSTER_SIZE = 2
 
 HODL_BUCKETS_DAYS = [
@@ -418,6 +439,57 @@ class Aggregator:
         })
 
 
+GIT_TRACKED_PATHS = [
+    "backfill_alltx_state.json", "utxo_index/", "address_clusters_state.json",
+    "address_clusters.json", "coin_days_destroyed.json", "hodl_waves.json",
+    "fee_stats.json", "alltx_orphan_spends.json", "blocks_incomplete_alltx.txt",
+]
+
+
+def git_push(reason):
+    """Committet+pusht den aktuellen Zwischenstand SOFORT, statt nur lokal zu
+    checkpointen und auf den einmaligen Push am Lauf-Ende zu warten (siehe
+    PUSH_MIN_INTERVAL_MINUTES). Bewusst fehlertolerant: ALLES hier läuft in einem
+    bare try/except, und jeder subprocess.run hat ein explizites timeout. Ein
+    fehlschlagender Push darf den Scan NIEMALS abbrechen oder aufhängen — das wäre
+    schlimmer als der Datenverlust, den diese Funktion verhindern soll (die
+    gleiche Klasse von stillem Hänger, die schon den 27-Tage-Stillstand
+    verursacht hat, nur jetzt in git statt im Reorder-Buffer). Bei einem
+    Rebase-Konflikt wird NICHT retry-geloopt (das könnte minutenlang blockieren,
+    während die API-Rate-Limits weiterlaufen) — stattdessen abbrechen, Rebase
+    abbrechen, und beim nächsten Intervall gegen einen dann aktuelleren origin
+    erneut versuchen."""
+    try:
+        subprocess.run(["git", "config", "user.name", "github-actions[bot]"], timeout=10, check=False)
+        subprocess.run(["git", "config", "user.email",
+                        "github-actions[bot]@users.noreply.github.com"], timeout=10, check=False)
+        for path in GIT_TRACKED_PATHS:
+            if os.path.exists(path):
+                subprocess.run(["git", "add", path], timeout=60, check=False)
+        diff = subprocess.run(["git", "diff", "--cached", "--quiet"], timeout=30)
+        if diff.returncode == 0:
+            return  # nichts zu committen
+        subprocess.run(
+            ["git", "commit", "-m", f"All-tx backfill progress (in-script, {reason}) "
+                                     f"{datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}"],
+            timeout=30, check=True)
+        rebase = subprocess.run(["git", "pull", "--rebase", "origin", "main"], timeout=120)
+        if rebase.returncode != 0:
+            subprocess.run(["git", "rebase", "--abort"], timeout=30, check=False)
+            print("Alltx-Backfill: Git-Push übersprungen (Rebase-Konflikt), "
+                  "Commit bleibt lokal bis zum nächsten Intervall.")
+            return
+        push = subprocess.run(["git", "push", "origin", "main"], timeout=60)
+        if push.returncode == 0:
+            print(f"Alltx-Backfill: Zwischenstand gepusht ({reason}).")
+        else:
+            print("Alltx-Backfill: Git-Push fehlgeschlagen, Commit bleibt lokal "
+                  "bis zum nächsten Intervall.")
+    except Exception as e:
+        print(f"Alltx-Backfill: Git-Push-Versuch fehlgeschlagen ({e}) — "
+              f"Scan läuft unbeeinträchtigt weiter.")
+
+
 def main():
     session = requests.Session()
     limiter = RateLimiter(MIN_REQUEST_INTERVAL)
@@ -454,6 +526,7 @@ def main():
     incomplete_f = open(INCOMPLETE_LOG, "a")
     start_time = time.time()
     last_checkpoint_time = start_time
+    last_push_time = start_time
     chunks_drained = 0
 
     # Bewusst KEIN eigenes SIGTERM-Handling mehr (frühere Version fing das Signal ab,
@@ -549,6 +622,14 @@ def main():
                       f"ETA ~{eta_min:.0f} min, {agg.tx_count} Tx verarbeitet, "
                       f"{len(agg.orphans)} offene Orphan-Spends)")
 
+                # Eigene, seltenere Uhr als der lokale Checkpoint oben (siehe
+                # PUSH_MIN_INTERVAL_MINUTES) — ohne das überlebt Fortschritt einen
+                # externen Runner-Shutdown nur bis zum nächsten in-script Push, statt
+                # bis zum (möglicherweise nie erreichten) Lauf-Ende.
+                if now - last_push_time >= PUSH_MIN_INTERVAL_MINUTES * 60:
+                    git_push(f"Block {next_height}")
+                    last_push_time = now
+
     # Nur bei ECHTEM Abschluss erreicht (alle Chunks fertig) — der Normalfall ist,
     # dass `timeout` den Prozess vorher beendet und diese Zeilen nie laufen.
     pool.shutdown(wait=True)
@@ -559,6 +640,7 @@ def main():
     state["next_height"] = next_height
     state["covered_days"] = covered_days_sorted
     save_state(state)
+    git_push("Lauf-Ende")
 
     print(f"\nAlltx-Backfill: Lauf beendet bei Block {next_height}/{target_end_height}. "
           f"{agg.tx_count} Tx verarbeitet, {len(agg.orphans)} offene Orphan-Spends.")

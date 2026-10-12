@@ -26,6 +26,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Record starting commit
+        # Referenz für den Warn-Check im letzten Step: backfill_alltx.py pusht jetzt
+        # selbst periodisch (siehe PUSH_MIN_INTERVAL_MINUTES in backfill_alltx.py) —
+        # "am Ende nichts mehr zu committen" heißt seitdem oft "lief gut, schon
+        # zwischendurch gepusht", nicht mehr automatisch "Stillstand".
+        run: echo "START_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -62,8 +69,20 @@ jobs:
           # committet, sah bisher identisch zu einem gesunden Lauf aus ("success", kein
           # Fehler) — genau das verschleierte den 27 Tage dauernden Stillstand bis zum
           # 08.10.2026. Jetzt taucht ein stiller Lauf sofort als Warnung im Actions-Tab auf.
+          #
+          # ABER: seit backfill_alltx.py selbst periodisch pusht (git_push() im Skript,
+          # siehe PUSH_MIN_INTERVAL_MINUTES), ist "hier nichts mehr zu committen" bei
+          # einem GUT laufenden Lauf der Normalfall, nicht die Ausnahme — der Fortschritt
+          # ist dann schon während des Laufs rausgegangen. Nur wenn ZUSÄTZLICH HEAD
+          # gegenüber dem Checkout-Zeitpunkt (START_SHA) unverändert ist, gab es in
+          # diesem gesamten Lauf WIRKLICH keinen einzigen Push — das ist der echte
+          # Stillstandsfall.
           if git diff --cached --quiet; then
-            echo "::warning::Dieser Lauf hat KEINEN Fortschritt committet (next_height unverändert) — Backfill könnte feststecken, siehe Log des vorherigen Steps."
+            if [ "$(git rev-parse HEAD)" = "$START_SHA" ]; then
+              echo "::warning::Dieser Lauf hat KEINEN Fortschritt committet (next_height unverändert) — Backfill könnte feststecken, siehe Log des vorherigen Steps."
+            else
+              echo "Kein zusätzlicher Commit nötig — backfill_alltx.py hat den Fortschritt schon während des Laufs selbst gepusht."
+            fi
           else
             git commit -m "All-tx backfill progress $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           fi
