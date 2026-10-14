@@ -427,7 +427,21 @@
     "2025-03-28",
     "2025-03-29",
     "2025-03-30",
-    "2025-03-31"
+    "2025-03-31",
+    "2025-04-01",
+    "2025-04-02",
+    "2025-04-03",
+    "2025-04-04",
+    "2025-04-05",
+    "2025-04-06",
+    "2025-04-07",
+    "2025-04-08",
+    "2025-04-09",
+    "2025-04-10",
+    "2025-04-11",
+    "2025-04-12",
+    "2025-04-13",
+    "2025-04-14"
   ],
   "daily": {
     "2024-01-30": {
@@ -3413,13 +3427,111 @@
       "tx_count_with_fee": 2718
     },
     "2025-03-31": {
-      "avg_fee_pep": 0.91373094,
+      "avg_fee_pep": 0.17707776,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.01855,
+      "total_fee_pep": 523.08769313,
+      "tx_count_with_fee": 2954
+    },
+    "2025-04-01": {
+      "avg_fee_pep": 0.02064537,
       "median_fee_pep": 0.00226,
       "p90_fee_pep": 0.00522,
-      "total_fee_pep": 390.16311312,
-      "tx_count_with_fee": 427
+      "total_fee_pep": 55.92831413,
+      "tx_count_with_fee": 2709
+    },
+    "2025-04-02": {
+      "avg_fee_pep": 0.00937939,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.00374,
+      "total_fee_pep": 26.45927156,
+      "tx_count_with_fee": 2821
+    },
+    "2025-04-03": {
+      "avg_fee_pep": 0.02016613,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.00226,
+      "total_fee_pep": 55.94085677,
+      "tx_count_with_fee": 2774
+    },
+    "2025-04-04": {
+      "avg_fee_pep": 0.01757285,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.0043,
+      "total_fee_pep": 45.5312462,
+      "tx_count_with_fee": 2591
+    },
+    "2025-04-05": {
+      "avg_fee_pep": 0.01976014,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.0026,
+      "total_fee_pep": 47.1279364,
+      "tx_count_with_fee": 2385
+    },
+    "2025-04-06": {
+      "avg_fee_pep": 0.02169584,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.00522,
+      "total_fee_pep": 57.36379189,
+      "tx_count_with_fee": 2644
+    },
+    "2025-04-07": {
+      "avg_fee_pep": 0.02399285,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.01,
+      "total_fee_pep": 66.05231545,
+      "tx_count_with_fee": 2753
+    },
+    "2025-04-08": {
+      "avg_fee_pep": 0.02147516,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.01855,
+      "total_fee_pep": 57.61785212,
+      "tx_count_with_fee": 2683
+    },
+    "2025-04-09": {
+      "avg_fee_pep": 0.01253375,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.02394,
+      "total_fee_pep": 41.24857825,
+      "tx_count_with_fee": 3291
+    },
+    "2025-04-10": {
+      "avg_fee_pep": 0.01791307,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.02394,
+      "total_fee_pep": 60.38496007,
+      "tx_count_with_fee": 3371
+    },
+    "2025-04-11": {
+      "avg_fee_pep": 0.02090734,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.02394,
+      "total_fee_pep": 89.02344532,
+      "tx_count_with_fee": 4258
+    },
+    "2025-04-12": {
+      "avg_fee_pep": 0.01917925,
+      "median_fee_pep": 0.01,
+      "p90_fee_pep": 0.02394,
+      "total_fee_pep": 89.4712033,
+      "tx_count_with_fee": 4665
+    },
+    "2025-04-13": {
+      "avg_fee_pep": 0.02350468,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.0026,
+      "total_fee_pep": 56.95182942,
+      "tx_count_with_fee": 2423
+    },
+    "2025-04-14": {
+      "avg_fee_pep": 0.04030753,
+      "median_fee_pep": 0.00226,
+      "p90_fee_pep": 0.01,
+      "total_fee_pep": 40.75091307,
+      "tx_count_with_fee": 1011
     }
   },
   "unit": "PEP",
-  "updated": "2026-10-14T20:52:14.297709+00:00"
+  "updated": "2026-10-14T21:17:18.884747+00:00"
 }
