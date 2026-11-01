@@ -38,15 +38,15 @@
     },
     {
       "label": "1-2 Jahre",
-      "output_count": 7693158,
+      "output_count": 7693155,
       "share_pct": 83.09,
-      "value_pep": 82837114919.2
+      "value_pep": 82836863578.53
     },
     {
       "label": "> 2 Jahre",
-      "output_count": 125268,
+      "output_count": 125271,
       "share_pct": 16.91,
-      "value_pep": 16853991853.93
+      "value_pep": 16854243194.6
     }
   ],
   "caveat": "Momentaufnahme \u00fcber covered_days \u2014 solange next_height < aktueller Blockstand k\u00f6nnen Coins f\u00e4lschlich als unverbraucht erscheinen, wenn ihr Spend in einem noch ungescannten Block liegt.",
@@ -660,9 +660,9 @@
     "2025-09-27",
     "2025-09-28"
   ],
-  "next_height": 802901,
+  "next_height": 818501,
   "target_end_height": 1275379,
   "total_value_pep": 99691106780.59,
   "unspent_outputs_tracked": 7818426,
-  "updated": "2026-11-01T21:29:33.115026+00:00"
+  "updated": "2026-11-01T21:54:40.384768+00:00"
 }
